@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><element:Concept xmlns:element="http:///com/tibco/cep/designtime/core/model/element" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Common/Concepts/" folder="/Common/Concepts/" name="LogData" description="" GUID="76383FC6-E4D9-3BA8-EE87-842BF083F957" ownerProjectName="DecisionEngine" superConceptPath="/Common/Concepts/BaseConcept" autoStartStateMachine="true">
+    <extendedProperties/>
+    <properties name="ApplicationID" ownerProjectName="DecisionEngine" ownerPath="/Common/Concepts/LogData"/>
+    <properties name="RequestorUserID" ownerProjectName="DecisionEngine" ownerPath="/Common/Concepts/LogData"/>
+    <properties name="TxRoot" ownerProjectName="DecisionEngine" ownerPath="/Common/Concepts/LogData"/>
+    <properties name="TxParent" ownerProjectName="DecisionEngine" ownerPath="/Common/Concepts/LogData"/>
+    <properties name="TxSelf" ownerProjectName="DecisionEngine" ownerPath="/Common/Concepts/LogData"/>
+    <properties name="TxStart" ownerProjectName="DecisionEngine" type="long" ownerPath="/Common/Concepts/LogData"/>
+    <properties name="TxEnd" ownerProjectName="DecisionEngine" type="long" ownerPath="/Common/Concepts/LogData"/>
+    <properties name="TxDurationInMillis" ownerProjectName="DecisionEngine" type="long" ownerPath="/Common/Concepts/LogData"/>
+    <properties name="TxResult" ownerProjectName="DecisionEngine" ownerPath="/Common/Concepts/LogData"/>
+    <properties name="TxCategory" ownerProjectName="DecisionEngine" ownerPath="/Common/Concepts/LogData"/>
+    <properties name="TxCategoryFingerprint" ownerProjectName="DecisionEngine" ownerPath="/Common/Concepts/LogData"/>
+    <properties name="Text" ownerProjectName="DecisionEngine" ownerPath="/Common/Concepts/LogData"/>
+    <properties name="MessageID" ownerProjectName="DecisionEngine" ownerPath="/Common/Concepts/LogData"/>
+    <properties name="CorrelationID" ownerProjectName="DecisionEngine" ownerPath="/Common/Concepts/LogData"/>
+    <properties name="Host" ownerProjectName="DecisionEngine" ownerPath="/Common/Concepts/LogData"/>
+    <properties name="Component" ownerProjectName="DecisionEngine" ownerPath="/Common/Concepts/LogData"/>
+    <properties name="RuleFunctionName" ownerProjectName="DecisionEngine" ownerPath="/Common/Concepts/LogData"/>
+    <properties name="Payload" ownerProjectName="DecisionEngine" ownerPath="/Common/Concepts/LogData"/>
+    <properties name="AccountId" ownerProjectName="DecisionEngine" ownerPath="/Common/Concepts/LogData"/>
+    <properties name="DivisionId" ownerProjectName="DecisionEngine" ownerPath="/Common/Concepts/LogData"/>
+    <properties name="SystemDesignator" ownerProjectName="DecisionEngine" ownerPath="/Common/Concepts/LogData"/>
+    <properties name="LegacyMso" ownerProjectName="DecisionEngine" ownerPath="/Common/Concepts/LogData"/>
+    <properties name="Environment" ownerProjectName="DecisionEngine" ownerPath="/Common/Concepts/LogData"/>
+    <properties name="BENodeName" ownerProjectName="DecisionEngine" ownerPath="/Common/Concepts/LogData"/>
+    <properties name="ErrorStackTrace" ownerProjectName="DecisionEngine" ownerPath="/Common/Concepts/LogData"/>
+    <properties name="ThreadName" ownerProjectName="DecisionEngine" ownerPath="/Common/Concepts/LogData"/>
+    <properties name="EventName" ownerProjectName="DecisionEngine" ownerPath="/Common/Concepts/LogData"/>
+    <properties name="Channel" ownerProjectName="DecisionEngine" ownerPath="/Common/Concepts/LogData"/>
+</element:Concept>

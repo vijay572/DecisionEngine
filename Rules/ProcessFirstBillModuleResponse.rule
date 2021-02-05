@@ -1,0 +1,29 @@
+/**
+ * @description 
+ * @author CORTOPSAL133M1D
+ */
+rule Rules.ProcessFirstBillModuleResponse {
+	attribute {
+		priority = 5;
+		forwardChain = true;
+	}
+	declare {
+		Concepts.ReasonForCallModuleStateModelConcept StateModelConceptExisting;
+		Concepts.FirstBillModuleRequestTracking firstbillmodulerequesttracking;
+		Events.Module.FirstBill.ResponseBase responsebase;		
+	}
+	when {
+		1==2;
+		firstbillmodulerequesttracking@parent == StateModelConceptExisting;	
+		StateModelConceptExisting@extId == "ReasonForCall:"+ responsebase.TxRoot;
+	}
+	then {
+				
+			firstbillmodulerequesttracking.ResponseRecieved = true;
+			firstbillmodulerequesttracking.ResponseTime = DateTime.now();
+			long elapsedTime = DateTime.getTimeInMillis(firstbillmodulerequesttracking.ResponseTime) - DateTime.getTimeInMillis(firstbillmodulerequesttracking.RequestedTime);
+			firstbillmodulerequesttracking.ElapsedTimeForRequestInMillies = elapsedTime;
+			firstbillmodulerequesttracking.AccountHasFirstBill = responsebase.AccountHasFirstBill;
+			firstbillmodulerequesttracking.ExceptionRecieved = responsebase.IsException;
+	}
+}

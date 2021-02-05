@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Events/Module/Appointment/" folder="/Events/Module/Appointment/" name="ResponseBase" description="" GUID="8580317A-542D-C741-3E8B-DE8105E83FFE" ownerProjectName="DecisionEngine" superEventPath="/Events/BaseResponseEvent" ttlUnits="Seconds">
+    <properties name="AccountHasAppointment" ownerProjectName="DecisionEngine" type="boolean" conceptTypePath="/Events/Module/Outage/ResponseBase" ownerPath="/Events/Module/Appointment/ResponseBase"/>
+    <expiryAction folder="/Events/Module/Outage/ResponseBase" name="OutageModuleResponse_expiryAction" ownerProjectName="DecisionEngine" actionText="" conditionText="">
+        <symbols>
+            <symbolList idName="outagemoduleresponse" type="/Events/Module/Appointment/ResponseBase"/>
+        </symbols>
+    </expiryAction>
+</event:SimpleEvent>

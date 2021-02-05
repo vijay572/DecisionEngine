@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Table:Table xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:Table="http:///com/tibco/cep/decision/table/model/DecisionTable.ecore" name="FirstBillStatusDM" folder="/RuleFunctions/DM/Modules/" implements="/RuleFunctions/DM/Modules/FirstBillStatusVRF" since="BE 4.0">
+  <md>
+    <prop name="SingleRowExecution" type="Boolean" value="true"/>
+  </md>
+  <decisionTable>
+    <rule id="1">
+      <md>
+        <prop name="Description" type="String" value=""/>
+        <prop name="Priority" type="Integer" value="3"/>
+      </md>
+      <cond id="1_1" colId="1" expr="1"/>
+      <act id="1_2" colId="2" expr="true"/>
+    </rule>
+    <rule id="2">
+      <act id="2_2" colId="2" expr="false"/>
+    </rule>
+    <columns>
+      <column id="1" name="FirstBillStatus.NumberOfBills" propertyPath="/RuleFunctions/DM/Modules/FirstBillStatus/NumberOfBills" propertyType="1" columnType="CONDITION" alias="NumberOfBills"/>
+      <column id="2" name="FirstBillStatus.HasFirstBill" propertyPath="/RuleFunctions/DM/Modules/FirstBillStatus/HasFirstBill" propertyType="4" columnType="ACTION" alias="HasFirstBill" defaultCellText="false"/>
+    </columns>
+  </decisionTable>
+  <exceptionTable/>
+  <argument direction="BOTH">
+    <property path="/RuleFunctions/DM/Modules/FirstBillStatus" alias="FirstBillStatus" resourceType="CONCEPT"/>
+  </argument>
+</Table:Table>

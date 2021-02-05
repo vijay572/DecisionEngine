@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><element:Concept xmlns:element="http:///com/tibco/cep/designtime/core/model/element" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Concepts/" folder="/Concepts/" name="Account" description="" GUID="17584D46-19EC-263F-3124-E15AB653A454" ownerProjectName="DecisionEngine" superConceptPath="" autoStartStateMachine="true">
+    <extendedProperties/>
+    <properties name="IVRCode" ownerProjectName="DecisionEngine" ownerPath="/Concepts/Account"/>
+    <properties name="IsActive" ownerProjectName="DecisionEngine" type="boolean" ownerPath="/Concepts/Account"/>
+    <properties name="IsInOutage" ownerProjectName="DecisionEngine" type="boolean" ownerPath="/Concepts/Account"/>
+    <properties name="HasActiveAppointment" ownerProjectName="DecisionEngine" type="boolean" ownerPath="/Concepts/Account"/>
+    <properties name="HasFirstBill" ownerProjectName="DecisionEngine" type="boolean" ownerPath="/Concepts/Account"/>
+    <properties name="PrimaryReasonForCall" ownerProjectName="DecisionEngine" ownerPath="/Concepts/Account"/>
+    <properties name="SecondaryReasonsForCall" ownerProjectName="DecisionEngine" array="true" ownerPath="/Concepts/Account"/>
+</element:Concept>

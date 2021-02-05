@@ -1,0 +1,35 @@
+/**
+ * @description 
+ */
+Common.Concepts.LogData rulefunction RuleFunctions.Helper.CreateLogContextFromBaseEvent {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Events.BaseEvent BaseEvent;
+		Object logger; 
+	}
+	body {
+		Common.Concepts.LogData logData = Common.RuleFunctions.LogHandler.createLogContext(
+											/*txRoot String */BaseEvent.TxRoot,
+											/*txParent String */BaseEvent.TxParent,
+											/*txSelf String */BaseEvent.TxSelf,
+											/*category String */BaseEvent.Category,
+											/*TxCategoryFingerprint String */BaseEvent.TxCategoryFingerprint,
+											/*correlation String */BaseEvent.CorrleationID,
+											/*eventName String */BaseEvent.EventName,
+											/*logger Object */logger,
+											/*Component String */BaseEvent.Component,
+											/*ApplicationID String */BaseEvent.ApplicationID,
+											/*AccountId String */BaseEvent.AccountId,
+											/*DivisionId String */BaseEvent.DivisionId,
+											/*SystemDesignator String */BaseEvent.SystemDesignator,
+											/*LegacyMso String */BaseEvent.LegacyMso,
+											/*RequestorUserID String */BaseEvent.RequestorUserID,
+											/*EventID String */BaseEvent.EventID,
+											/*Channel String */BaseEvent.Channel,
+											/*MessageID String */BaseEvent.MessageID);
+		return logData;
+		
+	}
+}

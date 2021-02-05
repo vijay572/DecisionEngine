@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Events/Shared/" folder="/Events/Shared/" name="AppointmentAPIResponse" description="" GUID="5D795C17-A420-2185-87F5-50209448431C" ownerProjectName="DecisionEngine" superEventPath="" ttlUnits="Seconds" channelURI="/DataProviders/HTTPAppointmentAPI" destinationName="AppointmentAPIResponse">
+    <namespaceEntries prefix="xsd" namespace="http://www.w3.org/2001/XMLSchema"/>
+    <expiryAction folder="/Events/Shared/AppointmentAPIResponse" name="OutageAPIResponse_expiryAction" ownerProjectName="DecisionEngine" actionText="" conditionText="">
+        <symbols>
+            <symbolList idName="outageapiresponse" type="/Events/Shared/AppointmentAPIResponse"/>
+        </symbols>
+    </expiryAction>
+</event:SimpleEvent>

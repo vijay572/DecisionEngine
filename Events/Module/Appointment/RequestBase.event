@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Events/Module/Appointment/" folder="/Events/Module/Appointment/" name="RequestBase" description="" GUID="E286B47F-8CC6-1C2B-D982-0FE586FA9B5F" ownerProjectName="DecisionEngine" superEventPath="/Events/BaseEvent" ttlUnits="Seconds">
+    <expiryAction folder="/Events/Module/Outage/RequestBase" name="OutageModuleRequest_expiryAction" ownerProjectName="DecisionEngine" actionText="" conditionText="">
+        <symbols>
+            <symbolList idName="outagemodulerequest" type="/Events/Module/Appointment/RequestBase"/>
+        </symbols>
+    </expiryAction>
+</event:SimpleEvent>

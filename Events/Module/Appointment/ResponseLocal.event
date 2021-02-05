@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Events/Module/Appointment/" folder="/Events/Module/Appointment/" name="ResponseLocal" description="" GUID="30077353-DA3C-0BFF-6AF8-699DA30C3BDA" ownerProjectName="DecisionEngine" superEventPath="/Events/Module/Appointment/ResponseBase" payloadString="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#10;&#10;&lt;payload ref=&quot;pfx:checkAppointmentsResponse&quot;/&gt;" ttlUnits="Seconds" channelURI="/Channels/CallDriver_LocalChannel" destinationName="AppointmentModuleResponse">
+    <namespaceEntries prefix="xsd" namespace="http://www.w3.org/2001/XMLSchema"/>
+    <namespaceEntries prefix="pfx" namespace="http://www.charter.com/enterprise/agentos/decisionengine/schemas/checkappointments/v1"/>
+    <registryImportEntries location="SharedResources/Schemas/CheckAppointments.xsd" namespace="http://www.charter.com/enterprise/agentos/decisionengine/schemas/checkappointments/v1"/>
+    <expiryAction folder="/Events/Module/Outage/ResponseLocal" name="OutageModuleResponseLocal_expiryAction" ownerProjectName="DecisionEngine" actionText="" conditionText="">
+        <symbols>
+            <symbolList idName="outagemoduleresponselocal" type="/Events/Module/Appointment/ResponseLocal"/>
+        </symbols>
+    </expiryAction>
+</event:SimpleEvent>

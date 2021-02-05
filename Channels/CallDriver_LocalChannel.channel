@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channel:Channel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:channel="http:///com/tibco/cep/designtime/core/model/service/channel" xmlns:designtime="http:///com/tibco/cep/designtime/core/model/designtime_ontology.ecore" namespace="/Channels/" folder="/Channels/" name="CallDriver_LocalChannel" description="" GUID="385593E8-3622-A59C-284C-955DB2D0BBC0" ownerProjectName="DecisionEngine">
+  <driver configMethod="REFERENCE" label="LOCAL" channel="/">
+    <destinations name="OutageModuleRequest" description="" GUID="07AA2453-8E63-5D80-34D9-D42BFDE85832" ownerProjectName="DecisionEngine" driverConfig="//@driver">
+      <properties>
+        <properties xsi:type="designtime:SimpleProperty" name="IncludeEventType" value="ALWAYS" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Size" value="0"/>
+        <properties xsi:type="designtime:SimpleProperty" name="TimeOut" value="-1"/>
+      </properties>
+    </destinations>
+    <destinations name="OutageModuleResponse" description="" GUID="AEE03BC7-B0A2-13DF-16CA-3719464AE0F2" ownerProjectName="DecisionEngine" driverConfig="//@driver">
+      <properties>
+        <properties xsi:type="designtime:SimpleProperty" name="IncludeEventType" value="ALWAYS" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Size" value="0"/>
+        <properties xsi:type="designtime:SimpleProperty" name="TimeOut" value="-1"/>
+      </properties>
+    </destinations>
+    <destinations name="AppointmentModuleRequest" description="" GUID="78DEF8C1-799D-AE6A-F0C5-DFF4D671D2DC" ownerProjectName="DecisionEngine" driverConfig="//@driver">
+      <properties>
+        <properties xsi:type="designtime:SimpleProperty" name="IncludeEventType" value="ALWAYS" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Size" value="0"/>
+        <properties xsi:type="designtime:SimpleProperty" name="TimeOut" value="-1"/>
+      </properties>
+    </destinations>
+    <destinations name="AppointmentModuleResponse" description="" GUID="8B454F27-3BD1-2BB4-3528-E184F0E0CF67" ownerProjectName="DecisionEngine" driverConfig="//@driver">
+      <properties>
+        <properties xsi:type="designtime:SimpleProperty" name="IncludeEventType" value="ALWAYS" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Size" value="0"/>
+        <properties xsi:type="designtime:SimpleProperty" name="TimeOut" value="-1"/>
+      </properties>
+    </destinations>
+    <destinations name="FirstBillModuleRequest" description="" GUID="A3DC0A26-3549-BDD5-224F-D7202B681597" ownerProjectName="DecisionEngine" driverConfig="//@driver">
+      <properties>
+        <properties xsi:type="designtime:SimpleProperty" name="IncludeEventType" value="ALWAYS" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Size" value="0"/>
+        <properties xsi:type="designtime:SimpleProperty" name="TimeOut" value="-1"/>
+      </properties>
+    </destinations>
+    <destinations name="FirstBillModuleResponse" description="" GUID="7FCCD2D9-16E0-4283-7ED1-5ABA53AD73F5" ownerProjectName="DecisionEngine" driverConfig="//@driver">
+      <properties>
+        <properties xsi:type="designtime:SimpleProperty" name="IncludeEventType" value="ALWAYS" mandatory="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Size" value="0"/>
+        <properties xsi:type="designtime:SimpleProperty" name="TimeOut" value="-1"/>
+      </properties>
+    </destinations>
+    <destinations name="AccountStatusModuleRequest" description="" GUID="35527DCC-1E58-2921-409A-30729ACD6581" ownerProjectName="DecisionEngine" driverConfig="//@driver">
+      <properties>
+        <properties xsi:type="designtime:SimpleProperty" name="Size" value="0"/>
+        <properties xsi:type="designtime:SimpleProperty" name="TimeOut" value="-1"/>
+      </properties>
+    </destinations>
+    <destinations name="AccountStatusModuleResponse" description="" GUID="C7CE39DF-DEB1-E2F6-0EEF-BAA159EA5801" ownerProjectName="DecisionEngine" driverConfig="//@driver">
+      <properties>
+        <properties xsi:type="designtime:SimpleProperty" name="Size" value="0"/>
+        <properties xsi:type="designtime:SimpleProperty" name="TimeOut" value="-1"/>
+      </properties>
+    </destinations>
+    <driverType xsi:type="channel:DriverTypeInfo" driverTypeName="Local"/>
+  </driver>
+</channel:Channel>

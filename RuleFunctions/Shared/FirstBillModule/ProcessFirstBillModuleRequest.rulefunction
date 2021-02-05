@@ -1,0 +1,57 @@
+/**
+ * @description 
+ */
+Events.Module.FirstBill.ResponseBase rulefunction RuleFunctions.Shared.FirstBillModule.ProcessFirstBillModuleRequest {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+		
+		Events.Module.FirstBill.RequestBase requestbase;
+		Common.Concepts.LogData logData;
+	}
+	body {
+		
+		Object logger = Log.getLogger(Engine.ruleFunctionName());
+		Common.RuleFunctions.LogHandler.log(/*logData Common.Concepts.LogData */logData,
+											/*result String */null,
+											/*message String */"Recieved FirstBillModuleRequestEvent" + " from Destination " + Event.getDestinationURI(requestbase) + " Account ID: " + requestbase.AccountId + " Division ID: " + requestbase.DivisionId,
+											/*payload String */null,
+											/*logLevel String */"debug",
+											/*logger Object */logger,
+											/*RuleFunctionName String */Engine.ruleFunctionName());
+		Events.Shared.FirstBillAPIResponse FirstBillAPIResponseEvent = DataProviders.AccountFirstBillRequest(requestbase.LegacyMso,requestbase.SystemDesignator,requestbase.DivisionId, requestbase.AccountId,logData);
+
+		Object jsonPayload = JSON.parseJSON(FirstBillAPIResponseEvent@payload);
+
+		RuleFunctions.DM.Modules.FirstBillStatus FirstBillStatus = RuleFunctions.DM.Modules.FirstBillStatus.FirstBillStatus(/*extId String */null,/*NumberOfBills int */0,/*HasFirstBill boolean */false);
+		
+		if(	jsonPayload!= null){
+			Object content = JSON.findNode(jsonPayload,"content");
+			
+			Object contentList =	Collections.List.createArrayList();
+			if(content!=null && JSON.isArrayNode(content)){
+				Object	 contentIterator = JSON.getAllElements(content);
+				while(Collections.Iterator.hasNext(contentIterator)){
+					Collections.add(contentList, Collections.Iterator.next(contentIterator));
+				}
+				FirstBillStatus.NumberOfBills = Collections.size(contentList);
+				RuleFunctions.DM.Modules.FirstBillStatusVRF(FirstBillStatus);
+			}
+		}
+
+		Common.RuleFunctions.LogHandler.log(/*logData Common.Concepts.LogData */logData,
+											/*result String */null,
+											/*message String */"Account FirstBill DM Response Account Bills Count:"  + FirstBillStatus.NumberOfBills,
+											/*payload String */FirstBillAPIResponseEvent@payload,
+											/*logLevel String */"info",
+											/*logger Object */logger,
+											/*RuleFunctionName String */Engine.ruleFunctionName());
+		
+		Events.Module.FirstBill.ResponseBase FirstBillModuleResponseBase= Event.createEvent("xslt://{{/Events/Module/FirstBill/ResponseBase}}<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" version=\"2.0\"><xsl:param name=\"requestbase\"/><xsl:param name=\"FirstBillStatus\"/><xsl:template name=\"Function\" match=\"/\"><createEvent><event><xsl:if test=\"$requestbase/@extId\"><xsl:attribute name=\"extId\"><xsl:value-of select=\"$requestbase/@extId\"/></xsl:attribute></xsl:if><xsl:if test=\"$requestbase/@Id\"><xsl:attribute name=\"Id\"><xsl:value-of select=\"$requestbase/@Id\"/></xsl:attribute></xsl:if><xsl:if test=\"$requestbase/TxRoot\"><TxRoot><xsl:value-of select=\"$requestbase/TxRoot\"/></TxRoot></xsl:if><xsl:if test=\"$requestbase/TxParent\"><TxParent><xsl:value-of select=\"$requestbase/TxParent\"/></TxParent></xsl:if><xsl:if test=\"$requestbase/TxSelf\"><TxSelf><xsl:value-of select=\"$requestbase/TxSelf\"/></TxSelf></xsl:if><xsl:if test=\"$requestbase/CorrleationID\"><CorrleationID><xsl:value-of select=\"$requestbase/CorrleationID\"/></CorrleationID></xsl:if><xsl:if test=\"$requestbase/Category\"><Category><xsl:value-of select=\"$requestbase/Category\"/></Category></xsl:if><xsl:if test=\"$requestbase/TxCategoryFingerprint\"><TxCategoryFingerprint><xsl:value-of select=\"$requestbase/TxCategoryFingerprint\"/></TxCategoryFingerprint></xsl:if><xsl:if test=\"$requestbase/EventName\"><EventName><xsl:value-of select=\"$requestbase/EventName\"/></EventName></xsl:if><xsl:if test=\"$requestbase/Component\"><Component><xsl:value-of select=\"$requestbase/Component\"/></Component></xsl:if><xsl:if test=\"$requestbase/ApplicationID\"><ApplicationID><xsl:value-of select=\"$requestbase/ApplicationID\"/></ApplicationID></xsl:if><xsl:if test=\"$requestbase/AccountId\"><AccountId><xsl:value-of select=\"$requestbase/AccountId\"/></AccountId></xsl:if><xsl:if test=\"$requestbase/DivisionId\"><DivisionId><xsl:value-of select=\"$requestbase/DivisionId\"/></DivisionId></xsl:if><xsl:if test=\"$requestbase/SystemDesignator\"><SystemDesignator><xsl:value-of select=\"$requestbase/SystemDesignator\"/></SystemDesignator></xsl:if><xsl:if test=\"$requestbase/LegacyMso\"><LegacyMso><xsl:value-of select=\"$requestbase/LegacyMso\"/></LegacyMso></xsl:if><xsl:if test=\"$requestbase/RequestorUserID\"><RequestorUserID><xsl:value-of select=\"$requestbase/RequestorUserID\"/></RequestorUserID></xsl:if><xsl:if test=\"$requestbase/EventID\"><EventID><xsl:value-of select=\"$requestbase/EventID\"/></EventID></xsl:if><xsl:if test=\"$requestbase/Channel\"><Channel><xsl:value-of select=\"$requestbase/Channel\"/></Channel></xsl:if><xsl:if test=\"$requestbase/MessageID\"><MessageID><xsl:value-of select=\"$requestbase/MessageID\"/></MessageID></xsl:if><xsl:if test=\"$FirstBillStatus/HasFirstBill\"><AccountHasFirstBill><xsl:value-of select=\"$FirstBillStatus/HasFirstBill\"/></AccountHasFirstBill></xsl:if></event></createEvent></xsl:template></xsl:stylesheet>"); 
+		Instance.deleteInstance(FirstBillStatus);
+		
+		return	FirstBillModuleResponseBase;
+	}
+}

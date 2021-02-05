@@ -1,0 +1,23 @@
+/**
+ * @description 
+ */
+void rulefunction RuleFunctions.PreProcessors.RecieveAccountStatusModuleResponseLocal {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+		Events.Module.AccountStatus.ResponseLocal responselcoal;
+	}
+	body {
+		
+		String StateMachineConceptExtID = responselcoal.CorrleationID;
+		Cluster.DataGrid.Lock(StateMachineConceptExtID,5000,true);
+		Concepts.ReasonForCallModuleStateModelConcept StateModelConceptExisting = Instance.getByExtIdByUri(StateMachineConceptExtID, "/Concepts/ReasonForCallModuleStateModelConcept");
+		if (StateModelConceptExisting == null) {
+			System.debugOut("Account Status Module Response Recieved but root concept not found");
+			Event.consumeEvent(responselcoal);
+		} 
+		
+	}
+}

@@ -1,0 +1,14 @@
+/**
+ * @description 
+ */
+virtual void rulefunction RuleFunctions.DM.SecondaryCallDriver {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Concepts.Account account;		
+	}
+	body {
+		
+	}
+}

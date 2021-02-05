@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><element:Concept xmlns:element="http:///com/tibco/cep/designtime/core/model/element" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/RuleFunctions/DM/Modules/" folder="/RuleFunctions/DM/Modules/" name="FirstBillStatus" description="" GUID="68FEBFC0-EA68-7809-9574-44C34C546CBB" ownerProjectName="DecisionEngine" superConceptPath="" autoStartStateMachine="true">
+    <extendedProperties/>
+    <properties name="NumberOfBills" ownerProjectName="DecisionEngine" type="int" ownerPath="/RuleFunctions/DM/Modules/FirstBillStatus"/>
+    <properties name="HasFirstBill" ownerProjectName="DecisionEngine" type="boolean" ownerPath="/RuleFunctions/DM/Modules/FirstBillStatus"/>
+</element:Concept>

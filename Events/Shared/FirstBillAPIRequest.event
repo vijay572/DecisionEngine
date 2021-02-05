@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Events/Shared/" folder="/Events/Shared/" name="FirstBillAPIRequest" description="" GUID="9F594DA8-1CA0-6B08-9AD1-1DA91287AB77" ownerProjectName="DecisionEngine" superEventPath="" ttlUnits="Seconds" channelURI="/DataProviders/HTTPFirstBillAPI" destinationName="FirstBillAPIRequest">
+    <properties name="CUSTOM_HEADER_x_charter_auth" ownerProjectName="DecisionEngine" ownerPath="/Events/Shared/FirstBillAPIRequest"/>
+    <namespaceEntries prefix="xsd" namespace="http://www.w3.org/2001/XMLSchema"/>
+    <expiryAction folder="/Events/Shared/FirstBillAPIRequest" name="OutageAPIRequest_expiryAction" ownerProjectName="DecisionEngine" actionText="" conditionText="">
+        <symbols>
+            <symbolList idName="outageapirequest" type="/Events/Shared/FirstBillAPIRequest"/>
+        </symbols>
+    </expiryAction>
+</event:SimpleEvent>

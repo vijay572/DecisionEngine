@@ -1,0 +1,16 @@
+/**
+ * @description 
+ */
+String rulefunction RuleFunctions.DM.AppendSecondaryCallDriver {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+	Concepts.Account Account;
+	String SecondaryReason; 
+	}
+	body {
+		Account.SecondaryReasonsForCall[Account.SecondaryReasonsForCall@length] = SecondaryReason;
+		return "";
+	}
+}

@@ -1,0 +1,24 @@
+/**
+ * @description 
+ */
+void rulefunction RuleFunctions.PreProcessors.RecieveAppointmentModuleResponseJMS {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+		Events.Module.Appointment.ResponseJMS responsejms;
+	}
+	body {
+		
+		String StateMachineConceptExtID = responsejms.CorrleationID;
+		Cluster.DataGrid.Lock(StateMachineConceptExtID,5000,true);
+		
+		Concepts.ReasonForCallModuleStateModelConcept StateModelConceptExisting = Instance.getByExtIdByUri(StateMachineConceptExtID, "/Concepts/ReasonForCallModuleStateModelConcept");
+		if (StateModelConceptExisting == null) {
+			System.debugOut("AppointmentModule Response Recieved but root concept not found");
+			Event.consumeEvent(responsejms);
+		} 
+		
+	}
+}

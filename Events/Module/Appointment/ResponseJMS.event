@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Events/Module/Appointment/" folder="/Events/Module/Appointment/" name="ResponseJMS" GUID="F215E3D6-D72C-EDE0-98FA-71BB1CDDDF60" ownerProjectName="DecisionEngine" superEventPath="/Events/Module/Appointment/ResponseBase" payloadString="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#10;&#10;&lt;payload ref=&quot;pfx:checkAppointmentsResponse&quot;/&gt;" ttlUnits="Seconds" channelURI="/Channels/Shared_JMSChannel" destinationName="AppointmentModuleResponse">
+    <namespaceEntries prefix="xsd" namespace="http://www.w3.org/2001/XMLSchema"/>
+    <namespaceEntries prefix="pfx" namespace="http://www.charter.com/enterprise/agentos/decisionengine/schemas/checkappointments/v1"/>
+    <registryImportEntries location="SharedResources/Schemas/CheckAppointments.xsd" namespace="http://www.charter.com/enterprise/agentos/decisionengine/schemas/checkappointments/v1"/>
+    <expiryAction folder="/Events/Module/Outage/ResponseJMS" name="OutageModuleResponseJMS_expiryAction" ownerProjectName="DecisionEngine" actionText="" conditionText="">
+        <symbols>
+            <symbolList idName="outagemoduleresponsejms" type="/Events/Module/Appointment/ResponseJMS"/>
+        </symbols>
+    </expiryAction>
+</event:SimpleEvent>

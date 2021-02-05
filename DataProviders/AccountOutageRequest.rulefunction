@@ -1,0 +1,65 @@
+/**
+ * @description 
+ */
+Events.Shared.OutageAPIResponse rulefunction DataProviders.AccountOutageRequest {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		String LegacyMso;
+		String SystemDesignator;
+		String DivisionID;
+		String AccountID;
+		Common.Concepts.LogData logData;
+	}
+	body {
+		
+		try{
+
+			Object logger = Log.getLogger(Engine.ruleFunctionName());
+			String endPointBaseURL = System.getGlobalVariableAsString("SharedResources/AppConfig/DataProviderEndPoints/AccountOutageEndPoint","https://gateway-dev.corp.chartercom.com/api/account-outage/v2/incidents");
+			Events.Shared.OutageAPIResponse OutageAPIResponseEvent;
+			String endpoint =   endPointBaseURL
+								+ "?legacyMso="+LegacyMso 
+								+ "&systemDesignator=" + SystemDesignator
+								+ "&systemInstanceId=" + DivisionID
+								+"&entityId=" + AccountID;
+								
+			Integer timeout = System.getGlobalVariableAsInt("SharedResources/AppConfig/DataProviderEndPoints/AccountOutageTimeOut",60000);
+			
+			String trustStoreUrl = System.getGlobalVariableAsString("SharedResources/AppConfig/DataProviderEndPoints/KeyStores/trustStoreUrl","C:\\SourceCode\\config-tibco\\DEV\\common\\tibco-preprod.jks");
+			String trustStorePassword = System.getGlobalVariableAsString("SharedResources/AppConfig/DataProviderEndPoints/KeyStores/trustStorePassword","charter");
+			String jwtKeyStoreUrl = System.getGlobalVariableAsString("SharedResources/AppConfig/DataProviderEndPoints/KeyStores/jwtKeyStoreUrl","C:\\SourceCode\\config-tibco\\DEV\\common\\jwk-keystore-preprod.jks");
+			String jwtKeyStorePassword = System.getGlobalVariableAsString("SharedResources/AppConfig/DataProviderEndPoints/KeyStores/jwtKeyStorePassword","local");
+			
+			Events.Shared.OutageAPIRequest OutageAPIRequest = Event.createEvent("xslt://{{/Events/Shared/OutageAPIRequest}}<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" xmlns:tns=\"www.tibco.com/be/ontology/Events/Shared/OutageAPIRequest\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" version=\"2.0\"><xsl:template name=\"Function\" match=\"/\"><createEvent><event/></createEvent></xsl:template></xsl:stylesheet>");
+			String ModuleName = "de-outages";
+			OutageAPIRequest.CUSTOM_HEADER_x_charter_auth = functions.createJsonWebSignature(jwtKeyStoreUrl, jwtKeyStorePassword, "JKS", ModuleName, ModuleName,"Router", 5, ModuleName,"");
+			
+	
+			
+			Object OutageHTTPConnInfo = HTTP.ConnectionInfo.createHTTPConnectionInfo(true);
+			
+			Object trustKeyStore = HTTP.createKeystore(trustStoreUrl,"JKS",trustStorePassword);
+			
+			HTTP.ConnectionInfo.setSecureInfo(OutageHTTPConnInfo,null,null, null, trustKeyStore,trustStorePassword, false);
+			
+			
+			OutageAPIResponseEvent  = HTTP.sendRequest(endpoint,  OutageAPIRequest,  "/Events/Shared/OutageAPIResponse",  timeout, OutageHTTPConnInfo);
+			Common.RuleFunctions.LogHandler.log(/*logData Common.Concepts.LogData */logData,
+												/*result String */null,
+												/*message String */"Account Outage DataProvided Response" ,
+												/*payload String */OutageAPIResponseEvent@payload,
+												/*logLevel String */"debug",
+												/*logger Object */logger,
+												/*RuleFunctionName String */Engine.ruleFunctionName());		
+	
+			return OutageAPIResponseEvent;
+		
+		} catch (Exception e) {
+			return null;
+//			Exception.newException("OutageDataProviderError", "OutageAPI Call Failed " , e); 
+		
+		}
+	}
+}

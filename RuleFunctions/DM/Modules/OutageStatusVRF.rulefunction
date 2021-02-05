@@ -1,0 +1,14 @@
+/**
+ * @description 
+ */
+virtual void rulefunction RuleFunctions.DM.Modules.OutageStatusVRF {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		RuleFunctions.DM.Modules.OutageStatus OutageStatus;
+	}
+	body {
+		
+	}
+}

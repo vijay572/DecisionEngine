@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Events/" folder="/Events/" name="ReasonForCallResponse" description="" GUID="B5F5CB4D-6D9B-500D-EAFB-DAFE416F3D00" ownerProjectName="DecisionEngine" superEventPath="/Events/BaseEvent" payloadString="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#10;&#10;&lt;payload ref=&quot;pfx:reasonForCallResponse&quot;/&gt;" ttlUnits="Seconds">
+    <properties name="AccountID" ownerProjectName="DecisionEngine" ownerPath="/Events/ReasonForCallResponse"/>
+    <properties name="DivisionID" ownerProjectName="DecisionEngine" ownerPath="/Events/ReasonForCallResponse"/>
+    <properties name="IsException" ownerProjectName="DecisionEngine" type="boolean" ownerPath="/Events/ReasonForCallResponse"/>
+    <properties name="BestReasonForCall" ownerProjectName="DecisionEngine" ownerPath="/Events/ReasonForCallResponse"/>
+    <properties name="ExceptionDetail" ownerProjectName="DecisionEngine" ownerPath="/Events/ReasonForCallResponse"/>
+    <properties name="JMSCorrelationID" ownerProjectName="DecisionEngine" ownerPath="/Events/ReasonForCallResponse"/>
+    <namespaceEntries prefix="xsd" namespace="http://www.w3.org/2001/XMLSchema"/>
+    <namespaceEntries prefix="pfx" namespace="http://www.charter.com/enterprise/agentos/decisionengine/schemas/reasonforcall/v1"/>
+    <registryImportEntries location="SharedResources/Schemas/ReasonForCall.xsd" namespace="http://www.charter.com/enterprise/agentos/decisionengine/schemas/reasonforcall/v1"/>
+    <expiryAction name="ReasonForCallResponse_expiryAction" ownerProjectName="DecisionEngine" actionText="" conditionText="">
+        <symbols>
+            <symbolList idName="reasonforcallresponse" type="/Events/ReasonForCallResponse"/>
+        </symbols>
+    </expiryAction>
+</event:SimpleEvent>

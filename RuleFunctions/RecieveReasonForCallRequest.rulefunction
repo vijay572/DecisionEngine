@@ -1,0 +1,69 @@
+/**
+ * @description 
+ */
+void rulefunction RuleFunctions.RecieveReasonForCallRequest {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+		Events.ReasonForCallRequest reasonforcallrequest;
+	}
+	body {
+		
+		try {
+			
+
+			Object logger = Log.getLogger(Engine.ruleFunctionName());
+			RuleFunctions.Helper.ParseReasonForCallRequest(reasonforcallrequest);
+			reasonforcallrequest.CorrleationID = reasonforcallrequest.TxSelf; 
+
+			Common.Concepts.LogData logData = RuleFunctions.Helper.CreateLogContextFromBaseEvent(reasonforcallrequest,logger);
+			Common.RuleFunctions.LogHandler.log(/*logData Common.Concepts.LogData */logData,
+												/*result String */null,
+												/*message String */"Recieved Reason For Call Request",
+												/*payload String */reasonforcallrequest@payload,
+												/*logLevel String */"info",
+												/*logger Object */logger,
+												/*RuleFunctionName String */Engine.ruleFunctionName());
+	
+			String StateMachineConceptExtID = reasonforcallrequest.CorrleationID;
+			if (Cluster.DataGrid.Lock(StateMachineConceptExtID,5000,true)){
+
+// NO need to do this Check. 
+//				Concepts.ReasonForCallModuleStateModelConcept StateModelConceptExisting = Instance.getByExtIdByUri(StateMachineConceptExtID, "/Concepts/ReasonForCallModuleStateModelConcept");
+//				if (StateModelConceptExisting != null) {
+//					Common.RuleFunctions.LogHandler.logException(
+//													/*logData Common.Concepts.LogData */logData,
+//													/*result String */"ERROR",
+//													/*message String */"Duplicate Request " + StateMachineConceptExtID ,
+//													/*payload String */reasonforcallrequest@payload,
+//													/*logLevel String */"error",
+//													/*logger Object */logger,
+//													/*e BEException */null);
+//					throw Exception.newException("LockError", "Duplicate Request " + StateMachineConceptExtID ,null);
+//
+//				}
+				Concepts.ReasonForCallModuleStateModelConcept StateModelConcept = Instance.createInstance("xslt://{{/Concepts/ReasonForCallModuleStateModelConcept}}<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"2.0\"><xsl:param name=\"reasonforcallrequest\"/><xsl:param name=\"StateMachineConceptExtID\"/><xsl:template name=\"Function\" match=\"/\"><createObject><object><xsl:attribute name=\"extId\"><xsl:value-of select=\"$StateMachineConceptExtID\"/></xsl:attribute><xsl:if test=\"$reasonforcallrequest/TxRoot\"><TxRoot><xsl:value-of select=\"$reasonforcallrequest/TxRoot\"/></TxRoot></xsl:if><xsl:if test=\"$reasonforcallrequest/TxParent\"><TxParent><xsl:value-of select=\"$reasonforcallrequest/TxParent\"/></TxParent></xsl:if><xsl:if test=\"$reasonforcallrequest/TxSelf\"><TxSelf><xsl:value-of select=\"$reasonforcallrequest/TxSelf\"/></TxSelf></xsl:if><xsl:if test=\"$reasonforcallrequest/AccountId\"><AccountID><xsl:value-of select=\"$reasonforcallrequest/AccountId\"/></AccountID></xsl:if><xsl:if test=\"$reasonforcallrequest/DivisionId\"><DivisionID><xsl:value-of select=\"$reasonforcallrequest/DivisionId\"/></DivisionID></xsl:if><ReciveTime><xsl:value-of select=\"current-dateTime()\"/></ReciveTime><ProcTime><xsl:value-of select=\"0\"/></ProcTime><xsl:if test=\"$reasonforcallrequest/CallDriverCode\"><CallDriverCode><xsl:value-of select=\"$reasonforcallrequest/CallDriverCode\"/></CallDriverCode></xsl:if><xsl:if test=\"$reasonforcallrequest/@Id\"><RequestEventID><xsl:value-of select=\"$reasonforcallrequest/@Id\"/></RequestEventID></xsl:if></object></createObject></xsl:template></xsl:stylesheet>"); 
+				StateModelConcept.LogData = logData;
+				Instance.startStateMachine(StateModelConcept,true);
+			}else {
+				Common.RuleFunctions.LogHandler.logException(
+												/*logData Common.Concepts.LogData */logData,
+												/*result String */"ERROR",
+												/*message String */"Unable to Aquire lock on " + StateMachineConceptExtID ,
+												/*payload String */reasonforcallrequest@payload,
+												/*logLevel String */"error",
+												/*logger Object */logger,
+												/*e BEException */null);
+				throw Exception.newException("LockError", "Unable to Aquire lock on " + StateMachineConceptExtID ,null);
+			}
+
+		} catch (Exception e) {
+			Events.ReasonForCallResponse ReasonForCallResponse = Event.createEvent("xslt://{{/Events/ReasonForCallResponse}}<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"2.0\"><xsl:param name=\"reasonforcallrequest\"/><xsl:template name=\"Function\" match=\"/\"><createEvent><event><xsl:if test=\"$reasonforcallrequest/@extId\"><xsl:attribute name=\"extId\"><xsl:value-of select=\"$reasonforcallrequest/@extId\"/></xsl:attribute></xsl:if><xsl:if test=\"$reasonforcallrequest/@Id\"><xsl:attribute name=\"Id\"><xsl:value-of select=\"$reasonforcallrequest/@Id\"/></xsl:attribute></xsl:if><xsl:if test=\"$reasonforcallrequest/TxRoot\"><TxRoot><xsl:value-of select=\"$reasonforcallrequest/TxRoot\"/></TxRoot></xsl:if><xsl:if test=\"$reasonforcallrequest/TxParent\"><TxParent><xsl:value-of select=\"$reasonforcallrequest/TxParent\"/></TxParent></xsl:if><xsl:if test=\"$reasonforcallrequest/TxSelf\"><TxSelf><xsl:value-of select=\"$reasonforcallrequest/TxSelf\"/></TxSelf></xsl:if><xsl:if test=\"$reasonforcallrequest/CorrleationID\"><CorrleationID><xsl:value-of select=\"$reasonforcallrequest/CorrleationID\"/></CorrleationID></xsl:if><xsl:if test=\"$reasonforcallrequest/Category\"><Category><xsl:value-of select=\"$reasonforcallrequest/Category\"/></Category></xsl:if><xsl:if test=\"$reasonforcallrequest/TxCategoryFingerprint\"><TxCategoryFingerprint><xsl:value-of select=\"$reasonforcallrequest/TxCategoryFingerprint\"/></TxCategoryFingerprint></xsl:if><xsl:if test=\"$reasonforcallrequest/EventName\"><EventName><xsl:value-of select=\"$reasonforcallrequest/EventName\"/></EventName></xsl:if><xsl:if test=\"$reasonforcallrequest/Component\"><Component><xsl:value-of select=\"$reasonforcallrequest/Component\"/></Component></xsl:if><xsl:if test=\"$reasonforcallrequest/ApplicationID\"><ApplicationID><xsl:value-of select=\"$reasonforcallrequest/ApplicationID\"/></ApplicationID></xsl:if><xsl:if test=\"$reasonforcallrequest/AccountId\"><AccountId><xsl:value-of select=\"$reasonforcallrequest/AccountId\"/></AccountId></xsl:if><xsl:if test=\"$reasonforcallrequest/DivisionId\"><DivisionId><xsl:value-of select=\"$reasonforcallrequest/DivisionId\"/></DivisionId></xsl:if><xsl:if test=\"$reasonforcallrequest/SystemDesignator\"><SystemDesignator><xsl:value-of select=\"$reasonforcallrequest/SystemDesignator\"/></SystemDesignator></xsl:if><xsl:if test=\"$reasonforcallrequest/LegacyMso\"><LegacyMso><xsl:value-of select=\"$reasonforcallrequest/LegacyMso\"/></LegacyMso></xsl:if><xsl:if test=\"$reasonforcallrequest/RequestorUserID\"><RequestorUserID><xsl:value-of select=\"$reasonforcallrequest/RequestorUserID\"/></RequestorUserID></xsl:if><xsl:if test=\"$reasonforcallrequest/EventID\"><EventID><xsl:value-of select=\"$reasonforcallrequest/EventID\"/></EventID></xsl:if><xsl:if test=\"$reasonforcallrequest/Channel\"><Channel><xsl:value-of select=\"$reasonforcallrequest/Channel\"/></Channel></xsl:if><xsl:if test=\"$reasonforcallrequest/MessageID\"><MessageID><xsl:value-of select=\"$reasonforcallrequest/MessageID\"/></MessageID></xsl:if><xsl:if test=\"$reasonforcallrequest/AccountId\"><AccountID><xsl:value-of select=\"$reasonforcallrequest/AccountId\"/></AccountID></xsl:if><xsl:if test=\"$reasonforcallrequest/DivisionId\"><DivisionID><xsl:value-of select=\"$reasonforcallrequest/DivisionId\"/></DivisionID></xsl:if><IsException><xsl:value-of select=\"true()\"/></IsException><ExceptionDetail><xsl:value-of select=\"&quot;System Error&quot;\"/></ExceptionDetail></event></createEvent></xsl:template></xsl:stylesheet>");
+			Event.replyEvent(reasonforcallrequest,ReasonForCallResponse);
+		}
+		
+		
+	}
+}

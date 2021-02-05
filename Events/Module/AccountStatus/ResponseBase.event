@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Events/Module/AccountStatus/" folder="/Events/Module/AccountStatus/" name="ResponseBase" description="" GUID="A5BCECB0-5DCF-7B15-29F7-18A3B8164AAA" ownerProjectName="DecisionEngine" superEventPath="/Events/BaseResponseEvent" ttlUnits="Seconds">
+    <properties name="IsAccountActive" ownerProjectName="DecisionEngine" type="boolean" conceptTypePath="/Events/Module/Outage/ResponseBase" ownerPath="/Events/Module/AccountStatus/ResponseBase"/>
+    <expiryAction folder="/Events/Module/Outage/ResponseBase" name="OutageModuleResponse_expiryAction" ownerProjectName="DecisionEngine" actionText="" conditionText="">
+        <symbols>
+            <symbolList idName="outagemoduleresponse" type="/Events/Module/AccountStatus/ResponseBase"/>
+        </symbols>
+    </expiryAction>
+</event:SimpleEvent>

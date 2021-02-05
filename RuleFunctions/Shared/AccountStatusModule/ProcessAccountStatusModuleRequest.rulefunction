@@ -1,0 +1,42 @@
+/**
+ * @description 
+ */
+Events.Module.AccountStatus.ResponseBase rulefunction RuleFunctions.Shared.AccountStatusModule.ProcessAccountStatusModuleRequest {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+		
+		Events.Module.AccountStatus.RequestBase requestbase;
+		Common.Concepts.LogData logData;
+	}
+	body {
+
+		Object logger = Log.getLogger(Engine.ruleFunctionName());
+		Events.Shared.AccountStatusAPIResponse AccountStatusAPIResponseEvent = DataProviders.AccountStatusRequest(requestbase.LegacyMso,requestbase.SystemDesignator,requestbase.DivisionId, requestbase.AccountId,logData);
+		Object jsonPayload = JSON.parseJSON(AccountStatusAPIResponseEvent@payload);
+		String Status; 
+		if(	jsonPayload!= null){
+			Object status = JSON.findNode(jsonPayload,"status");
+				if(status !=null){
+					Status = JSON.getTextValue(status);
+			}
+		}
+		RuleFunctions.DM.Modules.AccountStatus AccountStatus = RuleFunctions.DM.Modules.AccountStatus.AccountStatus(/*extId String */null,/*Status String */Status,/*IsAccountActive boolean */false); 
+		RuleFunctions.DM.Modules.AccountStatusVRF(AccountStatus);
+		Common.RuleFunctions.LogHandler.log(/*logData Common.Concepts.LogData */logData,
+											/*result String */null,
+											/*message String */"Account Status DM Response IsAccountActive :"  + AccountStatus.IsAccountActive,
+											/*payload String */AccountStatusAPIResponseEvent@payload,
+											/*logLevel String */"info",
+											/*logger Object */logger,
+											/*RuleFunctionName String */Engine.ruleFunctionName());
+		
+
+		Events.Module.AccountStatus.ResponseBase AccountStatusModuleResponse = Event.createEvent("xslt://{{/Events/Module/AccountStatus/ResponseBase}}<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"2.0\"><xsl:param name=\"requestbase\"/><xsl:param name=\"AccountStatus\"/><xsl:template name=\"Function\" match=\"/\"><createEvent><event><xsl:if test=\"$requestbase/@extId\"><xsl:attribute name=\"extId\"><xsl:value-of select=\"$requestbase/@extId\"/></xsl:attribute></xsl:if><xsl:if test=\"$requestbase/@Id\"><xsl:attribute name=\"Id\"><xsl:value-of select=\"$requestbase/@Id\"/></xsl:attribute></xsl:if><xsl:if test=\"$requestbase/TxRoot\"><TxRoot><xsl:value-of select=\"$requestbase/TxRoot\"/></TxRoot></xsl:if><xsl:if test=\"$requestbase/TxParent\"><TxParent><xsl:value-of select=\"$requestbase/TxParent\"/></TxParent></xsl:if><xsl:if test=\"$requestbase/TxSelf\"><TxSelf><xsl:value-of select=\"$requestbase/TxSelf\"/></TxSelf></xsl:if><xsl:if test=\"$requestbase/CorrleationID\"><CorrleationID><xsl:value-of select=\"$requestbase/CorrleationID\"/></CorrleationID></xsl:if><xsl:if test=\"$requestbase/Category\"><Category><xsl:value-of select=\"$requestbase/Category\"/></Category></xsl:if><xsl:if test=\"$requestbase/TxCategoryFingerprint\"><TxCategoryFingerprint><xsl:value-of select=\"$requestbase/TxCategoryFingerprint\"/></TxCategoryFingerprint></xsl:if><xsl:if test=\"$requestbase/EventName\"><EventName><xsl:value-of select=\"$requestbase/EventName\"/></EventName></xsl:if><xsl:if test=\"$requestbase/Component\"><Component><xsl:value-of select=\"$requestbase/Component\"/></Component></xsl:if><xsl:if test=\"$requestbase/ApplicationID\"><ApplicationID><xsl:value-of select=\"$requestbase/ApplicationID\"/></ApplicationID></xsl:if><xsl:if test=\"$requestbase/AccountId\"><AccountId><xsl:value-of select=\"$requestbase/AccountId\"/></AccountId></xsl:if><xsl:if test=\"$requestbase/DivisionId\"><DivisionId><xsl:value-of select=\"$requestbase/DivisionId\"/></DivisionId></xsl:if><xsl:if test=\"$requestbase/SystemDesignator\"><SystemDesignator><xsl:value-of select=\"$requestbase/SystemDesignator\"/></SystemDesignator></xsl:if><xsl:if test=\"$requestbase/LegacyMso\"><LegacyMso><xsl:value-of select=\"$requestbase/LegacyMso\"/></LegacyMso></xsl:if><xsl:if test=\"$requestbase/RequestorUserID\"><RequestorUserID><xsl:value-of select=\"$requestbase/RequestorUserID\"/></RequestorUserID></xsl:if><xsl:if test=\"$requestbase/EventID\"><EventID><xsl:value-of select=\"$requestbase/EventID\"/></EventID></xsl:if><xsl:if test=\"$requestbase/Channel\"><Channel><xsl:value-of select=\"$requestbase/Channel\"/></Channel></xsl:if><xsl:if test=\"$requestbase/MessageID\"><MessageID><xsl:value-of select=\"$requestbase/MessageID\"/></MessageID></xsl:if><IsException><xsl:value-of select=\"false()\"/></IsException><xsl:if test=\"$AccountStatus/IsAccountActive\"><IsAccountActive><xsl:value-of select=\"$AccountStatus/IsAccountActive\"/></IsAccountActive></xsl:if></event></createEvent></xsl:template></xsl:stylesheet>");
+		Instance.deleteInstance(AccountStatus); 
+		 
+		return	AccountStatusModuleResponse;
+	}
+}

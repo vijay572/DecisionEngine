@@ -1,0 +1,53 @@
+/**
+ * @description 
+ */
+String rulefunction  Common.RuleFunctions.LogHandler.getLogDataString {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Object logger;
+		Common.Concepts.LogData logData;
+	}
+	body {
+		
+		Log.log(logger, "trace", " Start of getLogDataString for ExtID : %s", logData.TxSelf);
+		
+		String logString = "ApplicationID=" + logData.ApplicationID
+							+ ", RequestorUserID=" + logData.RequestorUserID
+							+ ", TxRoot=" + logData.TxRoot
+							+ ", TxParent=" + logData.TxParent
+							+ ", TxSelf=" + logData.TxSelf
+							+ ", TxStart=" + logData.TxStart
+							+ ", TxEnd=" + logData.TxEnd
+							+ ", TxDurationInMillis=" + logData.TxDurationInMillis
+							+ ", TxResult=" + logData.TxResult
+							+ ", TxCategory=" + logData.TxCategory
+							+ ", TxCategoryFingerprint=" + logData.TxCategoryFingerprint
+							+ ", Text=" + logData.Text
+							+ ", MessageID=" + logData.MessageID
+							+ ", CorrelationID=" + logData.CorrelationID
+							+ ", Host=" + logData.Host
+							+ ", Component=" + logData.Component
+							+ ", RuleFunctionName=" + logData.RuleFunctionName
+							+ ", AccountId=" + logData.AccountId
+							+ ", DivisionId=" + logData.DivisionId
+							+ ", SystemDesignator=" + logData.SystemDesignator
+							+ ", LegacyMso=" + logData.LegacyMso
+							+ ", Environment=" + logData.Environment
+							+ ", BENodeName=" + logData.BENodeName
+							+ ", ErrorStackTrace=" + logData.ErrorStackTrace
+							+ ", ThreadName=" + logData.ThreadName
+							+ ", EventName=" + logData.EventName
+							+ ", Channel=" + logData.Channel
+							+ ", EventID=" + logData.EventID;
+							
+		if (System.getGlobalVariableAsBoolean("EnableLoggingPayload",false)) {
+			logString=logString + ", Payload=" + logData.Payload;
+		}
+		
+		Log.log(logger, "trace", " End of getLogDataString for ExtID=%s", logData.TxSelf);
+		return logString;						   
+		
+	}
+}

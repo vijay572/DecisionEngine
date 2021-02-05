@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cluster xmlns="http://tibco.com/businessevents/configuration/5.6">
+    <revision>
+        <version>70</version>
+        <author>P2943582</author>
+        <date>2021/01/15 14:28:58</date>
+        <comment/>
+    </revision>
+    <name>DecisionEngine</name>
+    <message-encoding>UTF-8</message-encoding>
+    <object-management>
+        <memory-manager/>
+        <db-concepts>
+            <db-uris/>
+            <check-interval>60</check-interval>
+            <inactivity-timeout>0</inactivity-timeout>
+            <initial-size>5</initial-size>
+            <max-size>5</max-size>
+            <min-size>5</min-size>
+            <property-check-interval>900</property-check-interval>
+            <retry-count>-1</retry-count>
+            <wait-timeout>1</wait-timeout>
+        </db-concepts>
+    </object-management>
+    <rulesets>
+        <rules id="all-rules">
+            <uri>/</uri>
+        </rules>
+    </rulesets>
+    <function-groups>
+        <functions id="all-functions">
+            <uri>/</uri>
+        </functions>
+    </function-groups>
+    <destination-groups>
+        <destinations id="OutageModule">
+            <destination id="OutageAPIRequest">
+                <pre-processor>/Testing_TobeDeleted/RecieveOutageAPIRequest</pre-processor>
+                <queue-size>0</queue-size>
+                <thread-count/>
+                <threading-model>shared-queue</threading-model>
+                <thread-affinity-rule-function/>
+                <uri>/DataProviders/HTTPOutageAPI/OutageAPIRequest</uri>
+            </destination>
+        </destinations>
+        <destinations id="AppointmentModule">
+            <destination id="AppointmentAPIRequest">
+                <pre-processor>/Testing_TobeDeleted/RecieveAppointmentAPIRequest</pre-processor>
+                <queue-size>0</queue-size>
+                <thread-count/>
+                <threading-model>shared-queue</threading-model>
+                <thread-affinity-rule-function/>
+                <uri>/DataProviders/HTTPAppointmentAPI/AppointmentAPIRequest</uri>
+            </destination>
+        </destinations>
+        <destinations id="FirstBillModule">
+            <destination id="FirstBillAPIRequest">
+                <pre-processor>/Testing_TobeDeleted/RecieveFirstBillAPIRequest</pre-processor>
+                <queue-size>0</queue-size>
+                <thread-count/>
+                <threading-model>shared-queue</threading-model>
+                <thread-affinity-rule-function/>
+                <uri>/DataProviders/HTTPFirstBillAPI/FirstBillAPIRequest</uri>
+            </destination>
+        </destinations>
+        <destinations id="AccountStatusModule">
+            <destination id="AccountStatusAPIRequest">
+                <pre-processor>/Testing_TobeDeleted/RecieveAccountStatusAPIRequest</pre-processor>
+                <queue-size>0</queue-size>
+                <thread-count/>
+                <threading-model>shared-queue</threading-model>
+                <thread-affinity-rule-function/>
+                <uri>/DataProviders/HTTPAccountStatusAPI/AccountStatusAPIRequest</uri>
+            </destination>
+        </destinations>
+    </destination-groups>
+    <process-groups/>
+    <log-configs>
+        <log-config id="logConfig">
+            <enabled>true</enabled>
+            <roles>*:debug</roles>
+            <files>
+                <enabled>true</enabled>
+                <dir>logs</dir>
+                <name/>
+                <max-number>10</max-number>
+                <max-size>5000000</max-size>
+                <append>true</append>
+            </files>
+            <terminal>
+                <enabled/>
+                <sys-out-redirect>false</sys-out-redirect>
+                <sys-err-redirect>false</sys-err-redirect>
+                <encoding/>
+            </terminal>
+            <line-layout>
+                <enabled>false</enabled>
+                <class/>
+                <arg/>
+            </line-layout>
+        </log-config>
+    </log-configs>
+    <agent-classes>
+        <inference-agent-class id="CallDriver">
+            <rules>
+                <ref>all-rules</ref>
+            </rules>
+            <destinations>
+                <ref>OutageModule</ref>
+                <ref>AppointmentModule</ref>
+                <ref>FirstBillModule</ref>
+                <ref>AccountStatusModule</ref>
+            </destinations>
+            <startup/>
+            <shutdown/>
+            <local-cache>
+                <eviction>
+                    <max-size>1024</max-size>
+                    <max-time>900</max-time>
+                </eviction>
+            </local-cache>
+            <shared-queue>
+                <size>1024</size>
+                <workers>10</workers>
+            </shared-queue>
+            <load>
+                <max-active/>
+            </load>
+            <concurrent-rtc>false</concurrent-rtc>
+            <check-for-duplicates>false</check-for-duplicates>
+            <businessworks>
+                <uri/>
+            </businessworks>
+            <property-group/>
+        </inference-agent-class>
+    </agent-classes>
+    <processing-units>
+        <processing-unit id="default">
+            <agents>
+                <agent>
+                    <ref>CallDriver</ref>
+                    <key/>
+                    <priority/>
+                </agent>
+            </agents>
+            <logs>logConfig</logs>
+            <hot-deploy>true</hot-deploy>
+            <cache-storage-enabled>false</cache-storage-enabled>
+            <db-concepts>false</db-concepts>
+            <property-group/>
+        </processing-unit>
+    </processing-units>
+    <load-balancer-configs>
+        <pair-configs/>
+        <adhoc-configs/>
+    </load-balancer-configs>
+    <property-group>
+        <property-group comment="" name="auth">
+            <property name="be.mm.auth.type" value="file"/>
+            <property name="be.mm.auth.file.location" value="/opt/tibco/be/5.6/mm/config/users.pwd"/>
+            <property name="java.security.auth.login.config" value="/opt/tibco/be/5.6/mm/config/jaas-config.config"/>
+        </property-group>
+        <property name="tibco.clientVar.SharedResources/JMS/JNDI_UserName" value="ecusr"/>
+        <property name="tibco.clientVar.SharedResources/JMS/JNDI_Password" value="#!vncnxUb9UrM9HVzqEz6hkCQ1aJxy8mseWla68Z/+Dz2kpHlPtRVmqA=="/>
+        <property name="tibco.clientVar.SharedResources/JMS/JNDI_ConnectionURL" value="tibjmsnaming://vm0dnemseva0002.twcable.com:8000"/>
+        <property name="tibco.clientVar.SharedResources/JMS/JMS_UserName" value="ecusr"/>
+        <property name="tibco.clientVar.SharedResources/JMS/JMS_Password" value="#!vncnxUb9UrM9HVzqEz6hkCQ1aJxy8mseWla68Z/+Dz2kpHlPtRVmqA=="/>
+        <property name="tibco.clientVar.SharedResources/JMS/JNDI_QueueConnectionFactory" value="DEV-TRXNS-QCF"/>
+        <property name="tibco.clientVar.SharedResources/JMS/JNDI_TopicConnectionFactory" value="DEV-TRXNS-TCF"/>
+        <property name="tibco.clientVar.SharedResources/AppConfig/UseLocalChannelForOutageModule" value="false"/>
+        <property name="tibco.clientVar.SharedResources/AppConfig/UseLocalChannelForAppointmentModule" value="false"/>
+        <property name="tibco.clientVar.SharedResources/AppConfig/UseLocalChannelForFirstBillModule" value="false"/>
+    </property-group>
+</cluster>

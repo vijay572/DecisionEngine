@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><element:Concept xmlns:element="http:///com/tibco/cep/designtime/core/model/element" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Concepts/" folder="/Concepts/" name="ReasonForCallModuleStateModelConcept" description="" GUID="D8FC4813-9E89-E2F7-F0BD-2A0338F04AA8" ownerProjectName="DecisionEngine" superConceptPath="">
+    <extendedProperties/>
+    <properties name="TxRoot" ownerProjectName="DecisionEngine" ownerPath="/Concepts/ReasonForCallModuleStateModelConcept"/>
+    <properties name="TxParent" ownerProjectName="DecisionEngine" ownerPath="/Concepts/ReasonForCallModuleStateModelConcept"/>
+    <properties name="TxSelf" ownerProjectName="DecisionEngine" ownerPath="/Concepts/ReasonForCallModuleStateModelConcept"/>
+    <properties name="AccountID" ownerProjectName="DecisionEngine" ownerPath="/Concepts/ReasonForCallModuleStateModelConcept"/>
+    <properties name="DivisionID" ownerProjectName="DecisionEngine" ownerPath="/Concepts/ReasonForCallModuleStateModelConcept"/>
+    <properties name="ReciveTime" ownerProjectName="DecisionEngine" ownerPath="/Concepts/ReasonForCallModuleStateModelConcept"/>
+    <properties name="ProcTime" ownerProjectName="DecisionEngine" ownerPath="/Concepts/ReasonForCallModuleStateModelConcept"/>
+    <properties name="OutageModuleRequestTracking" ownerProjectName="DecisionEngine" type="ContainedConcept" conceptTypePath="/Concepts/OutageModuleRequestTracking" ownerPath="/Concepts/ReasonForCallModuleStateModelConcept"/>
+    <properties name="AppointmentModuleRequestTracking" ownerProjectName="DecisionEngine" type="ContainedConcept" conceptTypePath="/Concepts/AppointmentModuleRequestTracking" ownerPath="/Concepts/ReasonForCallModuleStateModelConcept"/>
+    <properties name="FirstBillModuleRequestTracking" ownerProjectName="DecisionEngine" type="ContainedConcept" conceptTypePath="/Concepts/FirstBillModuleRequestTracking" ownerPath="/Concepts/ReasonForCallModuleStateModelConcept"/>
+    <properties name="CurrentState" ownerProjectName="DecisionEngine" ownerPath="/Concepts/ReasonForCallModuleStateModelConcept"/>
+    <properties name="CallDriverCode" ownerProjectName="DecisionEngine" ownerPath="/Concepts/ReasonForCallModuleStateModelConcept"/>
+    <properties name="AllModulesResonded" ownerProjectName="DecisionEngine" type="boolean" ownerPath="/Concepts/ReasonForCallModuleStateModelConcept"/>
+    <properties name="PrimaryReasonForCallDecision" ownerProjectName="DecisionEngine" ownerPath="/Concepts/ReasonForCallModuleStateModelConcept"/>
+    <properties name="isException" ownerProjectName="DecisionEngine" type="boolean" ownerPath="/Concepts/ReasonForCallModuleStateModelConcept"/>
+    <properties name="ExceptionDetail" ownerProjectName="DecisionEngine" ownerPath="/Concepts/ReasonForCallModuleStateModelConcept"/>
+    <properties name="RequestEventID" ownerProjectName="DecisionEngine" type="int" ownerPath="/Concepts/ReasonForCallModuleStateModelConcept"/>
+    <properties name="LogData" ownerProjectName="DecisionEngine" type="ContainedConcept" conceptTypePath="/Common/Concepts/LogData" ownerPath="/Concepts/ReasonForCallModuleStateModelConcept"/>
+    <properties name="AccountStatusModuleRequestTracking" ownerProjectName="DecisionEngine" type="ContainedConcept" conceptTypePath="/Concepts/AccountStatusModuleRequestTracking" ownerPath="/Concepts/ReasonForCallModuleStateModelConcept"/>
+    <properties name="SecondaryReasonForCallDecision" ownerProjectName="DecisionEngine" array="true" ownerPath="/Concepts/ReasonForCallModuleStateModelConcept"/>
+    <stateMachinePaths>/StateMachines/ReasonForCallStateModel</stateMachinePaths>
+</element:Concept>

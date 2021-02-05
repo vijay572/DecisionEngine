@@ -1,0 +1,21 @@
+/**
+ * @description 
+ */
+void rulefunction Testing_TobeDeleted.RecieveOutageAPIRequest {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+		Events.Shared.OutageAPIRequest outageapirequest;
+	}
+	body {
+
+		System.debugOut("Recieved OutageAPI REquest with payload :"  + outageapirequest@payload);
+		Events.Shared.OutageAPIResponse OutageAPIResponse = Event.createEvent("xslt://{{/Events/Shared/OutageAPIResponse}}<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" xmlns:tns1=\"www.tibco.com/be/ontology/Events/Shared/OutageAPIResponse\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" version=\"2.0\"><xsl:template name=\"Function\" match=\"/\"><createEvent><event/></createEvent></xsl:template></xsl:stylesheet>");
+		System.debugOut("Replied to OutageAPI Request with payload: "+ OutageAPIResponse@payload);
+//		Engine.sleep(5000);
+		Event.replyEvent(outageapirequest,OutageAPIResponse);
+		
+	}
+}

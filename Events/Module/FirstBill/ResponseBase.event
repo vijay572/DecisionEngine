@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Events/Module/FirstBill/" folder="/Events/Module/FirstBill/" name="ResponseBase" description="" GUID="DA10B7F7-3E92-C972-5482-E31383007B5E" ownerProjectName="DecisionEngine" superEventPath="/Events/BaseResponseEvent" ttlUnits="Seconds">
+    <properties name="AccountHasFirstBill" ownerProjectName="DecisionEngine" type="boolean" conceptTypePath="/Events/Module/Outage/ResponseBase" ownerPath="/Events/Module/FirstBill/ResponseBase"/>
+    <expiryAction folder="/Events/Module/Outage/ResponseBase" name="OutageModuleResponse_expiryAction" ownerProjectName="DecisionEngine" actionText="" conditionText="">
+        <symbols>
+            <symbolList idName="outagemoduleresponse" type="/Events/Module/FirstBill/ResponseBase"/>
+        </symbols>
+    </expiryAction>
+</event:SimpleEvent>

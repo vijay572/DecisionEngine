@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Events/Module/Outage/" folder="/Events/Module/Outage/" name="ResponseLocal" description="" GUID="95C00705-FFA9-5538-EC7B-3F5B2F3ADD68" ownerProjectName="DecisionEngine" superEventPath="/Events/Module/Outage/ResponseBase" payloadString="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#10;&#10;&lt;payload ref=&quot;pfx:checkActiveOutagesResponse&quot;/&gt;" ttlUnits="Seconds" channelURI="/Channels/CallDriver_LocalChannel" destinationName="OutageModuleResponse">
+    <namespaceEntries prefix="xsd" namespace="http://www.w3.org/2001/XMLSchema"/>
+    <namespaceEntries prefix="pfx" namespace="http://www.charter.com/enterprise/agentos/decisionengine/schemas/checkactiveoutages/v1"/>
+    <registryImportEntries location="SharedResources/Schemas/CheckActiveOutages.xsd" namespace="http://www.charter.com/enterprise/agentos/decisionengine/schemas/checkactiveoutages/v1"/>
+    <expiryAction folder="/Events/Module/Outage/ResponseLocal" name="OutageModuleResponseLocal_expiryAction" ownerProjectName="DecisionEngine" actionText="" conditionText="">
+        <symbols>
+            <symbolList idName="outagemoduleresponselocal" type="/Events/Module/Outage/ResponseLocal"/>
+        </symbols>
+    </expiryAction>
+</event:SimpleEvent>

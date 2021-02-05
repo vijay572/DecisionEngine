@@ -1,0 +1,14 @@
+/**
+ * @description 
+ */
+virtual void rulefunction RuleFunctions.DM.Modules.FirstBillStatusVRF {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		RuleFunctions.DM.Modules.FirstBillStatus FirstBillStatus; 
+	}
+	body {
+		
+	}
+}

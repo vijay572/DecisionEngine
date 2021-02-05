@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channel:Channel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:channel="http:///com/tibco/cep/designtime/core/model/service/channel" xmlns:designtime="http:///com/tibco/cep/designtime/core/model/designtime_ontology.ecore" namespace="/Channels/" folder="/Channels/" name="CallDriver_JMSChannel" description="" GUID="52541DB3-65EE-C1E6-7712-DDFC7E82063E" ownerProjectName="DecisionEngine">
+  <driver configMethod="REFERENCE" reference="/SharedResources/JMS/EMSConnection.sharedjmscon" label="MQTT" channel="/">
+    <properties>
+      <properties xsi:type="designtime:SimpleProperty" name="ProviderURL" value="tcp://localhost:7222"/>
+      <properties xsi:type="designtime:SimpleProperty" name="UserName" value=""/>
+      <properties xsi:type="designtime:SimpleProperty" name="Password" value=""/>
+      <properties xsi:type="designtime:SimpleProperty" name="IsTransacted" value=""/>
+      <properties xsi:type="designtime:SimpleProperty" name="ClientID" value=""/>
+    </properties>
+    <destinations name="CallDriverRequest" description="" GUID="FF49E5A7-E40E-F46F-52AA-1940622EA611" ownerProjectName="DecisionEngine" eventURI="/Events/ReasonForCallRequest" serializerDeserializerClass="com.tibco.cep.driver.jms.serializer.TextMessageSerializer" driverConfig="//@driver">
+      <properties>
+        <properties xsi:type="designtime:SimpleProperty" name="IsJSONPayload" value="false"/>
+        <properties xsi:type="designtime:SimpleProperty" name="IncludeEventType" value="ALWAYS"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Queue" value="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Name" value="%%SharedResources/Destinations/CallDriverRequestQueue%%"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Selector" value=""/>
+        <properties xsi:type="designtime:SimpleProperty" name="DeliveryMode" value="2"/>
+        <properties xsi:type="designtime:SimpleProperty" name="AckMode" value="23"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Priority" value="4"/>
+        <properties xsi:type="designtime:SimpleProperty" name="TTL" value="0"/>
+        <properties xsi:type="designtime:SimpleProperty" name="DurableSuscriberName" value="%%Deployment%%:%%EngineName%%:%%SessionName%%:%%ChannelURI%%:%%DestinationName%%"/>
+        <properties xsi:type="designtime:SimpleProperty" name="SharedSubscriptionName" value=""/>
+      </properties>
+    </destinations>
+    <destinations name="CallDriverResponse" description="" GUID="A866282C-76C2-4A1B-C2B8-3102243240BC" ownerProjectName="DecisionEngine" eventURI="/Events/ReasonForCallResponse" serializerDeserializerClass="com.tibco.cep.driver.jms.serializer.TextMessageSerializer" driverConfig="//@driver">
+      <properties>
+        <properties xsi:type="designtime:SimpleProperty" name="IsJSONPayload" value="false"/>
+        <properties xsi:type="designtime:SimpleProperty" name="IncludeEventType" value="ALWAYS"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Queue" value="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Name" value="%%SharedResources/Destinations/CallDriverResponseQueue%%"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Selector" value=""/>
+        <properties xsi:type="designtime:SimpleProperty" name="DeliveryMode" value="2"/>
+        <properties xsi:type="designtime:SimpleProperty" name="AckMode" value="23"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Priority" value="4"/>
+        <properties xsi:type="designtime:SimpleProperty" name="TTL" value="0"/>
+        <properties xsi:type="designtime:SimpleProperty" name="DurableSuscriberName" value="%%Deployment%%:%%EngineName%%:%%SessionName%%:%%ChannelURI%%:%%DestinationName%%"/>
+        <properties xsi:type="designtime:SimpleProperty" name="SharedSubscriptionName" value=""/>
+      </properties>
+    </destinations>
+    <driverType xsi:type="channel:DriverTypeInfo" driverTypeName="JMS"/>
+  </driver>
+</channel:Channel>

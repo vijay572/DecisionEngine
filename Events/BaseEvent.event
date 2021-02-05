@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Events/" folder="/Events/" name="BaseEvent" description="" GUID="4AB781D3-97E8-9BDE-355F-28C9AD47E0C2" ownerProjectName="DecisionEngine" superEventPath="" ttlUnits="Seconds">
+    <properties name="TxRoot" ownerProjectName="DecisionEngine" ownerPath="/Events/BaseEvent"/>
+    <properties name="TxParent" ownerProjectName="DecisionEngine" ownerPath="/Events/BaseEvent"/>
+    <properties name="TxSelf" ownerProjectName="DecisionEngine" ownerPath="/Events/BaseEvent"/>
+    <properties name="CorrleationID" ownerProjectName="DecisionEngine" ownerPath="/Events/BaseEvent"/>
+    <properties name="Category" ownerProjectName="DecisionEngine" ownerPath="/Events/BaseEvent"/>
+    <properties name="TxCategoryFingerprint" ownerProjectName="DecisionEngine" ownerPath="/Events/BaseEvent"/>
+    <properties name="EventName" ownerProjectName="DecisionEngine" ownerPath="/Events/BaseEvent"/>
+    <properties name="Component" ownerProjectName="DecisionEngine" ownerPath="/Events/BaseEvent"/>
+    <properties name="ApplicationID" ownerProjectName="DecisionEngine" ownerPath="/Events/BaseEvent"/>
+    <properties name="AccountId" ownerProjectName="DecisionEngine" ownerPath="/Events/BaseEvent"/>
+    <properties name="DivisionId" ownerProjectName="DecisionEngine" ownerPath="/Events/BaseEvent"/>
+    <properties name="SystemDesignator" ownerProjectName="DecisionEngine" ownerPath="/Events/BaseEvent"/>
+    <properties name="LegacyMso" ownerProjectName="DecisionEngine" ownerPath="/Events/BaseEvent"/>
+    <properties name="RequestorUserID" ownerProjectName="DecisionEngine" ownerPath="/Events/BaseEvent"/>
+    <properties name="EventID" ownerProjectName="DecisionEngine" ownerPath="/Events/BaseEvent"/>
+    <properties name="Channel" ownerProjectName="DecisionEngine" ownerPath="/Events/BaseEvent"/>
+    <properties name="MessageID" ownerProjectName="DecisionEngine" ownerPath="/Events/BaseEvent"/>
+    <expiryAction name="BaseEvent_expiryAction" ownerProjectName="DecisionEngine" actionText="" conditionText="">
+        <symbols>
+            <symbolList idName="baseevent" type="/Events/BaseEvent"/>
+        </symbols>
+    </expiryAction>
+</event:SimpleEvent>

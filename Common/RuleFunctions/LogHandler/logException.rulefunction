@@ -1,0 +1,36 @@
+/**
+ * @description 
+ */
+void rulefunction Common.RuleFunctions.LogHandler.logException {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+				Common.Concepts.LogData logData;
+				String result;
+				String message;
+				String payload;
+				String logLevel;
+				Object logger;
+				Exception e;
+
+	}
+	body {
+		
+			Log.log(logger, "trace", " Start of Custom Log Exception Function to log event data for ExtID : %s", logData.TxSelf);
+			logData.TxResult = result;
+			logData.Text = message;
+			logData.Payload = payload;
+			logData.ErrorStackTrace = e@stackTrace;		
+			
+			if (result == "ERROR"){
+				logData.TxEnd = DateTime.getTimeInMillis(now());
+				logData.TxDurationInMillis = logData.TxEnd - logData.TxStart;
+			}
+		
+		String logString = Common.RuleFunctions.LogHandler.getLogDataString(logger, logData);
+		Log.logException(logger, logLevel, logString, e );
+		
+		Log.log(logger, "trace", "End of Custom Log Function to log event data for ExtID : %s", logData.TxSelf);	
+	}
+}

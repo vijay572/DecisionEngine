@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><element:Concept xmlns:element="http:///com/tibco/cep/designtime/core/model/element" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Concepts/" folder="/Concepts/" name="AccountStatusModuleRequestTracking" description="" GUID="C0F66180-9EF4-6410-9A48-AE46D10C1888" ownerProjectName="DecisionEngine" superConceptPath="">
+    <extendedProperties/>
+    <properties name="ModuleName" ownerProjectName="DecisionEngine" ownerPath="/Concepts/AccountStatusModuleRequestTracking"/>
+    <properties name="RequestSent" ownerProjectName="DecisionEngine" type="boolean" ownerPath="/Concepts/AccountStatusModuleRequestTracking"/>
+    <properties name="ExceptionRecieved" ownerProjectName="DecisionEngine" type="boolean" ownerPath="/Concepts/AccountStatusModuleRequestTracking"/>
+    <properties name="RequestedTime" ownerProjectName="DecisionEngine" type="DateTime" ownerPath="/Concepts/AccountStatusModuleRequestTracking"/>
+    <properties name="ResponseTime" ownerProjectName="DecisionEngine" type="DateTime" ownerPath="/Concepts/AccountStatusModuleRequestTracking"/>
+    <properties name="ElapsedTimeForRequestInMillies" ownerProjectName="DecisionEngine" type="long" ownerPath="/Concepts/AccountStatusModuleRequestTracking"/>
+    <properties name="ResponseRecieved" ownerProjectName="DecisionEngine" type="boolean" ownerPath="/Concepts/AccountStatusModuleRequestTracking"/>
+    <properties name="RequestTimedOut" ownerProjectName="DecisionEngine" type="boolean" ownerPath="/Concepts/AccountStatusModuleRequestTracking"/>
+    <properties name="ModuleResponseString" ownerProjectName="DecisionEngine" ownerPath="/Concepts/AccountStatusModuleRequestTracking"/>
+    <properties name="IsAccountActive" ownerProjectName="DecisionEngine" type="boolean" ownerPath="/Concepts/AccountStatusModuleRequestTracking"/>
+</element:Concept>

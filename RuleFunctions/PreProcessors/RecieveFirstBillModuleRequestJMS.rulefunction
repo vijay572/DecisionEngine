@@ -1,0 +1,54 @@
+/**
+ * @description 
+ */
+void rulefunction RuleFunctions.PreProcessors.RecieveFirstBillModuleRequestJMS {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+		Events.Module.FirstBill.RequestJMS FirstBillModuleRequest;
+	}
+	body {
+			Object logger = Log.getLogger(Engine.ruleFunctionName());
+			RuleFunctions.Helper.ParseFirstBillModuleRequest(FirstBillModuleRequest,null);
+			Common.Concepts.LogData logData = RuleFunctions.Helper.CreateLogContextFromBaseEvent(FirstBillModuleRequest,logger);
+			logData.Channel = Event.getDestinationURI(FirstBillModuleRequest);
+		
+		try {
+			Common.RuleFunctions.LogHandler.log(/*logData Common.Concepts.LogData */logData,
+												/*result String */null,
+												/*message String */"Recieved Account FirstBill Module Request",
+												/*payload String */FirstBillModuleRequest@payload,
+												/*logLevel String */"info",
+												/*logger Object */logger,
+												/*RuleFunctionName String */Engine.ruleFunctionName());
+												
+			Events.Module.FirstBill.ResponseBase ResponseBase = RuleFunctions.Shared.FirstBillModule.ProcessFirstBillModuleRequest(FirstBillModuleRequest,logData);
+			Events.Module.FirstBill.ResponseJMS ResponseJMS = Event.createEvent("xslt://{{/Events/Module/FirstBill/ResponseJMS}}<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" xmlns:ns=\"http://www.charter.com/enterprise/agentos/decisionengine/schemas/checkfirstbill/v1\" version=\"2.0\"><xsl:param name=\"ResponseBase\"/><xsl:param name=\"FirstBillModuleRequest\"/><xsl:template name=\"Function\" match=\"/\"><createEvent><event><xsl:if test=\"$ResponseBase/@extId\"><xsl:attribute name=\"extId\"><xsl:value-of select=\"$ResponseBase/@extId\"/></xsl:attribute></xsl:if><xsl:if test=\"$ResponseBase/@Id\"><xsl:attribute name=\"Id\"><xsl:value-of select=\"$ResponseBase/@Id\"/></xsl:attribute></xsl:if><xsl:if test=\"$FirstBillModuleRequest/TxRoot\"><TxRoot><xsl:value-of select=\"$FirstBillModuleRequest/TxRoot\"/></TxRoot></xsl:if><xsl:if test=\"$FirstBillModuleRequest/TxParent\"><TxParent><xsl:value-of select=\"$FirstBillModuleRequest/TxParent\"/></TxParent></xsl:if><xsl:if test=\"$FirstBillModuleRequest/TxSelf\"><TxSelf><xsl:value-of select=\"$FirstBillModuleRequest/TxSelf\"/></TxSelf></xsl:if><xsl:if test=\"$FirstBillModuleRequest/CorrleationID\"><CorrleationID><xsl:value-of select=\"$FirstBillModuleRequest/CorrleationID\"/></CorrleationID></xsl:if><xsl:if test=\"$ResponseBase/Category\"><Category><xsl:value-of select=\"$ResponseBase/Category\"/></Category></xsl:if><xsl:if test=\"$ResponseBase/TxCategoryFingerprint\"><TxCategoryFingerprint><xsl:value-of select=\"$ResponseBase/TxCategoryFingerprint\"/></TxCategoryFingerprint></xsl:if><xsl:if test=\"$ResponseBase/EventName\"><EventName><xsl:value-of select=\"$ResponseBase/EventName\"/></EventName></xsl:if><xsl:if test=\"$ResponseBase/Component\"><Component><xsl:value-of select=\"$ResponseBase/Component\"/></Component></xsl:if><xsl:if test=\"$ResponseBase/ApplicationID\"><ApplicationID><xsl:value-of select=\"$ResponseBase/ApplicationID\"/></ApplicationID></xsl:if><xsl:if test=\"$ResponseBase/AccountId\"><AccountId><xsl:value-of select=\"$ResponseBase/AccountId\"/></AccountId></xsl:if><xsl:if test=\"$ResponseBase/DivisionId\"><DivisionId><xsl:value-of select=\"$ResponseBase/DivisionId\"/></DivisionId></xsl:if><xsl:if test=\"$ResponseBase/SystemDesignator\"><SystemDesignator><xsl:value-of select=\"$ResponseBase/SystemDesignator\"/></SystemDesignator></xsl:if><xsl:if test=\"$ResponseBase/LegacyMso\"><LegacyMso><xsl:value-of select=\"$ResponseBase/LegacyMso\"/></LegacyMso></xsl:if><xsl:if test=\"$ResponseBase/RequestorUserID\"><RequestorUserID><xsl:value-of select=\"$ResponseBase/RequestorUserID\"/></RequestorUserID></xsl:if><xsl:if test=\"$ResponseBase/EventID\"><EventID><xsl:value-of select=\"$ResponseBase/EventID\"/></EventID></xsl:if><xsl:if test=\"$ResponseBase/Channel\"><Channel><xsl:value-of select=\"$ResponseBase/Channel\"/></Channel></xsl:if><xsl:if test=\"$ResponseBase/MessageID\"><MessageID><xsl:value-of select=\"$ResponseBase/MessageID\"/></MessageID></xsl:if><xsl:if test=\"$ResponseBase/IsException\"><IsException><xsl:value-of select=\"$ResponseBase/IsException\"/></IsException></xsl:if><xsl:if test=\"$ResponseBase/ExceptionDetail\"><ExceptionDetail><xsl:value-of select=\"$ResponseBase/ExceptionDetail\"/></ExceptionDetail></xsl:if><xsl:if test=\"$ResponseBase/AccountHasFirstBill\"><AccountHasFirstBill><xsl:value-of select=\"$ResponseBase/AccountHasFirstBill\"/></AccountHasFirstBill></xsl:if><payload><ns:checkFirstBillResponse><xsl:copy-of select=\"$FirstBillModuleRequest/payload/ns:checkFirstBillRequest/ns:messageHeader\"/><ns:response><ns:hasFirstBill><xsl:value-of select=\"$ResponseBase/AccountHasFirstBill\"/></ns:hasFirstBill><xsl:copy-of select=\"$FirstBillModuleRequest/payload/ns:checkFirstBillRequest/ns:request/ns:additionalElements\"/></ns:response></ns:checkFirstBillResponse></payload></event></createEvent></xsl:template></xsl:stylesheet>");
+			Event.replyEvent(FirstBillModuleRequest, ResponseJMS);
+			Common.RuleFunctions.LogHandler.log(/*logData Common.Concepts.LogData */logData,
+												/*result String */"SUCCESS",
+												/*message String */"Responded to FirstBill Module Request",
+												/*payload String */ResponseJMS@payload,
+												/*logLevel String */"info",
+												/*logger Object */logger,
+												/*RuleFunctionName String */Engine.ruleFunctionName());
+
+		} catch (Exception e) {
+			Events.Module.FirstBill.ResponseJMS FirstBillModuleResponse = Event.createEvent("xslt://{{/Events/Module/FirstBill/ResponseJMS}}<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" xmlns:ns=\"http://www.charter.com/enterprise/agentos/decisionengine/schemas/checkfirstbill/v1\" version=\"2.0\"><xsl:param name=\"e\"/><xsl:param name=\"FirstBillModuleRequest\"/><xsl:template name=\"Function\" match=\"/\"><createEvent><event><xsl:if test=\"$FirstBillModuleRequest/@extId\"><xsl:attribute name=\"extId\"><xsl:value-of select=\"$FirstBillModuleRequest/@extId\"/></xsl:attribute></xsl:if><xsl:if test=\"$FirstBillModuleRequest/@Id\"><xsl:attribute name=\"Id\"><xsl:value-of select=\"$FirstBillModuleRequest/@Id\"/></xsl:attribute></xsl:if><xsl:if test=\"$FirstBillModuleRequest/TxRoot\"><TxRoot><xsl:value-of select=\"$FirstBillModuleRequest/TxRoot\"/></TxRoot></xsl:if><xsl:if test=\"$FirstBillModuleRequest/TxParent\"><TxParent><xsl:value-of select=\"$FirstBillModuleRequest/TxParent\"/></TxParent></xsl:if><xsl:if test=\"$FirstBillModuleRequest/TxSelf\"><TxSelf><xsl:value-of select=\"$FirstBillModuleRequest/TxSelf\"/></TxSelf></xsl:if><xsl:if test=\"$FirstBillModuleRequest/CorrleationID\"><CorrleationID><xsl:value-of select=\"$FirstBillModuleRequest/CorrleationID\"/></CorrleationID></xsl:if><xsl:if test=\"$FirstBillModuleRequest/Category\"><Category><xsl:value-of select=\"$FirstBillModuleRequest/Category\"/></Category></xsl:if><xsl:if test=\"$FirstBillModuleRequest/TxCategoryFingerprint\"><TxCategoryFingerprint><xsl:value-of select=\"$FirstBillModuleRequest/TxCategoryFingerprint\"/></TxCategoryFingerprint></xsl:if><xsl:if test=\"$FirstBillModuleRequest/EventName\"><EventName><xsl:value-of select=\"$FirstBillModuleRequest/EventName\"/></EventName></xsl:if><xsl:if test=\"$FirstBillModuleRequest/Component\"><Component><xsl:value-of select=\"$FirstBillModuleRequest/Component\"/></Component></xsl:if><xsl:if test=\"$FirstBillModuleRequest/ApplicationID\"><ApplicationID><xsl:value-of select=\"$FirstBillModuleRequest/ApplicationID\"/></ApplicationID></xsl:if><xsl:if test=\"$FirstBillModuleRequest/AccountId\"><AccountId><xsl:value-of select=\"$FirstBillModuleRequest/AccountId\"/></AccountId></xsl:if><xsl:if test=\"$FirstBillModuleRequest/DivisionId\"><DivisionId><xsl:value-of select=\"$FirstBillModuleRequest/DivisionId\"/></DivisionId></xsl:if><xsl:if test=\"$FirstBillModuleRequest/SystemDesignator\"><SystemDesignator><xsl:value-of select=\"$FirstBillModuleRequest/SystemDesignator\"/></SystemDesignator></xsl:if><xsl:if test=\"$FirstBillModuleRequest/LegacyMso\"><LegacyMso><xsl:value-of select=\"$FirstBillModuleRequest/LegacyMso\"/></LegacyMso></xsl:if><xsl:if test=\"$FirstBillModuleRequest/RequestorUserID\"><RequestorUserID><xsl:value-of select=\"$FirstBillModuleRequest/RequestorUserID\"/></RequestorUserID></xsl:if><xsl:if test=\"$FirstBillModuleRequest/EventID\"><EventID><xsl:value-of select=\"$FirstBillModuleRequest/EventID\"/></EventID></xsl:if><xsl:if test=\"$FirstBillModuleRequest/Channel\"><Channel><xsl:value-of select=\"$FirstBillModuleRequest/Channel\"/></Channel></xsl:if><xsl:if test=\"$FirstBillModuleRequest/MessageID\"><MessageID><xsl:value-of select=\"$FirstBillModuleRequest/MessageID\"/></MessageID></xsl:if><IsException><xsl:value-of select=\"true()\"/></IsException><ExceptionDetail><xsl:value-of select=\"concat(&quot;System Error:&quot;,$e/@stackTrace)\"/></ExceptionDetail><payload><ns:checkFirstBillResponse><xsl:copy-of select=\"$FirstBillModuleRequest/payload/ns:checkFirstBillRequest/ns:messageHeader\"/><ns:response><ns:hasFirstBill><xsl:value-of select=\"false()\"/></ns:hasFirstBill><xsl:copy-of select=\"$FirstBillModuleRequest/payload/ns:checkFirstBillRequest/ns:request/ns:additionalElements\"/></ns:response></ns:checkFirstBillResponse></payload></event></createEvent></xsl:template></xsl:stylesheet>");
+			Event.replyEvent(FirstBillModuleRequest, FirstBillModuleResponse);
+			Common.RuleFunctions.LogHandler.logException(
+											/*logData Common.Concepts.LogData */logData,
+											/*result String */"ERROR",
+											/*message String */"Responded to FirstBill Module Request with Exception" ,
+											/*payload String */FirstBillModuleResponse@payload,
+											/*logLevel String */"error",
+											/*logger Object */logger,
+											/*e BEException */e);
+		
+		}
+		
+		
+	}
+}

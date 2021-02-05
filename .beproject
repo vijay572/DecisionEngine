@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration:StudioProjectConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:configuration="http:///com/tibco/cep/studio/common/configuration/model/project_configuration.ecore" name="DecisionEngine" version="5.6.1" build="135" xpathVersion="2.0">
+  <thirdpartyLibEntries entryType="Third Party" path="C:\Utils\JARS\jose4j-0.5.1.jar" timestamp="1602207710000">
+    <nativeLibraryLocation/>
+  </thirdpartyLibEntries>
+  <thirdpartyLibEntries entryType="Third Party" path="C:\Utils\JARS\slf4j.api-1.6.1.jar" timestamp="1602207710000">
+    <nativeLibraryLocation/>
+  </thirdpartyLibEntries>
+  <thirdpartyLibEntries entryType="Third Party" path="C:\Utils\JARS\slf4j-simple-1.6.1.jar" timestamp="1602207710000">
+    <nativeLibraryLocation/>
+  </thirdpartyLibEntries>
+  <javaSourceFolderEntries entryType="JAVA_SOURCE_FOLDER" path="/DecisionEngine/JavaSrc" readOnly="true"/>
+  <enterpriseArchiveConfiguration name="DecisionEngine" author="P2943582" version="177" path="C:\Charter\EventCorrelation\WorkingDirectory\DecisionEngine-1.0.1.ear" overwrite="true"/>
+  <bpmnProcessSettings/>
+</configuration:StudioProjectConfiguration>

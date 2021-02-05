@@ -1,0 +1,54 @@
+/**
+ * @description 
+ */
+void rulefunction RuleFunctions.PreProcessors.RecieveAppointmentModuleRequestJMS {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+		Events.Module.Appointment.RequestJMS AppointmentModuleRequest;
+	}
+	body {
+			Object logger = Log.getLogger(Engine.ruleFunctionName());
+			RuleFunctions.Helper.ParseAppointmentModuleRequest(AppointmentModuleRequest,null);
+			
+			Common.Concepts.LogData logData = RuleFunctions.Helper.CreateLogContextFromBaseEvent(AppointmentModuleRequest,logger);
+			logData.Channel = Event.getDestinationURI(AppointmentModuleRequest);
+		try {
+			
+			Common.RuleFunctions.LogHandler.log(/*logData Common.Concepts.LogData */logData,
+												/*result String */null,
+												/*message String */"Recieved AppointmentCheck Module Request",
+												/*payload String */AppointmentModuleRequest@payload,
+												/*logLevel String */"info",
+												/*logger Object */logger,
+												/*RuleFunctionName String */Engine.ruleFunctionName());
+			
+			Events.Module.Appointment.ResponseBase ResponseBase = RuleFunctions.Shared.AppointmentModule.ProcessAppointmentModuleRequest(AppointmentModuleRequest,logData);
+			Events.Module.Appointment.ResponseJMS ResponseJMS = Event.createEvent("xslt://{{/Events/Module/Appointment/ResponseJMS}}<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" xmlns:ns=\"http://www.charter.com/enterprise/agentos/decisionengine/schemas/checkappointments/v1\" version=\"2.0\"><xsl:param name=\"ResponseBase\"/><xsl:param name=\"AppointmentModuleRequest\"/><xsl:template name=\"Function\" match=\"/\"><createEvent><event><xsl:if test=\"$ResponseBase/@extId\"><xsl:attribute name=\"extId\"><xsl:value-of select=\"$ResponseBase/@extId\"/></xsl:attribute></xsl:if><xsl:if test=\"$ResponseBase/@Id\"><xsl:attribute name=\"Id\"><xsl:value-of select=\"$ResponseBase/@Id\"/></xsl:attribute></xsl:if><xsl:if test=\"$AppointmentModuleRequest/TxRoot\"><TxRoot><xsl:value-of select=\"$AppointmentModuleRequest/TxRoot\"/></TxRoot></xsl:if><xsl:if test=\"$AppointmentModuleRequest/TxParent\"><TxParent><xsl:value-of select=\"$AppointmentModuleRequest/TxParent\"/></TxParent></xsl:if><xsl:if test=\"$AppointmentModuleRequest/TxSelf\"><TxSelf><xsl:value-of select=\"$AppointmentModuleRequest/TxSelf\"/></TxSelf></xsl:if><xsl:if test=\"$AppointmentModuleRequest/CorrleationID\"><CorrleationID><xsl:value-of select=\"$AppointmentModuleRequest/CorrleationID\"/></CorrleationID></xsl:if><xsl:if test=\"$ResponseBase/Category\"><Category><xsl:value-of select=\"$ResponseBase/Category\"/></Category></xsl:if><xsl:if test=\"$ResponseBase/TxCategoryFingerprint\"><TxCategoryFingerprint><xsl:value-of select=\"$ResponseBase/TxCategoryFingerprint\"/></TxCategoryFingerprint></xsl:if><xsl:if test=\"$ResponseBase/EventName\"><EventName><xsl:value-of select=\"$ResponseBase/EventName\"/></EventName></xsl:if><xsl:if test=\"$ResponseBase/Component\"><Component><xsl:value-of select=\"$ResponseBase/Component\"/></Component></xsl:if><xsl:if test=\"$ResponseBase/ApplicationID\"><ApplicationID><xsl:value-of select=\"$ResponseBase/ApplicationID\"/></ApplicationID></xsl:if><xsl:if test=\"$ResponseBase/AccountId\"><AccountId><xsl:value-of select=\"$ResponseBase/AccountId\"/></AccountId></xsl:if><xsl:if test=\"$ResponseBase/DivisionId\"><DivisionId><xsl:value-of select=\"$ResponseBase/DivisionId\"/></DivisionId></xsl:if><xsl:if test=\"$ResponseBase/SystemDesignator\"><SystemDesignator><xsl:value-of select=\"$ResponseBase/SystemDesignator\"/></SystemDesignator></xsl:if><xsl:if test=\"$ResponseBase/LegacyMso\"><LegacyMso><xsl:value-of select=\"$ResponseBase/LegacyMso\"/></LegacyMso></xsl:if><xsl:if test=\"$ResponseBase/RequestorUserID\"><RequestorUserID><xsl:value-of select=\"$ResponseBase/RequestorUserID\"/></RequestorUserID></xsl:if><xsl:if test=\"$ResponseBase/EventID\"><EventID><xsl:value-of select=\"$ResponseBase/EventID\"/></EventID></xsl:if><xsl:if test=\"$ResponseBase/Channel\"><Channel><xsl:value-of select=\"$ResponseBase/Channel\"/></Channel></xsl:if><xsl:if test=\"$ResponseBase/MessageID\"><MessageID><xsl:value-of select=\"$ResponseBase/MessageID\"/></MessageID></xsl:if><xsl:if test=\"$ResponseBase/IsException\"><IsException><xsl:value-of select=\"$ResponseBase/IsException\"/></IsException></xsl:if><xsl:if test=\"$ResponseBase/ExceptionDetail\"><ExceptionDetail><xsl:value-of select=\"$ResponseBase/ExceptionDetail\"/></ExceptionDetail></xsl:if><xsl:if test=\"$ResponseBase/AccountHasAppointment\"><AccountHasAppointment><xsl:value-of select=\"$ResponseBase/AccountHasAppointment\"/></AccountHasAppointment></xsl:if><payload><ns:checkAppointmentsResponse><xsl:copy-of select=\"$AppointmentModuleRequest/payload/ns:checkAppointmentsRequest/ns:messageHeader\"/><ns:response><ns:hasAppointments><xsl:value-of select=\"$ResponseBase/AccountHasAppointment\"/></ns:hasAppointments><xsl:copy-of select=\"$AppointmentModuleRequest/payload/ns:checkAppointmentsRequest/ns:request/ns:additionalElements\"/></ns:response></ns:checkAppointmentsResponse></payload></event></createEvent></xsl:template></xsl:stylesheet>");
+			Event.replyEvent(AppointmentModuleRequest, ResponseJMS);
+			Common.RuleFunctions.LogHandler.log(/*logData Common.Concepts.LogData */logData,
+												/*result String */"SUCCESS",
+												/*message String */"Responded to AppointmentCheck Module Request",
+												/*payload String */ResponseJMS@payload,
+												/*logLevel String */"info",
+												/*logger Object */logger,
+												/*RuleFunctionName String */Engine.ruleFunctionName());
+
+		} catch (Exception e) {
+			Events.Module.Appointment.ResponseJMS AppointmentsModuleResponse = Event.createEvent("xslt://{{/Events/Module/Appointment/ResponseJMS}}<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" xmlns:ns=\"http://www.charter.com/enterprise/agentos/decisionengine/schemas/checkappointments/v1\" version=\"2.0\"><xsl:param name=\"e\"/><xsl:param name=\"AppointmentModuleRequest\"/><xsl:template name=\"Function\" match=\"/\"><createEvent><event><xsl:if test=\"$AppointmentModuleRequest/@extId\"><xsl:attribute name=\"extId\"><xsl:value-of select=\"$AppointmentModuleRequest/@extId\"/></xsl:attribute></xsl:if><xsl:if test=\"$AppointmentModuleRequest/@Id\"><xsl:attribute name=\"Id\"><xsl:value-of select=\"$AppointmentModuleRequest/@Id\"/></xsl:attribute></xsl:if><xsl:if test=\"$AppointmentModuleRequest/TxRoot\"><TxRoot><xsl:value-of select=\"$AppointmentModuleRequest/TxRoot\"/></TxRoot></xsl:if><xsl:if test=\"$AppointmentModuleRequest/TxParent\"><TxParent><xsl:value-of select=\"$AppointmentModuleRequest/TxParent\"/></TxParent></xsl:if><xsl:if test=\"$AppointmentModuleRequest/TxSelf\"><TxSelf><xsl:value-of select=\"$AppointmentModuleRequest/TxSelf\"/></TxSelf></xsl:if><xsl:if test=\"$AppointmentModuleRequest/CorrleationID\"><CorrleationID><xsl:value-of select=\"$AppointmentModuleRequest/CorrleationID\"/></CorrleationID></xsl:if><xsl:if test=\"$AppointmentModuleRequest/Category\"><Category><xsl:value-of select=\"$AppointmentModuleRequest/Category\"/></Category></xsl:if><xsl:if test=\"$AppointmentModuleRequest/TxCategoryFingerprint\"><TxCategoryFingerprint><xsl:value-of select=\"$AppointmentModuleRequest/TxCategoryFingerprint\"/></TxCategoryFingerprint></xsl:if><xsl:if test=\"$AppointmentModuleRequest/EventName\"><EventName><xsl:value-of select=\"$AppointmentModuleRequest/EventName\"/></EventName></xsl:if><xsl:if test=\"$AppointmentModuleRequest/Component\"><Component><xsl:value-of select=\"$AppointmentModuleRequest/Component\"/></Component></xsl:if><xsl:if test=\"$AppointmentModuleRequest/ApplicationID\"><ApplicationID><xsl:value-of select=\"$AppointmentModuleRequest/ApplicationID\"/></ApplicationID></xsl:if><xsl:if test=\"$AppointmentModuleRequest/AccountId\"><AccountId><xsl:value-of select=\"$AppointmentModuleRequest/AccountId\"/></AccountId></xsl:if><xsl:if test=\"$AppointmentModuleRequest/DivisionId\"><DivisionId><xsl:value-of select=\"$AppointmentModuleRequest/DivisionId\"/></DivisionId></xsl:if><xsl:if test=\"$AppointmentModuleRequest/SystemDesignator\"><SystemDesignator><xsl:value-of select=\"$AppointmentModuleRequest/SystemDesignator\"/></SystemDesignator></xsl:if><xsl:if test=\"$AppointmentModuleRequest/LegacyMso\"><LegacyMso><xsl:value-of select=\"$AppointmentModuleRequest/LegacyMso\"/></LegacyMso></xsl:if><xsl:if test=\"$AppointmentModuleRequest/RequestorUserID\"><RequestorUserID><xsl:value-of select=\"$AppointmentModuleRequest/RequestorUserID\"/></RequestorUserID></xsl:if><xsl:if test=\"$AppointmentModuleRequest/EventID\"><EventID><xsl:value-of select=\"$AppointmentModuleRequest/EventID\"/></EventID></xsl:if><xsl:if test=\"$AppointmentModuleRequest/Channel\"><Channel><xsl:value-of select=\"$AppointmentModuleRequest/Channel\"/></Channel></xsl:if><xsl:if test=\"$AppointmentModuleRequest/MessageID\"><MessageID><xsl:value-of select=\"$AppointmentModuleRequest/MessageID\"/></MessageID></xsl:if><IsException><xsl:value-of select=\"true()\"/></IsException><ExceptionDetail><xsl:value-of select=\"concat(&quot;System Error:&quot;,$e/@stackTrace)\"/></ExceptionDetail><payload><ns:checkAppointmentsResponse><xsl:copy-of select=\"$AppointmentModuleRequest/payload/ns:checkAppointmentsRequest/ns:messageHeader\"/><ns:response><ns:hasAppointments><xsl:value-of select=\"false()\"/></ns:hasAppointments><xsl:copy-of select=\"$AppointmentModuleRequest/payload/ns:checkAppointmentsRequest/ns:request/ns:additionalElements\"/></ns:response></ns:checkAppointmentsResponse></payload></event></createEvent></xsl:template></xsl:stylesheet>");
+			Event.replyEvent(AppointmentModuleRequest, AppointmentsModuleResponse);
+			Common.RuleFunctions.LogHandler.logException(
+											/*logData Common.Concepts.LogData */logData,
+											/*result String */"ERROR",
+											/*message String */"Responded to AppointmentCheck Module Request with Exception" ,
+											/*payload String */AppointmentsModuleResponse@payload,
+											/*logLevel String */"error",
+											/*logger Object */logger,
+											/*e BEException */e);
+		}
+		
+		
+	}
+}

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channel:Channel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:channel="http:///com/tibco/cep/designtime/core/model/service/channel" xmlns:designtime="http:///com/tibco/cep/designtime/core/model/designtime_ontology.ecore" namespace="/DataProviders/" folder="/DataProviders/" name="HTTPAppointmentAPI" description="" GUID="DCFCA1E7-1FF9-A658-2E60-1EB70155D55A" ownerProjectName="DecisionEngine">
+  <driver xsi:type="channel:HttpChannelDriverConfig" configMethod="REFERENCE" reference="/SharedResources/HTTP/AppointmentAPIConnection.sharedhttp" label="HTTP" channel="/">
+    <destinations name="AppointmentAPIRequest" description="" GUID="8D715507-2130-306B-AB26-3BA5A965184A" ownerProjectName="DecisionEngine" eventURI="/Events/Shared/AppointmentAPIRequest" serializerDeserializerClass="com.tibco.cep.driver.http.serializer.RESTMessageSerializer" driverConfig="//@driver">
+      <properties>
+        <properties xsi:type="designtime:SimpleProperty" name="be.http.jsonPayload" value="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="be.http.IncludeEventType" value="ALWAYS"/>
+        <properties xsi:type="designtime:SimpleProperty" name="be.http.type" value="DEFAULT"/>
+        <properties xsi:type="designtime:SimpleProperty" name="be.http.contextPath" value=""/>
+        <properties xsi:type="designtime:SimpleProperty" name="be.http.pageFlowFunction" value=""/>
+      </properties>
+    </destinations>
+    <destinations name="AppointmentAPIResponse" description="" GUID="5B4D6A1E-F541-3CFA-C3D1-32515862F433" ownerProjectName="DecisionEngine" eventURI="/Events/Shared/AppointmentAPIResponse" serializerDeserializerClass="com.tibco.cep.driver.http.serializer.RESTMessageSerializer" driverConfig="//@driver">
+      <properties>
+        <properties xsi:type="designtime:SimpleProperty" name="be.http.jsonPayload" value="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="be.http.IncludeEventType" value="ALWAYS"/>
+        <properties xsi:type="designtime:SimpleProperty" name="be.http.type" value="DEFAULT"/>
+        <properties xsi:type="designtime:SimpleProperty" name="be.http.contextPath" value=""/>
+        <properties xsi:type="designtime:SimpleProperty" name="be.http.pageFlowFunction" value=""/>
+      </properties>
+    </destinations>
+    <extendedConfiguration>
+      <properties name="serverType" value="TOMCAT"/>
+    </extendedConfiguration>
+    <driverType xsi:type="channel:DriverTypeInfo" driverTypeName="HTTP"/>
+    <choice value="TOMCAT">
+      <extendedConfiguration>
+        <properties name="be.http.connectorType" value="NIO"/>
+        <properties name="be.http.connectorInstances" value="1"/>
+        <properties name="be.http.debug" value="false"/>
+        <properties name="be.http.debugFolder" value=""/>
+        <properties name="be.http.debugLogPattern" value="%{yyyy MMM dd HH:mm:ss.SSS 'GMT'X}t %A %I [%m] '%U' [%s] %bbytes %Dms"/>
+        <properties name="be.http.connectionTimeout" value="60000"/>
+        <properties name="be.http.acceptCount" value="-1"/>
+        <properties name="be.http.socketBufferSize" value="9000"/>
+        <properties name="be.http.maxProcessors" value="-1"/>
+        <properties name="be.http.connectionLinger" value="-1"/>
+        <properties name="be.http.enableDNSLookups" value="false"/>
+        <properties name="be.http.tcpNoDelay" value="true"/>
+        <properties name="be.http.compression" value="off"/>
+        <properties name="be.http.useBodyEncodingForURI" value="false"/>
+        <properties name="be.http.URIEncoding" value=""/>
+        <properties name="be.http.maxKeepAliveRequests" value="-1"/>
+        <properties name="be.http.maxHttpHeaderSize" value="4096"/>
+        <properties name="be.http.maxPostSize" value="2097152"/>
+        <properties name="be.http.maxSavePostSize" value="4096"/>
+        <properties name="be.http.scheme" value=""/>
+        <properties name="be.http.sessionTimeout" value="1800"/>
+        <properties name="be.http.maxSpareThreads" value="50"/>
+        <properties name="be.http.minSpareThreads" value="4"/>
+        <properties name="be.http.compressableMimeType" value="text/html,text/xml,text/plain"/>
+        <properties name="be.http.restrictedUserAgents" value=""/>
+        <properties name="be.http.docRoot" value=""/>
+        <properties name="be.http.docPage" value=""/>
+        <properties name="be.http.ssl_server_keymanageralgorithm" value=""/>
+        <properties name="be.http.ssl_server_trustmanageralgorithm" value=""/>
+        <properties name="be.http.ssl_server_enabledprotocols" value="TLSv1,TLSv1.1,TLSv1.2"/>
+        <properties name="be.http.ssl_server_ciphers" value="TLS_AES_128_GCM_SHA256,TLS_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_DHE_RSA_WITH_AES_128_GCM_SHA256,TLS_DHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_RSA_WITH_AES_256_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256,TLS_DHE_RSA_WITH_AES_256_CBC_SHA256,TLS_DHE_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_DSS_WITH_AES_128_CBC_SHA,TLS_DHE_DSS_WITH_AES_128_CBC_SHA256,TLS_DHE_DSS_WITH_AES_128_GCM_SHA256,TLS_DHE_DSS_WITH_AES_256_CBC_SHA,TLS_DHE_DSS_WITH_AES_256_CBC_SHA256,TLS_DHE_DSS_WITH_AES_256_GCM_SHA384"/>
+        <properties name="be.http.ssl_server_useServerCipherOrder" value="false"/>
+        <properties name="be.http.serverHeader" value="Apache-Coyote/1.1"/>
+      </extendedConfiguration>
+    </choice>
+  </driver>
+</channel:Channel>

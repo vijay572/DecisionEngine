@@ -1,0 +1,16 @@
+/**
+ * @description 
+ */
+String rulefunction RuleFunctions.Shared.getGUID {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		//Srikanth Can be moved to SharedLib. 
+		//Srikanth We can use Java custom funcitons here, we will re evaluate if this becomes a bottle neck. 
+		return XPath.evalAsString("xpath://<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xpath>\n    <expr>tib:uuid()</expr>\n    <namespaces>\n        <namespace URI=\"http://www.w3.org/2001/XMLSchema\" pfx=\"xsd\"/>\n        <namespace URI=\"http://www.tibco.com/bw/xslt/custom-functions\" pfx=\"tib\"/>\n    </namespaces>\n    <variables/>\n</xpath>");
+	}
+}

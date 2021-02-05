@@ -1,0 +1,73 @@
+/**
+ * @description 
+ */
+Common.Concepts.LogData rulefunction Common.RuleFunctions.LogHandler.createLogContext {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+		String txRoot;
+		String txParent;
+		String txSelf;
+		String category;
+		String TxCategoryFingerprint;
+		String correlation;
+		String eventName;
+		Object logger;
+		String Component;
+		String ApplicationID;
+		String AccountId;
+		String DivisionId;
+		String SystemDesignator;
+		String LegacyMso;
+		String RequestorUserID;
+		String EventID;
+		String Channel;
+		String MessageID;
+	}
+	body {
+		
+		
+		// Initialise LogData in preprocessor
+		// Assert it in Preprocessor
+		// Load this concept in Get LogString
+		// ExtId will be TxSelf;
+		Log.log(logger, "trace", "Start of createLogData for : '%s'", eventName);
+		Common.Concepts.LogData logData = Common.Concepts.LogData.LogData(/*extId String */ null,
+										/*ApplicationID String */ ApplicationID,
+										/*RequestorUserID String */RequestorUserID,
+										/*TxRoot String */txRoot,
+										/*TxParent String */txParent,
+										/*TxSelf String */txSelf,
+										/*TxStart String */DateTime.getTimeInMillis(now()),
+										/*TxEnd String */0,
+										/*TxDurationInMillis String */0,
+										/*TxResult String */"",
+										/*TxCategory String */category,
+										/*TxCategoryFingerprint String */TxCategoryFingerprint,
+										/*Text String */"",
+										/*MessageID String */MessageID,
+										/*CorrelationID String */correlation,
+										/*Host String */"HostName",										
+//										/*Host String */XPath.evalAsString("xpath://<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xpath>\n    <expr>bw:getHostName()</expr>\n    <namespaces>\n        <namespace URI=\"http://www.tibco.com/bw/xpath/bw-custom-functions\" pfx=\"bw\"/>\n        <namespace URI=\"http://www.w3.org/2001/XMLSchema\" pfx=\"xsd\"/>\n    </namespaces>\n    <variables/>\n</xpath>"),
+										/*Component String */Component,
+										/*RuleFunctionName String */"",
+										/*Payload String */"",
+										/*AccountId String */AccountId,
+										/*DivisionId String */DivisionId,
+										/*SystemDesignator String */SystemDesignator,
+										/*LegacyMso String */LegacyMso,
+										/*Environment String */System.getGlobalVariableAsString("Environment", "dev"),
+										/*BENodeName String */Engine.sessionName(),
+										/*ErrorStackTrace String */"",
+										/*ThreadName String */Engine.threadName(),
+										/*EventName String */eventName,
+										/*Channel String */Channel,
+										/*EventID String */EventID);
+										
+		Log.log(logger, "trace", "End of createLogData for extID: '%s', LogContext: '%s'", txSelf, Common.RuleFunctions.LogHandler.getLogDataString(logger, logData));
+		return logData;
+		
+}
+}

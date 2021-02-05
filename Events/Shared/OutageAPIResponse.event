@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Events/Shared/" folder="/Events/Shared/" name="OutageAPIResponse" description="" GUID="4482F49A-F2AA-8ADB-8B1F-3287379FCBF9" ownerProjectName="DecisionEngine" superEventPath="" ttlUnits="Seconds" channelURI="/DataProviders/HTTPOutageAPI" destinationName="OutageAPIResponse">
+    <properties name="AccountID" ownerProjectName="DecisionEngine" ownerPath="/Events/Shared/OutageAPIResponse"/>
+    <properties name="DivisionID" ownerProjectName="DecisionEngine" ownerPath="/Events/Shared/OutageAPIResponse"/>
+    <namespaceEntries prefix="xsd" namespace="http://www.w3.org/2001/XMLSchema"/>
+    <expiryAction folder="/Events/Shared/OutageAPIResponse" name="OutageAPIResponse_expiryAction" ownerProjectName="DecisionEngine" actionText="" conditionText="">
+        <symbols>
+            <symbolList idName="outageapiresponse" type="/Events/Shared/OutageAPIResponse"/>
+        </symbols>
+    </expiryAction>
+</event:SimpleEvent>

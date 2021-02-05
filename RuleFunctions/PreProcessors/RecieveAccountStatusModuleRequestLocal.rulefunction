@@ -1,0 +1,55 @@
+/**
+ * @description 
+ */
+void rulefunction RuleFunctions.PreProcessors.RecieveAccountStatusModuleRequestLocal {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+		Events.Module.AccountStatus.RequestLocal AccountStatusModuleRequest;
+	}
+	body {
+			Object logger = Log.getLogger(Engine.ruleFunctionName());
+			RuleFunctions.Helper.ParseAccountStatusModuleRequest(null,AccountStatusModuleRequest);
+			
+			Common.Concepts.LogData logData = RuleFunctions.Helper.CreateLogContextFromBaseEvent(AccountStatusModuleRequest,logger);
+			logData.Channel = Event.getDestinationURI(AccountStatusModuleRequest);
+		
+		try {
+			
+			Common.RuleFunctions.LogHandler.log(/*logData Common.Concepts.LogData */logData,
+												/*result String */"SUCCESS",
+												/*message String */"Recieved AccountStatus Module Request",
+												/*payload String */AccountStatusModuleRequest@payload,
+												/*logLevel String */"info",
+												/*logger Object */logger,
+												/*RuleFunctionName String */Engine.ruleFunctionName());
+
+			Events.Module.AccountStatus.ResponseBase ResponseBase = RuleFunctions.Shared.AccountStatusModule.ProcessAccountStatusModuleRequest(AccountStatusModuleRequest,logData);
+			Events.Module.AccountStatus.ResponseLocal ResponseLocal = Event.createEvent("xslt://{{/Events/Module/AccountStatus/ResponseLocal}}<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" xmlns:ns=\"http://www.charter.com/enterprise/agentos/decisionengine/schemas/checkaccountstatus/v1\" version=\"2.0\"><xsl:param name=\"ResponseBase\"/><xsl:param name=\"AccountStatusModuleRequest\"/><xsl:template name=\"Function\" match=\"/\"><createEvent><event><xsl:if test=\"$ResponseBase/@extId\"><xsl:attribute name=\"extId\"><xsl:value-of select=\"$ResponseBase/@extId\"/></xsl:attribute></xsl:if><xsl:if test=\"$ResponseBase/@Id\"><xsl:attribute name=\"Id\"><xsl:value-of select=\"$ResponseBase/@Id\"/></xsl:attribute></xsl:if><xsl:if test=\"$AccountStatusModuleRequest/TxRoot\"><TxRoot><xsl:value-of select=\"$AccountStatusModuleRequest/TxRoot\"/></TxRoot></xsl:if><xsl:if test=\"$AccountStatusModuleRequest/TxParent\"><TxParent><xsl:value-of select=\"$AccountStatusModuleRequest/TxParent\"/></TxParent></xsl:if><xsl:if test=\"$AccountStatusModuleRequest/TxSelf\"><TxSelf><xsl:value-of select=\"$AccountStatusModuleRequest/TxSelf\"/></TxSelf></xsl:if><xsl:if test=\"$AccountStatusModuleRequest/CorrleationID\"><CorrleationID><xsl:value-of select=\"$AccountStatusModuleRequest/CorrleationID\"/></CorrleationID></xsl:if><xsl:if test=\"$ResponseBase/Category\"><Category><xsl:value-of select=\"$ResponseBase/Category\"/></Category></xsl:if><xsl:if test=\"$ResponseBase/TxCategoryFingerprint\"><TxCategoryFingerprint><xsl:value-of select=\"$ResponseBase/TxCategoryFingerprint\"/></TxCategoryFingerprint></xsl:if><xsl:if test=\"$ResponseBase/EventName\"><EventName><xsl:value-of select=\"$ResponseBase/EventName\"/></EventName></xsl:if><xsl:if test=\"$ResponseBase/Component\"><Component><xsl:value-of select=\"$ResponseBase/Component\"/></Component></xsl:if><xsl:if test=\"$ResponseBase/ApplicationID\"><ApplicationID><xsl:value-of select=\"$ResponseBase/ApplicationID\"/></ApplicationID></xsl:if><xsl:if test=\"$ResponseBase/AccountId\"><AccountId><xsl:value-of select=\"$ResponseBase/AccountId\"/></AccountId></xsl:if><xsl:if test=\"$ResponseBase/DivisionId\"><DivisionId><xsl:value-of select=\"$ResponseBase/DivisionId\"/></DivisionId></xsl:if><xsl:if test=\"$ResponseBase/SystemDesignator\"><SystemDesignator><xsl:value-of select=\"$ResponseBase/SystemDesignator\"/></SystemDesignator></xsl:if><xsl:if test=\"$ResponseBase/LegacyMso\"><LegacyMso><xsl:value-of select=\"$ResponseBase/LegacyMso\"/></LegacyMso></xsl:if><xsl:if test=\"$ResponseBase/RequestorUserID\"><RequestorUserID><xsl:value-of select=\"$ResponseBase/RequestorUserID\"/></RequestorUserID></xsl:if><xsl:if test=\"$ResponseBase/EventID\"><EventID><xsl:value-of select=\"$ResponseBase/EventID\"/></EventID></xsl:if><xsl:if test=\"$ResponseBase/Channel\"><Channel><xsl:value-of select=\"$ResponseBase/Channel\"/></Channel></xsl:if><xsl:if test=\"$ResponseBase/MessageID\"><MessageID><xsl:value-of select=\"$ResponseBase/MessageID\"/></MessageID></xsl:if><xsl:if test=\"$ResponseBase/IsException\"><IsException><xsl:value-of select=\"$ResponseBase/IsException\"/></IsException></xsl:if><xsl:if test=\"$ResponseBase/ExceptionDetail\"><ExceptionDetail><xsl:value-of select=\"$ResponseBase/ExceptionDetail\"/></ExceptionDetail></xsl:if><xsl:if test=\"$ResponseBase/IsAccountActive\"><IsAccountActive><xsl:value-of select=\"$ResponseBase/IsAccountActive\"/></IsAccountActive></xsl:if><payload><ns:accountStatusResponse><xsl:copy-of select=\"$AccountStatusModuleRequest/payload/ns:accountStatusRequest/ns:messageHeader\"/><ns:response><ns:isAccountActive><xsl:value-of select=\"$ResponseBase/IsAccountActive\"/></ns:isAccountActive><xsl:copy-of select=\"$AccountStatusModuleRequest/payload/ns:accountStatusRequest/ns:request/ns:additionalElements\"/></ns:response></ns:accountStatusResponse></payload></event></createEvent></xsl:template></xsl:stylesheet>");
+			Event.sendEvent(ResponseLocal);
+			Common.RuleFunctions.LogHandler.log(/*logData Common.Concepts.LogData */logData,
+												/*result String */"SUCCESS",
+												/*message String */"Responded to AccountStatus Module Request",
+												/*payload String */ResponseLocal@payload,
+												/*logLevel String */"info",
+												/*logger Object */logger,
+												/*RuleFunctionName String */Engine.ruleFunctionName());
+
+		} catch (Exception e) {
+			Events.Module.AccountStatus.ResponseLocal AccountStatusModuleResponse = Event.createEvent("xslt://{{/Events/Module/AccountStatus/ResponseLocal}}<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" xmlns:ns=\"http://www.charter.com/enterprise/agentos/decisionengine/schemas/checkaccountstatus/v1\" version=\"2.0\"><xsl:param name=\"e\"/><xsl:param name=\"AccountStatusModuleRequest\"/><xsl:template name=\"Function\" match=\"/\"><createEvent><event><xsl:if test=\"$AccountStatusModuleRequest/@extId\"><xsl:attribute name=\"extId\"><xsl:value-of select=\"$AccountStatusModuleRequest/@extId\"/></xsl:attribute></xsl:if><xsl:if test=\"$AccountStatusModuleRequest/@Id\"><xsl:attribute name=\"Id\"><xsl:value-of select=\"$AccountStatusModuleRequest/@Id\"/></xsl:attribute></xsl:if><xsl:if test=\"$AccountStatusModuleRequest/TxRoot\"><TxRoot><xsl:value-of select=\"$AccountStatusModuleRequest/TxRoot\"/></TxRoot></xsl:if><xsl:if test=\"$AccountStatusModuleRequest/TxParent\"><TxParent><xsl:value-of select=\"$AccountStatusModuleRequest/TxParent\"/></TxParent></xsl:if><xsl:if test=\"$AccountStatusModuleRequest/TxSelf\"><TxSelf><xsl:value-of select=\"$AccountStatusModuleRequest/TxSelf\"/></TxSelf></xsl:if><xsl:if test=\"$AccountStatusModuleRequest/CorrleationID\"><CorrleationID><xsl:value-of select=\"$AccountStatusModuleRequest/CorrleationID\"/></CorrleationID></xsl:if><xsl:if test=\"$AccountStatusModuleRequest/Category\"><Category><xsl:value-of select=\"$AccountStatusModuleRequest/Category\"/></Category></xsl:if><xsl:if test=\"$AccountStatusModuleRequest/TxCategoryFingerprint\"><TxCategoryFingerprint><xsl:value-of select=\"$AccountStatusModuleRequest/TxCategoryFingerprint\"/></TxCategoryFingerprint></xsl:if><xsl:if test=\"$AccountStatusModuleRequest/EventName\"><EventName><xsl:value-of select=\"$AccountStatusModuleRequest/EventName\"/></EventName></xsl:if><xsl:if test=\"$AccountStatusModuleRequest/Component\"><Component><xsl:value-of select=\"$AccountStatusModuleRequest/Component\"/></Component></xsl:if><xsl:if test=\"$AccountStatusModuleRequest/ApplicationID\"><ApplicationID><xsl:value-of select=\"$AccountStatusModuleRequest/ApplicationID\"/></ApplicationID></xsl:if><xsl:if test=\"$AccountStatusModuleRequest/AccountId\"><AccountId><xsl:value-of select=\"$AccountStatusModuleRequest/AccountId\"/></AccountId></xsl:if><xsl:if test=\"$AccountStatusModuleRequest/DivisionId\"><DivisionId><xsl:value-of select=\"$AccountStatusModuleRequest/DivisionId\"/></DivisionId></xsl:if><xsl:if test=\"$AccountStatusModuleRequest/SystemDesignator\"><SystemDesignator><xsl:value-of select=\"$AccountStatusModuleRequest/SystemDesignator\"/></SystemDesignator></xsl:if><xsl:if test=\"$AccountStatusModuleRequest/LegacyMso\"><LegacyMso><xsl:value-of select=\"$AccountStatusModuleRequest/LegacyMso\"/></LegacyMso></xsl:if><xsl:if test=\"$AccountStatusModuleRequest/RequestorUserID\"><RequestorUserID><xsl:value-of select=\"$AccountStatusModuleRequest/RequestorUserID\"/></RequestorUserID></xsl:if><xsl:if test=\"$AccountStatusModuleRequest/EventID\"><EventID><xsl:value-of select=\"$AccountStatusModuleRequest/EventID\"/></EventID></xsl:if><xsl:if test=\"$AccountStatusModuleRequest/Channel\"><Channel><xsl:value-of select=\"$AccountStatusModuleRequest/Channel\"/></Channel></xsl:if><xsl:if test=\"$AccountStatusModuleRequest/MessageID\"><MessageID><xsl:value-of select=\"$AccountStatusModuleRequest/MessageID\"/></MessageID></xsl:if><IsException><xsl:value-of select=\"true()\"/></IsException><ExceptionDetail><xsl:value-of select=\"concat(&quot;System Error:&quot;,$e/@stackTrace)\"/></ExceptionDetail><payload><ns:accountStatusResponse><xsl:copy-of select=\"$AccountStatusModuleRequest/payload/ns:accountStatusRequest/ns:messageHeader\"/><ns:response><ns:isAccountActive><xsl:value-of select=\"false()\"/></ns:isAccountActive><xsl:copy-of select=\"$AccountStatusModuleRequest/payload/ns:accountStatusRequest/ns:request/ns:additionalElements\"/></ns:response></ns:accountStatusResponse></payload></event></createEvent></xsl:template></xsl:stylesheet>");
+			Event.sendEvent(AccountStatusModuleResponse);
+			Common.RuleFunctions.LogHandler.logException(
+											/*logData Common.Concepts.LogData */logData,
+											/*result String */"ERROR",
+											/*message String */"Responded to AccountStatus Module Request with Exception" ,
+											/*payload String */AccountStatusModuleResponse@payload,
+											/*logLevel String */"error",
+											/*logger Object */logger,
+											/*e BEException */e);					
+		}
+		
+		
+	}
+}

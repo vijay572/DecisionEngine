@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns="http://www.charter.com/enterprise/agentos/decisionengine/schemas/reasonforcall/v1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.charter.com/enterprise/agentos/decisionengine/schemas/reasonforcall/v1">
+
+    <xsd:include schemaLocation="MessageHeader.xsd"/>
+	<xsd:complexType name="reasonForCallRequestType">
+		<xsd:sequence>
+			<xsd:element name="messageHeader" type="messageHeaderType"/>
+			<xsd:element name="request" type="requestBodyType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="reasonForCallResponseType">
+		<xsd:sequence>
+			<xsd:element name="messageHeader" type="messageHeaderType"/>
+			<xsd:element name="response" type="responseBodyType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="requestBodyType">
+		<xsd:sequence>
+			<xsd:element name="accountId" type="xsd:string"/>
+			<xsd:element name="divisionId" type="xsd:string"/>
+			<xsd:element name="systemDesignator" type="xsd:string"/>
+			<xsd:element name="legacyMso" minOccurs="0" type="xsd:string"/>
+			<xsd:element name="purposeOfCallFromIvr" minOccurs="0" type="xsd:string"/>
+			<xsd:element minOccurs="0" name="additionalElements" type="additionalElementsType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="responseBodyType">
+		<xsd:sequence>
+			<xsd:element name="callDriverList" type="callDriverListType"/>
+			<xsd:element minOccurs="0" name="additionalElements" type="additionalElementsType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="callDriverType">
+		<xsd:sequence>
+			<xsd:element name="name" type="xsd:string"/>
+			<xsd:element minOccurs="0" name="description" type="xsd:string"/>
+			<xsd:element minOccurs="0" name="additionalElements" type="additionalElementsType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="callDriverListType">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="callDriver" type="callDriverType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="reasonForCallRequest" type="reasonForCallRequestType">
+	</xsd:element>
+
+	<xsd:element name="reasonForCallResponse" type="reasonForCallResponseType">
+	</xsd:element>
+</xsd:schema>

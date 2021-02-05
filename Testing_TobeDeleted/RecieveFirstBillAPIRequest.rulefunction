@@ -1,0 +1,21 @@
+/**
+ * @description 
+ */
+void rulefunction Testing_TobeDeleted.RecieveFirstBillAPIRequest {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+		Events.Shared.FirstBillAPIRequest FirstBillapirequest;
+	}
+	body {
+
+		System.debugOut("Recieved FirstBill API REquest with payload :"  + FirstBillapirequest@payload);
+		Events.Shared.FirstBillAPIResponse FirstBillAPIResponse = Event.createEvent("xslt://{{/Events/Shared/FirstBillAPIResponse}}<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:ns0=\"www.tibco.com/be/ontology/Events/Shared/FirstBillAPIResponse\" version=\"2.0\"><xsl:template name=\"Function\" match=\"/\"><createEvent><event/></createEvent></xsl:template></xsl:stylesheet>");
+		System.debugOut("Replied to OutageAPI Request with payload: "+ FirstBillAPIResponse@payload);
+//		Engine.sleep(5000);
+		Event.replyEvent(FirstBillapirequest,FirstBillAPIResponse);
+		
+	}
+}

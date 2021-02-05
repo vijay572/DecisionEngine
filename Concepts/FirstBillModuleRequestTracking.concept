@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><element:Concept xmlns:element="http:///com/tibco/cep/designtime/core/model/element" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Concepts/" folder="/Concepts/" name="FirstBillModuleRequestTracking" description="" GUID="A705F93C-BF78-9593-582C-524C68C8D152" ownerProjectName="DecisionEngine" superConceptPath="">
+    <extendedProperties/>
+    <properties name="ModuleName" ownerProjectName="DecisionEngine" ownerPath="/Concepts/FirstBillModuleRequestTracking"/>
+    <properties name="RequestSent" ownerProjectName="DecisionEngine" type="boolean" ownerPath="/Concepts/FirstBillModuleRequestTracking"/>
+    <properties name="ExceptionRecieved" ownerProjectName="DecisionEngine" type="boolean" ownerPath="/Concepts/FirstBillModuleRequestTracking"/>
+    <properties name="RequestedTime" ownerProjectName="DecisionEngine" type="DateTime" ownerPath="/Concepts/FirstBillModuleRequestTracking"/>
+    <properties name="ResponseTime" ownerProjectName="DecisionEngine" type="DateTime" ownerPath="/Concepts/FirstBillModuleRequestTracking"/>
+    <properties name="ElapsedTimeForRequestInMillies" ownerProjectName="DecisionEngine" type="long" ownerPath="/Concepts/FirstBillModuleRequestTracking"/>
+    <properties name="ResponseRecieved" ownerProjectName="DecisionEngine" type="boolean" ownerPath="/Concepts/FirstBillModuleRequestTracking"/>
+    <properties name="RequestTimedOut" ownerProjectName="DecisionEngine" type="boolean" ownerPath="/Concepts/FirstBillModuleRequestTracking"/>
+    <properties name="ModuleResponseString" ownerProjectName="DecisionEngine" ownerPath="/Concepts/FirstBillModuleRequestTracking"/>
+    <properties name="AccountHasFirstBill" ownerProjectName="DecisionEngine" type="boolean" ownerPath="/Concepts/FirstBillModuleRequestTracking"/>
+</element:Concept>

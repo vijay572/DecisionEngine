@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Table:Table xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:Table="http:///com/tibco/cep/decision/table/model/DecisionTable.ecore" name="OutageStatusDM" folder="/RuleFunctions/DM/Modules/" implements="/RuleFunctions/DM/Modules/OutageStatusVRF" since="BE 4.0">
+  <md>
+    <prop name="SingleRowExecution" type="Boolean" value="true"/>
+  </md>
+  <decisionTable>
+    <rule id="1">
+      <md>
+        <prop name="Description" type="String" value=""/>
+        <prop name="Priority" type="Integer" value="3"/>
+      </md>
+      <cond id="1_1" colId="1" expr="&quot;Outage&quot;"/>
+      <act id="1_2" colId="2" expr="true"/>
+    </rule>
+    <rule id="2">
+      <act id="2_2" colId="2" expr="false"/>
+    </rule>
+    <columns>
+      <column id="1" name="OutageStatus.Classification" propertyPath="/RuleFunctions/DM/Modules/OutageStatus/Classification" columnType="CONDITION" alias="Classification"/>
+      <column id="2" name="OutageStatus.IsInOutage" propertyPath="/RuleFunctions/DM/Modules/OutageStatus/IsInOutage" propertyType="4" columnType="ACTION" alias="IsInOutage" defaultCellText="false"/>
+    </columns>
+  </decisionTable>
+  <exceptionTable/>
+  <argument direction="BOTH">
+    <property path="/RuleFunctions/DM/Modules/OutageStatus" alias="OutageStatus" resourceType="CONCEPT"/>
+  </argument>
+</Table:Table>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?><element:Concept xmlns:element="http:///com/tibco/cep/designtime/core/model/element" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Common/Concepts/" folder="/Common/Concepts/" name="BaseConcept" description="" GUID="DD0AA1EA-F3DD-6EC4-8410-4F6E8345130B" ownerProjectName="DecisionEngine" superConceptPath="" autoStartStateMachine="true">
+    <extendedProperties/>
+    <properties name="EventID" ownerProjectName="DecisionEngine" ownerPath="/Common/Concepts/BaseConcept"/>
+</element:Concept>

@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cluster xmlns="http://tibco.com/businessevents/configuration/5.6">
+    <revision>
+        <version>65</version>
+        <author>P2943582</author>
+        <date>2021/01/15 14:28:58</date>
+        <comment/>
+    </revision>
+    <name>DecisionEngine</name>
+    <message-encoding>UTF-8</message-encoding>
+    <object-management>
+        <memory-manager/>
+        <db-concepts>
+            <db-uris/>
+            <check-interval>60</check-interval>
+            <inactivity-timeout>0</inactivity-timeout>
+            <initial-size>5</initial-size>
+            <max-size>5</max-size>
+            <min-size>5</min-size>
+            <property-check-interval>900</property-check-interval>
+            <retry-count>-1</retry-count>
+            <wait-timeout>1</wait-timeout>
+        </db-concepts>
+    </object-management>
+    <rulesets>
+        <rules id="all-rules">
+            <uri>/</uri>
+        </rules>
+    </rulesets>
+    <function-groups>
+        <functions id="all-functions">
+            <uri>/</uri>
+        </functions>
+    </function-groups>
+    <destination-groups>
+        <destinations id="AccountStatusModule">
+            <destination id="AccountStatusModuleRequest-Local">
+                <pre-processor>/RuleFunctions/PreProcessors/RecieveAccountStatusModuleRequestLocal</pre-processor>
+                <queue-size>0</queue-size>
+                <thread-count/>
+                <threading-model>shared-queue</threading-model>
+                <thread-affinity-rule-function/>
+                <uri>/Channels/CallDriver_LocalChannel/AccountStatusModuleRequest</uri>
+            </destination>
+            <destination id="AccountStatusModuleRequest-JMS">
+                <pre-processor>/RuleFunctions/PreProcessors/RecieveAccountStatusModuleRequestJMS</pre-processor>
+                <queue-size>0</queue-size>
+                <thread-count/>
+                <threading-model>shared-queue</threading-model>
+                <thread-affinity-rule-function/>
+                <uri>/Channels/Shared_JMSChannel/AccountStatusModuleRequest</uri>
+            </destination>
+        </destinations>
+        <destinations id="OutageModule">
+            <destination id="OutageModuleRequest-Local">
+                <pre-processor>/RuleFunctions/PreProcessors/RecieveOutageModuleRequestLocal</pre-processor>
+                <queue-size>0</queue-size>
+                <thread-count/>
+                <threading-model>shared-queue</threading-model>
+                <thread-affinity-rule-function/>
+                <uri>/Channels/CallDriver_LocalChannel/OutageModuleRequest</uri>
+            </destination>
+            <destination id="OutageModuleRequest-JMS">
+                <pre-processor>/RuleFunctions/PreProcessors/RecieveOutageModuleRequestJMS</pre-processor>
+                <queue-size>0</queue-size>
+                <thread-count/>
+                <threading-model>shared-queue</threading-model>
+                <thread-affinity-rule-function/>
+                <uri>/Channels/Shared_JMSChannel/OutageModuleRequest</uri>
+            </destination>
+        </destinations>
+        <destinations id="AppointmentModule">
+            <destination id="AppointmentModuleRequest-Local">
+                <pre-processor>/RuleFunctions/PreProcessors/RecieveAppointmentModuleRequestLocal</pre-processor>
+                <queue-size>0</queue-size>
+                <thread-count/>
+                <threading-model>shared-queue</threading-model>
+                <thread-affinity-rule-function/>
+                <uri>/Channels/CallDriver_LocalChannel/AppointmentModuleRequest</uri>
+            </destination>
+            <destination id="AppointmentModuleRequest-JMS">
+                <pre-processor>/RuleFunctions/PreProcessors/RecieveAppointmentModuleRequestJMS</pre-processor>
+                <queue-size>0</queue-size>
+                <thread-count/>
+                <threading-model>shared-queue</threading-model>
+                <thread-affinity-rule-function/>
+                <uri>/Channels/Shared_JMSChannel/AppointmentModuleRequest</uri>
+            </destination>
+        </destinations>
+        <destinations id="FirstBillModule">
+            <destination id="FirstBillModuleRequest-Local">
+                <pre-processor>/RuleFunctions/PreProcessors/RecieveFirstBillModuleRequestLocal</pre-processor>
+                <queue-size>0</queue-size>
+                <thread-count/>
+                <threading-model>shared-queue</threading-model>
+                <thread-affinity-rule-function/>
+                <uri>/Channels/CallDriver_LocalChannel/FirstBillModuleRequest</uri>
+            </destination>
+            <destination id="FirstBillModuleRequest-JMS">
+                <pre-processor>/RuleFunctions/PreProcessors/RecieveFirstBillModuleRequestJMS</pre-processor>
+                <queue-size>0</queue-size>
+                <thread-count/>
+                <threading-model>shared-queue</threading-model>
+                <thread-affinity-rule-function/>
+                <uri>/Channels/Shared_JMSChannel/FirstBillModuleRequest</uri>
+            </destination>
+        </destinations>
+        <destinations id="LocalModuleCommunication">
+            <destination id="AccountStatusModuleResponse-Local">
+                <pre-processor>/RuleFunctions/PreProcessors/RecieveAccountStatusModuleResponseLocal</pre-processor>
+                <queue-size>0</queue-size>
+                <thread-count/>
+                <threading-model>shared-queue</threading-model>
+                <thread-affinity-rule-function/>
+                <uri>/Channels/CallDriver_LocalChannel/AccountStatusModuleResponse</uri>
+            </destination>
+            <destination id="OutageModuleResponse-Local">
+                <pre-processor>/RuleFunctions/PreProcessors/RecieveOutageModuleResponseLocal</pre-processor>
+                <queue-size>0</queue-size>
+                <thread-count/>
+                <threading-model>shared-queue</threading-model>
+                <thread-affinity-rule-function/>
+                <uri>/Channels/CallDriver_LocalChannel/OutageModuleResponse</uri>
+            </destination>
+            <destination id="AppointmentModuleResponse-Local">
+                <pre-processor>/RuleFunctions/PreProcessors/RecieveAppointmentModuleResponseLocal</pre-processor>
+                <queue-size>0</queue-size>
+                <thread-count/>
+                <threading-model>shared-queue</threading-model>
+                <thread-affinity-rule-function/>
+                <uri>/Channels/CallDriver_LocalChannel/AppointmentModuleResponse</uri>
+            </destination>
+            <destination id="FirstBillModuleResponse-Local">
+                <pre-processor>/RuleFunctions/PreProcessors/RecieveFirstBillModuleResponseLocal</pre-processor>
+                <queue-size>0</queue-size>
+                <thread-count/>
+                <threading-model>shared-queue</threading-model>
+                <thread-affinity-rule-function/>
+                <uri>/Channels/CallDriver_LocalChannel/FirstBillModuleResponse</uri>
+            </destination>
+        </destinations>
+        <destinations id="JMSModuleCommunication">
+            <destination id="AccountStatusModuleResponse-JMS">
+                <pre-processor>/RuleFunctions/PreProcessors/RecieveAccountStatusModuleResponseJMS</pre-processor>
+                <queue-size>0</queue-size>
+                <thread-count/>
+                <threading-model>shared-queue</threading-model>
+                <thread-affinity-rule-function/>
+                <uri>/Channels/Shared_JMSChannel/AccountStatusModuleResponse</uri>
+            </destination>
+            <destination id="OutageModuleResponse-JMS">
+                <pre-processor>/RuleFunctions/PreProcessors/RecieveOutageModuleResponseJMS</pre-processor>
+                <queue-size>0</queue-size>
+                <thread-count/>
+                <threading-model>shared-queue</threading-model>
+                <thread-affinity-rule-function/>
+                <uri>/Channels/Shared_JMSChannel/OutageModuleResponse</uri>
+            </destination>
+            <destination id="AppointmentModuleResponse-JMS">
+                <pre-processor>/RuleFunctions/PreProcessors/RecieveAppointmentModuleResponseJMS</pre-processor>
+                <queue-size>0</queue-size>
+                <thread-count/>
+                <threading-model>shared-queue</threading-model>
+                <thread-affinity-rule-function/>
+                <uri>/Channels/Shared_JMSChannel/AppointmentModuleResponse</uri>
+            </destination>
+            <destination id="FirstBillModuleResponse-JMS">
+                <pre-processor>/RuleFunctions/PreProcessors/RecieveFirstBillModuleResponseJMS</pre-processor>
+                <queue-size>0</queue-size>
+                <thread-count/>
+                <threading-model>shared-queue</threading-model>
+                <thread-affinity-rule-function/>
+                <uri>/Channels/Shared_JMSChannel/FirstBillModuleResponse</uri>
+            </destination>
+        </destinations>
+    </destination-groups>
+    <process-groups/>
+    <log-configs>
+        <log-config id="logConfig">
+            <enabled>true</enabled>
+            <roles>*:info</roles>
+            <files>
+                <enabled>true</enabled>
+                <dir>logs</dir>
+                <name/>
+                <max-number>10</max-number>
+                <max-size>5000000</max-size>
+                <append>true</append>
+            </files>
+            <terminal>
+                <enabled/>
+                <sys-out-redirect>false</sys-out-redirect>
+                <sys-err-redirect>false</sys-err-redirect>
+                <encoding/>
+            </terminal>
+            <line-layout>
+                <enabled>false</enabled>
+                <class/>
+                <arg/>
+            </line-layout>
+        </log-config>
+    </log-configs>
+    <agent-classes>
+        <inference-agent-class id="CallDriver">
+            <rules>
+                <ref>all-rules</ref>
+            </rules>
+            <destinations>
+                <ref>OutageModule</ref>
+                <ref>AppointmentModule</ref>
+                <ref>FirstBillModule</ref>
+                <ref>LocalModuleCommunication</ref>
+                <ref>JMSModuleCommunication</ref>
+                <ref>AccountStatusModule</ref>
+                <destination id="CallDriverRequest">
+                    <pre-processor>/RuleFunctions/RecieveReasonForCallRequest</pre-processor>
+                    <queue-size/>
+                    <thread-count/>
+                    <threading-model>shared-queue</threading-model>
+                    <thread-affinity-rule-function/>
+                    <uri>/Channels/CallDriver_JMSChannel/CallDriverRequest</uri>
+                </destination>
+            </destinations>
+            <startup/>
+            <shutdown/>
+            <local-cache>
+                <eviction>
+                    <max-size>1024</max-size>
+                    <max-time>900</max-time>
+                </eviction>
+            </local-cache>
+            <shared-queue>
+                <size>1024</size>
+                <workers>10</workers>
+            </shared-queue>
+            <load>
+                <max-active/>
+            </load>
+            <concurrent-rtc>false</concurrent-rtc>
+            <check-for-duplicates>false</check-for-duplicates>
+            <businessworks>
+                <uri/>
+            </businessworks>
+            <property-group/>
+        </inference-agent-class>
+    </agent-classes>
+    <processing-units>
+        <processing-unit id="default">
+            <agents>
+                <agent>
+                    <ref>CallDriver</ref>
+                    <key/>
+                    <priority/>
+                </agent>
+            </agents>
+            <logs>logConfig</logs>
+            <hot-deploy>true</hot-deploy>
+            <cache-storage-enabled>false</cache-storage-enabled>
+            <db-concepts>false</db-concepts>
+            <property-group/>
+        </processing-unit>
+    </processing-units>
+    <load-balancer-configs>
+        <pair-configs/>
+        <adhoc-configs/>
+    </load-balancer-configs>
+    <property-group>
+        <property-group comment="" name="auth">
+            <property name="be.mm.auth.type" value="file"/>
+            <property name="be.mm.auth.file.location" value="/opt/tibco/be/5.6/mm/config/users.pwd"/>
+            <property name="java.security.auth.login.config" value="/opt/tibco/be/5.6/mm/config/jaas-config.config"/>
+        </property-group>
+        <property name="tibco.clientVar.SharedResources/JMS/JNDI_Password" value="#!vncnxUb9UrM9HVzqEz6hkCQ1aJxy8mseWla68Z/+Dz2kpHlPtRVmqA=="/>
+        <property name="tibco.clientVar.SharedResources/JMS/JNDI_ConnectionURL" value="tibjmsnaming://localhost:7222"/>
+        <property name="tibco.clientVar.SharedResources/JMS/JMS_UserName" value="admin"/>
+        <property name="tibco.clientVar.SharedResources/JMS/JMS_Password" value="#!vncnxUb9UrM9HVzqEz6hkCQ1aJxy8mseWla68Z/+Dz2kpHlPtRVmqA=="/>
+        <property name="tibco.clientVar.SharedResources/JMS/JNDI_QueueConnectionFactory" value="QueueConnectionFactory"/>
+        <property name="tibco.clientVar.SharedResources/JMS/JNDI_TopicConnectionFactory" value="TopicConnectionFactory"/>
+        <property name="tibco.clientVar.SharedResources/AppConfig/UseLocalChannelForAccountStatusModule" value="false"/>
+        <property name="tibco.clientVar.SharedResources/AppConfig/UseLocalChannelForOutageModule" value="false"/>
+        <property name="tibco.clientVar.SharedResources/AppConfig/UseLocalChannelForAppointmentModule" value="false"/>
+        <property name="tibco.clientVar.SharedResources/AppConfig/UseLocalChannelForFirstBillModule" value="false"/>
+        <property name="tibco.clientVar.SharedResources/AppConfig/DataProviderEndPoints/AccountOutageEndPoint" value="https://gateway-qa.corp.chartercom.com/api/account-outage/v2/incidents"/>
+        <property name="tibco.clientVar.SharedResources/AppConfig/DataProviderEndPoints/AccountStatusEndPoint" value="https://gateway-qa.corp.chartercom.com/api/account-base/v3"/>
+        <property name="tibco.clientVar.SharedResources/AppConfig/DataProviderEndPoints/AccountFirstBillEndPoint" value="https://gateway-qa.corp.chartercom.com/api/account-statement/v1"/>
+        <property name="tibco.clientVar.SharedResources/AppConfig/DataProviderEndPoints/AccountAppointmentsEndPoint" value="https://gateway-qa.corp.chartercom.com/api/account-jorder/v3"/>
+    </property-group>
+</cluster>

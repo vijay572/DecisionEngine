@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Table:Table xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:Table="http:///com/tibco/cep/decision/table/model/DecisionTable.ecore" name="AppointmentStatusDM" folder="/RuleFunctions/DM/Modules/" implements="/RuleFunctions/DM/Modules/AppointmentStatusVRF" since="BE 4.0">
+  <md>
+    <prop name="SingleRowExecution" type="Boolean" value="true"/>
+  </md>
+  <decisionTable>
+    <rule id="1">
+      <md>
+        <prop name="Description" type="String" value=""/>
+        <prop name="Priority" type="Integer" value="3"/>
+      </md>
+      <cond id="1_1" colId="1" expr="!=null"/>
+      <cond id="1_3" colId="3" expr="!=null"/>
+      <cond id="1_4" colId="4" expr="!=null"/>
+      <act id="1_2" colId="2" expr="true"/>
+    </rule>
+    <rule id="2">
+      <md>
+        <prop name="Description" type="String" value=""/>
+        <prop name="Priority" type="Integer" value="5"/>
+      </md>
+      <act id="2_2" colId="2" expr="false"/>
+    </rule>
+    <columns>
+      <column id="1" name="AppointmentStatus.Order" propertyPath="/RuleFunctions/DM/Modules/AppointmentStatus/Order" columnType="CONDITION" alias="Order"/>
+      <column id="3" name="AppointmentStatus.BillerID" propertyPath="/RuleFunctions/DM/Modules/AppointmentStatus/BillerID" columnType="CONDITION" alias="BillerID"/>
+      <column id="4" name="AppointmentStatus.CreationDate" propertyPath="/RuleFunctions/DM/Modules/AppointmentStatus/CreationDate" columnType="CONDITION" alias="CreationDate"/>
+      <column id="2" name="AppointmentStatus.HasActiveAppointment" propertyPath="/RuleFunctions/DM/Modules/AppointmentStatus/HasActiveAppointment" propertyType="4" columnType="ACTION" alias="HasActiveAppointment" defaultCellText="false"/>
+    </columns>
+  </decisionTable>
+  <exceptionTable/>
+  <argument direction="BOTH">
+    <property path="/RuleFunctions/DM/Modules/AppointmentStatus" alias="AppointmentStatus" resourceType="CONCEPT"/>
+  </argument>
+</Table:Table>

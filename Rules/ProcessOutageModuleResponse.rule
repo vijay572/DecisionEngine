@@ -1,0 +1,29 @@
+/**
+ * @description 
+ * @author CORTOPSAL133M1D
+ */
+rule Rules.ProcessOutageModuleResponse {
+	attribute {
+		priority = 5;
+		forwardChain = true;
+	}
+	declare {
+		Concepts.ReasonForCallModuleStateModelConcept StateModelConceptExisting;
+		Concepts.OutageModuleRequestTracking outagemodulerequesttracking;
+		Events.Module.Outage.ResponseBase responsebase;		
+	}
+	when {
+		1==2;
+		outagemodulerequesttracking@parent == StateModelConceptExisting;	
+		StateModelConceptExisting@extId == "ReasonForCall:"+ responsebase.TxRoot;
+	}
+	then {
+				
+			outagemodulerequesttracking.ResponseRecieved = true;
+			outagemodulerequesttracking.ResponseTime = DateTime.now();
+			long elapsedTime = DateTime.getTimeInMillis(outagemodulerequesttracking.ResponseTime) - DateTime.getTimeInMillis(outagemodulerequesttracking.RequestedTime);
+			outagemodulerequesttracking.ElapsedTimeForRequestInMillies = elapsedTime;
+			outagemodulerequesttracking.AccountInOutage = responsebase.AccountInOutage;
+			outagemodulerequesttracking.ExceptionRecieved = responsebase.IsException;
+	}
+}

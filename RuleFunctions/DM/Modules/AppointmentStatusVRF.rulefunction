@@ -1,0 +1,14 @@
+/**
+ * @description 
+ */
+virtual void rulefunction RuleFunctions.DM.Modules.AppointmentStatusVRF {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		RuleFunctions.DM.Modules.AppointmentStatus AppointmentStatus; 
+	}
+	body {
+		
+	}
+}

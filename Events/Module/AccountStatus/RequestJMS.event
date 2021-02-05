@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Events/Module/AccountStatus/" folder="/Events/Module/AccountStatus/" name="RequestJMS" description="" GUID="2882B540-47C2-2D52-82D0-F8E99F51500E" ownerProjectName="DecisionEngine" superEventPath="/Events/Module/AccountStatus/RequestBase" payloadString="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#10;&#10;&lt;payload ref=&quot;pfx2:accountStatusRequest&quot;/&gt;" ttlUnits="Seconds" channelURI="/Channels/Shared_JMSChannel" destinationName="AccountStatusModuleRequest">
+    <properties name="JMSReplyTo" ownerProjectName="DecisionEngine" ownerPath="/Events/Module/AccountStatus/RequestJMS"/>
+    <namespaceEntries prefix="xsd" namespace="http://www.w3.org/2001/XMLSchema"/>
+    <namespaceEntries prefix="pfx2" namespace="http://www.charter.com/enterprise/agentos/decisionengine/schemas/checkaccountstatus/v1"/>
+    <registryImportEntries location="SharedResources/Schemas/CheckAccountStatus.xsd" namespace="http://www.charter.com/enterprise/agentos/decisionengine/schemas/checkaccountstatus/v1"/>
+    <expiryAction folder="/Events/Module/Outage/RequestJMS" name="OutageModuleRequestJMS_expiryAction" ownerProjectName="DecisionEngine" actionText="" conditionText="">
+        <symbols>
+            <symbolList idName="outagemodulerequestjms" type="/Events/Module/AccountStatus/RequestJMS"/>
+        </symbols>
+    </expiryAction>
+</event:SimpleEvent>

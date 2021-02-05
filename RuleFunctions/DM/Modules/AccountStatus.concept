@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><element:Concept xmlns:element="http:///com/tibco/cep/designtime/core/model/element" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/RuleFunctions/DM/Modules/" folder="/RuleFunctions/DM/Modules/" name="AccountStatus" description="" GUID="F4D68B18-397E-1AE2-A291-5E86BCF67A46" ownerProjectName="DecisionEngine" superConceptPath="" autoStartStateMachine="true">
+    <extendedProperties/>
+    <properties name="Status" ownerProjectName="DecisionEngine" ownerPath="/RuleFunctions/DM/Modules/AccountStatus"/>
+    <properties name="IsAccountActive" ownerProjectName="DecisionEngine" type="boolean" ownerPath="/RuleFunctions/DM/Modules/AccountStatus"/>
+</element:Concept>

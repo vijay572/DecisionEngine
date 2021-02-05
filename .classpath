@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="con" path="BE_CLASSPATH_CONTAINER"/>
+	<classpathentry kind="src" path="JavaSrc"/>
+	<classpathentry kind="lib" path="C:/Utils/JARS/jose4j-0.5.1.jar"/>
+	<classpathentry kind="lib" path="C:/Utils/JARS/slf4j.api-1.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/Utils/JARS/slf4j-simple-1.6.1.jar"/>
+	<classpathentry kind="output" path="JavaBin"/>
+</classpath>

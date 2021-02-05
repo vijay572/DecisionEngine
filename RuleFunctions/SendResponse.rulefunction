@@ -1,0 +1,27 @@
+/**
+ * @description 
+ */
+void rulefunction RuleFunctions.SendResponse {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+		Concepts.ReasonForCallModuleStateModelConcept reasonforcallmodulestatemodelconcept;
+	}
+	body {
+		Events.ReasonForCallRequest requestEvent = Event.getByIdByUri(reasonforcallmodulestatemodelconcept.RequestEventID,"Events/ReasonForCallRequest");
+		Events.ReasonForCallResponse reasonForCallResonse =  Event.createEvent("xslt://{{/Events/ReasonForCallResponse}}<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" xmlns:ns=\"http://www.charter.com/enterprise/agentos/decisionengine/schemas/reasonforcall/v1\" version=\"2.0\"><xsl:param name=\"reasonforcallmodulestatemodelconcept\"/><xsl:param name=\"requestEvent\"/><xsl:template name=\"Function\" match=\"/\"><createEvent><event><xsl:if test=\"$reasonforcallmodulestatemodelconcept/AccountID\"><AccountID><xsl:value-of select=\"$reasonforcallmodulestatemodelconcept/AccountID\"/></AccountID></xsl:if><xsl:if test=\"$reasonforcallmodulestatemodelconcept/DivisionID\"><DivisionID><xsl:value-of select=\"$reasonforcallmodulestatemodelconcept/DivisionID\"/></DivisionID></xsl:if><xsl:if test=\"$reasonforcallmodulestatemodelconcept/isException\"><IsException><xsl:value-of select=\"$reasonforcallmodulestatemodelconcept/isException\"/></IsException></xsl:if><xsl:if test=\"$reasonforcallmodulestatemodelconcept/PrimaryReasonForCallDecision\"><BestReasonForCall><xsl:value-of select=\"$reasonforcallmodulestatemodelconcept/PrimaryReasonForCallDecision\"/></BestReasonForCall></xsl:if><xsl:if test=\"$reasonforcallmodulestatemodelconcept/ExceptionDetail\"><ExceptionDetail><xsl:value-of select=\"$reasonforcallmodulestatemodelconcept/ExceptionDetail\"/></ExceptionDetail></xsl:if><xsl:if test=\"$requestEvent/JMSMessageID\"><JMSCorrelationID><xsl:value-of select=\"$requestEvent/JMSMessageID\"/></JMSCorrelationID></xsl:if><payload><ns:reasonForCallResponse><ns:messageHeader><ns:messageId><xsl:value-of select=\"$requestEvent/payload/ns:reasonForCallRequest/ns:messageHeader/ns:messageId\"/></ns:messageId><ns:requestorUserID><xsl:value-of select=\"$requestEvent/payload/ns:reasonForCallRequest/ns:messageHeader/ns:requestorUserID\"/></ns:requestorUserID><ns:applicationID><xsl:value-of select=\"$requestEvent/payload/ns:reasonForCallRequest/ns:messageHeader/ns:applicationID\"/></ns:applicationID><ns:sourceModuleName><xsl:value-of select=\"$requestEvent/payload/ns:reasonForCallRequest/ns:messageHeader/ns:sourceModuleName\"/></ns:sourceModuleName><ns:sourceModuleVersion><xsl:value-of select=\"$requestEvent/payload/ns:reasonForCallRequest/ns:messageHeader/ns:sourceModuleVersion\"/></ns:sourceModuleVersion><ns:targetModuleName><xsl:value-of select=\"$requestEvent/payload/ns:reasonForCallRequest/ns:messageHeader/ns:targetModuleName\"/></ns:targetModuleName><ns:targetModuleVersion><xsl:value-of select=\"$requestEvent/payload/ns:reasonForCallRequest/ns:messageHeader/ns:targetModuleVersion\"/></ns:targetModuleVersion><ns:creationDateTime><xsl:value-of select=\"$requestEvent/payload/ns:reasonForCallRequest/ns:messageHeader/ns:creationDateTime\"/></ns:creationDateTime><xsl:if test=\"$requestEvent/payload/ns:reasonForCallRequest/ns:messageHeader/ns:expirationDateTime\"><ns:expirationDateTime><xsl:value-of select=\"$requestEvent/payload/ns:reasonForCallRequest/ns:messageHeader/ns:expirationDateTime\"/></ns:expirationDateTime></xsl:if><xsl:copy-of select=\"$requestEvent/payload/ns:reasonForCallRequest/ns:messageHeader/ns:transaction\"/><xsl:copy-of select=\"$requestEvent/payload/ns:reasonForCallRequest/ns:messageHeader/ns:additionalElements\"/></ns:messageHeader><ns:response><ns:callDriverList><ns:callDriver><ns:name><xsl:value-of select=\"$reasonforcallmodulestatemodelconcept/PrimaryReasonForCallDecision\"/></ns:name></ns:callDriver><xsl:for-each select=\"$reasonforcallmodulestatemodelconcept/SecondaryReasonForCallDecision\"><ns:callDriver><ns:name><xsl:value-of select=\".\"/></ns:name></ns:callDriver></xsl:for-each></ns:callDriverList></ns:response></ns:reasonForCallResponse></payload></event></createEvent></xsl:template></xsl:stylesheet>");		
+		Object logger = Log.getLogger(Engine.ruleFunctionName());
+		Common.RuleFunctions.LogHandler.log(/*logData Common.Concepts.LogData */reasonforcallmodulestatemodelconcept.LogData,
+											/*result String */"SUCCESS",
+											/*message String */"Module Responses",
+											/*payload String */reasonForCallResonse@payload,
+											/*logLevel String */"info",
+											/*logger Object */logger,
+											/*RuleFunctionName String */Engine.ruleFunctionName());
+		Event.replyEvent(requestEvent,reasonForCallResonse);
+		Event.consumeEvent(requestEvent);
+		Instance.deleteInstance(reasonforcallmodulestatemodelconcept);
+	}
+}

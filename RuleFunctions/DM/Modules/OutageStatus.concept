@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><element:Concept xmlns:element="http:///com/tibco/cep/designtime/core/model/element" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/RuleFunctions/DM/Modules/" folder="/RuleFunctions/DM/Modules/" name="OutageStatus" description="" GUID="A26F5EC0-A68D-A0BA-477C-F2851E76DF7D" ownerProjectName="DecisionEngine" superConceptPath="" autoStartStateMachine="true">
+    <extendedProperties/>
+    <properties name="Classification" ownerProjectName="DecisionEngine" ownerPath="/RuleFunctions/DM/Modules/OutageStatus"/>
+    <properties name="IsInOutage" ownerProjectName="DecisionEngine" type="boolean" ownerPath="/RuleFunctions/DM/Modules/OutageStatus"/>
+</element:Concept>

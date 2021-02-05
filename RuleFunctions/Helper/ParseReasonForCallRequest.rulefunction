@@ -1,0 +1,39 @@
+/**
+ * @description 
+ */
+void rulefunction RuleFunctions.Helper.ParseReasonForCallRequest {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Events.ReasonForCallRequest reasonforcallrequest;		
+	}
+	body {
+		try {
+			System.debugOut(reasonforcallrequest@payload);
+			reasonforcallrequest.AccountId = XPath.evalAsString("xpath://<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xpath>\n    <expr>$reasonforcallrequest/payload/ns:reasonForCallRequest/ns:request/ns:accountId</expr>\n    <namespaces>\n        <namespace URI=\"http://www.charter.com/enterprise/agentos/decisionengine/schemas/reasonforcall/v1\" pfx=\"ns\"/>\n        <namespace URI=\"http://www.w3.org/2001/XMLSchema\" pfx=\"xsd\"/>\n    </namespaces>\n    <variables>\n        <variable>reasonforcallrequest</variable>\n    </variables>\n</xpath>");
+			reasonforcallrequest.DivisionId = XPath.evalAsString("xpath://<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xpath>\n    <expr>$reasonforcallrequest/payload/ns:reasonForCallRequest/ns:request/ns:divisionId</expr>\n    <namespaces>\n        <namespace URI=\"http://www.charter.com/enterprise/agentos/decisionengine/schemas/reasonforcall/v1\" pfx=\"ns\"/>\n        <namespace URI=\"http://www.w3.org/2001/XMLSchema\" pfx=\"xsd\"/>\n    </namespaces>\n    <variables>\n        <variable>reasonforcallrequest</variable>\n    </variables>\n</xpath>");
+			reasonforcallrequest.CallDriverCode = XPath.evalAsString("xpath://<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xpath>\n    <expr>$reasonforcallrequest/payload/ns:reasonForCallRequest/ns:request/ns:purposeOfCallFromIvr</expr>\n    <namespaces>\n        <namespace URI=\"http://www.charter.com/enterprise/agentos/decisionengine/schemas/reasonforcall/v1\" pfx=\"ns\"/>\n        <namespace URI=\"http://www.w3.org/2001/XMLSchema\" pfx=\"xsd\"/>\n    </namespaces>\n    <variables>\n        <variable>reasonforcallrequest</variable>\n    </variables>\n</xpath>");
+			reasonforcallrequest.JMSMessageID = reasonforcallrequest.JMSMessageID;
+			reasonforcallrequest.SystemDesignator = XPath.evalAsString("xpath://<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xpath>\n    <expr>$reasonforcallrequest/payload/ns:reasonForCallRequest/ns:request/ns:systemDesignator</expr>\n    <namespaces>\n        <namespace URI=\"http://www.charter.com/enterprise/agentos/decisionengine/schemas/reasonforcall/v1\" pfx=\"ns\"/>\n        <namespace URI=\"http://www.w3.org/2001/XMLSchema\" pfx=\"xsd\"/>\n    </namespaces>\n    <variables>\n        <variable>reasonforcallrequest</variable>\n    </variables>\n</xpath>");
+			reasonforcallrequest.LegacyMso = XPath.evalAsString("xpath://<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xpath>\n    <expr>$reasonforcallrequest/payload/ns:reasonForCallRequest/ns:request/ns:legacyMso</expr>\n    <namespaces>\n        <namespace URI=\"http://www.charter.com/enterprise/agentos/decisionengine/schemas/reasonforcall/v1\" pfx=\"ns\"/>\n        <namespace URI=\"http://www.w3.org/2001/XMLSchema\" pfx=\"xsd\"/>\n    </namespaces>\n    <variables>\n        <variable>reasonforcallrequest</variable>\n    </variables>\n</xpath>");
+			reasonforcallrequest.RequestorUserID = XPath.evalAsString("xpath://<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xpath>\n    <expr>$reasonforcallrequest/payload/ns:reasonForCallRequest/ns:messageHeader/ns:requestorUserID</expr>\n    <namespaces>\n        <namespace URI=\"http://www.charter.com/enterprise/agentos/decisionengine/schemas/reasonforcall/v1\" pfx=\"ns\"/>\n        <namespace URI=\"http://www.w3.org/2001/XMLSchema\" pfx=\"xsd\"/>\n    </namespaces>\n    <variables>\n        <variable>reasonforcallrequest</variable>\n    </variables>\n</xpath>");
+			reasonforcallrequest.ApplicationID = XPath.evalAsString("xpath://<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xpath>\n    <expr>$reasonforcallrequest/payload/ns:reasonForCallRequest/ns:messageHeader/ns:applicationID</expr>\n    <namespaces>\n        <namespace URI=\"http://www.charter.com/enterprise/agentos/decisionengine/schemas/reasonforcall/v1\" pfx=\"ns\"/>\n        <namespace URI=\"http://www.w3.org/2001/XMLSchema\" pfx=\"xsd\"/>\n    </namespaces>\n    <variables>\n        <variable>reasonforcallrequest</variable>\n    </variables>\n</xpath>");
+			reasonforcallrequest.Category = "DE.CALLDRIVER"	;	
+			reasonforcallrequest.TxCategoryFingerprint = null;
+			reasonforcallrequest.Component = "CallDriver";
+			reasonforcallrequest.TxParent = XPath.evalAsString("xpath://<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xpath>\n    <expr>$reasonforcallrequest/payload/ns:reasonForCallRequest/ns:messageHeader/ns:transaction/ns:parent</expr>\n    <namespaces>\n        <namespace URI=\"http://www.charter.com/enterprise/agentos/decisionengine/schemas/reasonforcall/v1\" pfx=\"ns\"/>\n        <namespace URI=\"http://www.w3.org/2001/XMLSchema\" pfx=\"xsd\"/>\n    </namespaces>\n    <variables>\n        <variable>reasonforcallrequest</variable>\n    </variables>\n</xpath>");
+			reasonforcallrequest.TxRoot = XPath.evalAsString("xpath://<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xpath>\n    <expr>$reasonforcallrequest/payload/ns:reasonForCallRequest/ns:messageHeader/ns:transaction/ns:root</expr>\n    <namespaces>\n        <namespace URI=\"http://www.charter.com/enterprise/agentos/decisionengine/schemas/reasonforcall/v1\" pfx=\"ns\"/>\n        <namespace URI=\"http://www.w3.org/2001/XMLSchema\" pfx=\"xsd\"/>\n    </namespaces>\n    <variables>\n        <variable>reasonforcallrequest</variable>\n    </variables>\n</xpath>");			
+			reasonforcallrequest.TxSelf = XPath.evalAsString("xpath://<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xpath>\n    <expr>$reasonforcallrequest/payload/ns:reasonForCallRequest/ns:messageHeader/ns:transaction/ns:self</expr>\n    <namespaces>\n        <namespace URI=\"http://www.charter.com/enterprise/agentos/decisionengine/schemas/reasonforcall/v1\" pfx=\"ns\"/>\n        <namespace URI=\"http://www.w3.org/2001/XMLSchema\" pfx=\"xsd\"/>\n    </namespaces>\n    <variables>\n        <variable>reasonforcallrequest</variable>\n    </variables>\n</xpath>");
+			reasonforcallrequest.TxParent = reasonforcallrequest.TxSelf;
+			reasonforcallrequest.TxSelf = RuleFunctions.Shared.getGUID();
+			reasonforcallrequest.EventName = "CallDriverRequest";
+			
+
+		}catch (Exception e) {
+//			RuleFunctions.LogHandler.logException(evt.TxSelf, "ERROR", "Error Occured while processing recvAccountOutageEvent preprocessor. Hence consuming Event", evt@payload, "error", Engine.threadName(), Engine.ruleFunctionName(), null, logger, e);
+//			Event.consumeEvent(evt);
+		}
+		
+	} 
+}

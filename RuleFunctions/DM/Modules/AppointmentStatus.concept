@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><element:Concept xmlns:element="http:///com/tibco/cep/designtime/core/model/element" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/RuleFunctions/DM/Modules/" folder="/RuleFunctions/DM/Modules/" name="AppointmentStatus" description="" GUID="A5DBAC0B-75D1-9EA6-51E3-991693D2B292" ownerProjectName="DecisionEngine" superConceptPath="" autoStartStateMachine="true">
+    <extendedProperties/>
+    <properties name="Order" ownerProjectName="DecisionEngine" ownerPath="/RuleFunctions/DM/Modules/AppointmentStatus"/>
+    <properties name="BillerID" ownerProjectName="DecisionEngine" ownerPath="/RuleFunctions/DM/Modules/AppointmentStatus"/>
+    <properties name="CreationDate" ownerProjectName="DecisionEngine" ownerPath="/RuleFunctions/DM/Modules/AppointmentStatus"/>
+    <properties name="HasActiveAppointment" ownerProjectName="DecisionEngine" type="boolean" ownerPath="/RuleFunctions/DM/Modules/AppointmentStatus"/>
+</element:Concept>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Events/Module/FirstBill/" folder="/Events/Module/FirstBill/" name="RequestLocal" description="" GUID="99DF1E93-BB4A-B020-5C65-8F9430804A6D" ownerProjectName="DecisionEngine" superEventPath="/Events/Module/FirstBill/RequestBase" payloadString="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#10;&#10;&lt;payload ref=&quot;pfx:checkFirstBillRequest&quot;/&gt;" ttlUnits="Seconds" channelURI="/Channels/CallDriver_LocalChannel" destinationName="FirstBillModuleRequest">
+    <namespaceEntries prefix="xsd" namespace="http://www.w3.org/2001/XMLSchema"/>
+    <namespaceEntries prefix="pfx" namespace="http://www.charter.com/enterprise/agentos/decisionengine/schemas/checkfirstbill/v1"/>
+    <registryImportEntries location="SharedResources/Schemas/CheckFirstBill.xsd" namespace="http://www.charter.com/enterprise/agentos/decisionengine/schemas/checkfirstbill/v1"/>
+    <expiryAction folder="/Events/Module/Outage/RequestLocal" name="OutageModuleRequestLocal_expiryAction" ownerProjectName="DecisionEngine" actionText="" conditionText="">
+        <symbols>
+            <symbolList idName="outagemodulerequestlocal" type="/Events/Module/FirstBill/RequestLocal"/>
+        </symbols>
+    </expiryAction>
+</event:SimpleEvent>

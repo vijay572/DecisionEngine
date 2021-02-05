@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Events/Module/AccountStatus/" folder="/Events/Module/AccountStatus/" name="RequestLocal" description="" GUID="D7B25212-CB03-618B-775E-9AFB2D0C49C7" ownerProjectName="DecisionEngine" superEventPath="/Events/Module/AccountStatus/RequestBase" payloadString="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#10;&#10;&lt;payload ref=&quot;pfx2:accountStatusRequest&quot;/&gt;" ttlUnits="Seconds" channelURI="/Channels/CallDriver_LocalChannel" destinationName="AccountStatusModuleRequest">
+    <namespaceEntries prefix="xsd" namespace="http://www.w3.org/2001/XMLSchema"/>
+    <namespaceEntries prefix="pfx2" namespace="http://www.charter.com/enterprise/agentos/decisionengine/schemas/checkaccountstatus/v1"/>
+    <registryImportEntries location="SharedResources/Schemas/CheckAccountStatus.xsd" namespace="http://www.charter.com/enterprise/agentos/decisionengine/schemas/checkaccountstatus/v1"/>
+    <expiryAction folder="/Events/Module/Outage/RequestLocal" name="OutageModuleRequestLocal_expiryAction" ownerProjectName="DecisionEngine" actionText="" conditionText="">
+        <symbols>
+            <symbolList idName="outagemodulerequestlocal" type="/Events/Module/AccountStatus/RequestLocal"/>
+        </symbols>
+    </expiryAction>
+</event:SimpleEvent>

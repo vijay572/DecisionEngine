@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<BWSharedResource>
+    <name>EMSConnection</name>
+    <resourceType>ae.shared.JMSConnectionKey</resourceType>
+    <description/>
+    <config>
+        <NamingEnvironment>
+            <UseJNDI>true</UseJNDI>
+            <ProviderURL>tcp://localhost:7222</ProviderURL>
+            <NamingURL>%%SharedResources/JMS/JNDI_ConnectionURL%%</NamingURL>
+            <NamingInitialContextFactory>com.tibco.tibjms.naming.TibjmsInitialContextFactory</NamingInitialContextFactory>
+            <TopicFactoryName>%%SharedResources/JMS/JNDI_TopicConnectionFactory%%</TopicFactoryName>
+            <QueueFactoryName>%%SharedResources/JMS/JNDI_QueueConnectionFactory%%</QueueFactoryName>
+            <NamingPrincipal>%%SharedResources/JMS/JNDI_UserName%%</NamingPrincipal>
+            <NamingCredential>%%SharedResources/JMS/JNDI_Password%%</NamingCredential>
+        </NamingEnvironment>
+        <ConnectionAttributes>
+            <username>%%SharedResources/JMS/JMS_UserName%%</username>
+            <password>%%SharedResources/JMS/JMS_Password%%</password>
+            <clientID/>
+            <autoGenClientID>true</autoGenClientID>
+        </ConnectionAttributes>
+        <UseXACF>false</UseXACF>
+        <useSsl>false</useSsl>
+        <UseSharedJndiConfig>false</UseSharedJndiConfig>
+        <AdmFactorySslPassword>#!SNeRiFWPPlfmv/dpxGuknQ==</AdmFactorySslPassword>
+        <ssl xmlns="http://www.tibco.com/xmlns/aemeta/services/2002">
+            <cert isRef="true"/>
+            <identity isRef="true"/>
+            <trustStorePassword>#!37HVaAwFs10j7RYzY/X+5g==</trustStorePassword>
+            <trace>true</trace>
+            <debugTrace>true</debugTrace>
+            <verifyHostName>true</verifyHostName>
+            <expectedHostName/>
+            <strongCipherSuitesOnly>true</strongCipherSuitesOnly>
+        </ssl>
+        <JndiSharedConfiguration/>
+        <JNDIProperties/>
+    </config>
+</BWSharedResource>

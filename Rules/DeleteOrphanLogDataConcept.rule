@@ -1,0 +1,19 @@
+/**
+ * @description 
+ * @author CORTOPSAL133M1D
+ */
+rule Rules.DeleteOrphanLogDataConcept {
+	attribute {
+		priority = 10;
+		forwardChain = true;
+	}
+	declare {
+		Common.Concepts.LogData logData; 	
+	}
+	when {
+		logData@parent == null; 
+	}
+	then {
+		Instance.deleteInstance(logData);
+	}
+}

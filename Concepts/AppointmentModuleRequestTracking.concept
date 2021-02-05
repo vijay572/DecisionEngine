@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><element:Concept xmlns:element="http:///com/tibco/cep/designtime/core/model/element" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Concepts/" folder="/Concepts/" name="AppointmentModuleRequestTracking" description="" GUID="C8628D0E-0D93-150C-ACF2-0742CDD88F01" ownerProjectName="DecisionEngine" superConceptPath="">
+    <extendedProperties/>
+    <properties name="ModuleName" ownerProjectName="DecisionEngine" ownerPath="/Concepts/AppointmentModuleRequestTracking"/>
+    <properties name="RequestSent" ownerProjectName="DecisionEngine" type="boolean" ownerPath="/Concepts/AppointmentModuleRequestTracking"/>
+    <properties name="ExceptionRecieved" ownerProjectName="DecisionEngine" type="boolean" ownerPath="/Concepts/AppointmentModuleRequestTracking"/>
+    <properties name="RequestedTime" ownerProjectName="DecisionEngine" type="DateTime" ownerPath="/Concepts/AppointmentModuleRequestTracking"/>
+    <properties name="ResponseTime" ownerProjectName="DecisionEngine" type="DateTime" ownerPath="/Concepts/AppointmentModuleRequestTracking"/>
+    <properties name="ElapsedTimeForRequestInMillies" ownerProjectName="DecisionEngine" type="long" ownerPath="/Concepts/AppointmentModuleRequestTracking"/>
+    <properties name="ResponseRecieved" ownerProjectName="DecisionEngine" type="boolean" ownerPath="/Concepts/AppointmentModuleRequestTracking"/>
+    <properties name="RequestTimedOut" ownerProjectName="DecisionEngine" type="boolean" ownerPath="/Concepts/AppointmentModuleRequestTracking"/>
+    <properties name="ModuleResponseString" ownerProjectName="DecisionEngine" ownerPath="/Concepts/AppointmentModuleRequestTracking"/>
+    <properties name="AccountHasActiveAppointment" ownerProjectName="DecisionEngine" type="boolean" ownerPath="/Concepts/AppointmentModuleRequestTracking"/>
+</element:Concept>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Table:Table xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:Table="http:///com/tibco/cep/decision/table/model/DecisionTable.ecore" name="AccountStatusDM" folder="/RuleFunctions/DM/Modules/" implements="/RuleFunctions/DM/Modules/AccountStatusVRF" since="BE 4.0">
+  <md>
+    <prop name="SingleRowExecution" type="Boolean" value="true"/>
+  </md>
+  <decisionTable>
+    <rule id="1">
+      <md>
+        <prop name="Description" type="String" value=""/>
+        <prop name="Priority" type="Integer" value="3"/>
+      </md>
+      <cond id="1_1" colId="1" expr="&quot;Active&quot;"/>
+      <act id="1_2" colId="2" expr="true"/>
+    </rule>
+    <rule id="2">
+      <md>
+        <prop name="Description" type="String" value=""/>
+        <prop name="Priority" type="Integer" value="5"/>
+      </md>
+      <act id="2_2" colId="2" expr="false"/>
+    </rule>
+    <columns>
+      <column id="1" name="AccountStatus.Status" propertyPath="/RuleFunctions/DM/Modules/AccountStatus/Status" columnType="CONDITION" alias="Status"/>
+      <column id="2" name="AccountStatus.IsAccountActive" propertyPath="/RuleFunctions/DM/Modules/AccountStatus/IsAccountActive" propertyType="4" columnType="ACTION" alias="IsAccountActive" defaultCellText="false"/>
+    </columns>
+  </decisionTable>
+  <exceptionTable/>
+  <argument direction="BOTH">
+    <property path="/RuleFunctions/DM/Modules/AccountStatus" alias="AccountStatus" resourceType="CONCEPT"/>
+  </argument>
+</Table:Table>

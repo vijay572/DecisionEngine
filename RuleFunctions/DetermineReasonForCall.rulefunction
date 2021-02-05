@@ -1,0 +1,137 @@
+/**
+ * @description 
+ */
+void rulefunction RuleFunctions.DetermineReasonForCall {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+		Concepts.ReasonForCallModuleStateModelConcept reasonforcallmodulestatemodelconcept;
+	}
+	body {
+		
+		Concepts.Account AccountStatus_DM = Instance.createInstance("xslt://{{/Concepts/Account}}<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"2.0\"><xsl:param name=\"reasonforcallmodulestatemodelconcept\"/><xsl:template name=\"Function\" match=\"/\"><createObject><object><xsl:choose><xsl:when test=\"contains($reasonforcallmodulestatemodelconcept/CallDriverCode, &quot;Outage&quot;)\"><IVRCode><xsl:value-of select=\"&quot;Outage&quot;\"/></IVRCode></xsl:when><xsl:when test=\"contains($reasonforcallmodulestatemodelconcept/CallDriverCode, &quot;Appointment&quot;)\"><IVRCode><xsl:value-of select=\"&quot;Appointment&quot;\"/></IVRCode></xsl:when><xsl:when test=\"contains($reasonforcallmodulestatemodelconcept/CallDriverCode, &quot;Billing&quot;)\"><IVRCode><xsl:value-of select=\"&quot;Billing&quot;\"/></IVRCode></xsl:when><xsl:otherwise><IVRCode><xsl:value-of select=\"&quot;&quot;\"/></IVRCode></xsl:otherwise></xsl:choose><IsActive><xsl:value-of select=\"if ($reasonforcallmodulestatemodelconcept/AccountStatusModuleRequestTracking/IsAccountActive = true() ) then true() else false()\"/></IsActive><IsInOutage><xsl:value-of select=\"if ($reasonforcallmodulestatemodelconcept/OutageModuleRequestTracking/AccountInOutage = true() ) then true() else false()\"/></IsInOutage><HasActiveAppointment><xsl:value-of select=\"if ($reasonforcallmodulestatemodelconcept/AppointmentModuleRequestTracking/AccountHasActiveAppointment = true() ) then true() else false()\"/></HasActiveAppointment><HasFirstBill><xsl:value-of select=\"if ($reasonforcallmodulestatemodelconcept/FirstBillModuleRequestTracking/AccountHasFirstBill = true() ) then true() else false()\"/></HasFirstBill></object></createObject></xsl:template></xsl:stylesheet>");
+		Object logger = Log.getLogger(Engine.ruleFunctionName());
+		Common.RuleFunctions.LogHandler.log(/*logData Common.Concepts.LogData */reasonforcallmodulestatemodelconcept.LogData,
+											/*result String */null,
+											/*message String */"Module Responses: " + Instance.serializeUsingDefaults(AccountStatus_DM),
+											/*payload String */null,
+											/*logLevel String */"info",
+											/*logger Object */logger,
+											/*RuleFunctionName String */Engine.ruleFunctionName());
+
+		RuleFunctions.DM.PrimaryCallDriver(AccountStatus_DM);
+		Common.RuleFunctions.LogHandler.log(/*logData Common.Concepts.LogData */reasonforcallmodulestatemodelconcept.LogData,
+													/*result String */null,
+													/*message String */"Primary Reason For call determined as " + AccountStatus_DM.PrimaryReasonForCall,
+													/*payload String */null,
+													/*logLevel String */"info",
+													/*logger Object */logger,
+													/*RuleFunctionName String */Engine.ruleFunctionName());
+		
+		reasonforcallmodulestatemodelconcept.PrimaryReasonForCallDecision = AccountStatus_DM.PrimaryReasonForCall;
+
+		if (reasonforcallmodulestatemodelconcept.PrimaryReasonForCallDecision != "Unknown") {
+			 		
+			RuleFunctions.DM.SecondaryCallDriver(AccountStatus_DM);
+			for (int i = 0; i< AccountStatus_DM.SecondaryReasonsForCall@length ; i++) {
+				if (AccountStatus_DM.SecondaryReasonsForCall[i] != reasonforcallmodulestatemodelconcept.PrimaryReasonForCallDecision) { 
+					reasonforcallmodulestatemodelconcept.SecondaryReasonForCallDecision[reasonforcallmodulestatemodelconcept.SecondaryReasonForCallDecision@length] = AccountStatus_DM.SecondaryReasonsForCall[i];
+				}
+			}
+			Common.RuleFunctions.LogHandler.log(/*logData Common.Concepts.LogData */reasonforcallmodulestatemodelconcept.LogData,
+											/*result String */null,
+											/*message String */"Seondary Reasons For call determined as " + XPath.evalAsString("xpath://<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xpath>\n    <expr>tib:concat-sequence-format($reasonforcallmodulestatemodelconcept/SecondaryReasonForCallDecision, \",\", true())</expr>\n    <namespaces>\n        <namespace URI=\"http://www.w3.org/2001/XMLSchema\" pfx=\"xsd\"/>\n        <namespace URI=\"http://www.tibco.com/bw/xslt/custom-functions\" pfx=\"tib\"/>\n    </namespaces>\n    <variables>\n        <variable>reasonforcallmodulestatemodelconcept</variable>\n    </variables>\n</xpath>"),
+											/*payload String */null,
+											/*logLevel String */"info",
+											/*logger Object */logger,
+											/*RuleFunctionName String */Engine.ruleFunctionName());
+			
+		}
+
+
+
+//		for (int i=0; i<Temporal.History.howMany(AccountStatus_DM.SecondaryReasonForCall,0,0,true); i++){
+//			System.debugOut("**** " + i + ": " 
+//		                    + Instance.PropertyAtom.getStringHistoryValue(AccountStatus_DM.SecondaryReasonForCall,i)
+//		                    + " at " + Instance.PropertyAtom.getHistoryTime(AccountStatus_DM.SecondaryReasonForCall,i)
+//		                   );		
+//			}
+
+		Instance.deleteInstance(AccountStatus_DM);
+		
+		
+		
+		
+		
+//		System.debugOut("Account Snanpshot After Calling DM : " + Instance.serializeUsingDefaults(AccountStatus_DM));
+//		reasonforcallmodulestatemodelconcept.FinalReasonForCallDecision = AccountStatus_DM.ReasonForCall;
+//		String 	ivrCodeCategory = AccountStatus_DM.IVRCode;	
+//		boolean isAccountActive = AccountStatus_DM.IsActive;
+//		boolean isOutage = AccountStatus_DM.IsInOutage;
+//		boolean hasAppointments  = AccountStatus_DM.HasActiveAppointment;
+//		boolean hasFirstBill = AccountStatus_DM.HasFirstBill;
+
+		
+//		
+//		if(!(isAccountActive)){
+//			reasonforcallmodulestatemodelconcept.PrimaryReasonForCallDecision = "Unknown";
+//		}else if(ivrCodeCategory == "Outage" && isOutage == true){
+//			reasonforcallmodulestatemodelconcept.PrimaryReasonForCallDecision = "Outage";
+//		}else if(ivrCodeCategory == "Appointment" && hasAppointments == true){
+//			reasonforcallmodulestatemodelconcept.PrimaryReasonForCallDecision = "Appointment";
+//		}else if(ivrCodeCategory == "Billing" && hasFirstBill == true){
+//			reasonforcallmodulestatemodelconcept.PrimaryReasonForCallDecision = "FirstBill";
+//		}else if(isOutage == true){
+//			reasonforcallmodulestatemodelconcept.PrimaryReasonForCallDecision = "Outage";
+//		}else if(hasAppointments == true){
+//			reasonforcallmodulestatemodelconcept.PrimaryReasonForCallDecision = "Appointment";
+//		}else if(hasFirstBill == true){
+//			reasonforcallmodulestatemodelconcept.PrimaryReasonForCallDecision = "FirstBill";
+//		}else{
+//			reasonforcallmodulestatemodelconcept.PrimaryReasonForCallDecision = "Unknown";
+//		}
+
+
+
+
+//		if (reasonforcallmodulestatemodelconcept.AccountStatusModuleRequestTracking.IsAccountActive != true) {
+//			reasonforcallmodulestatemodelconcept.FinalReasonForCallDecision = "Unknown";
+//			return;
+//		} 
+//		if (reasonforcallmodulestatemodelconcept.AccountStatusModuleRequestTracking.RequestTimedOut == true) {
+//			reasonforcallmodulestatemodelconcept.FinalReasonForCallDecision = "Unknown";
+//			reasonforcallmodulestatemodelconcept.isException = true;
+//			reasonforcallmodulestatemodelconcept.ExceptionDetail = "Account Status Module TimedOut";
+//			return;
+//		} 
+//		
+//		if (reasonforcallmodulestatemodelconcept.CallDriverCode == "Outage") {
+//			if (reasonforcallmodulestatemodelconcept.OutageModuleRequestTracking.RequestTimedOut ||
+// 				reasonforcallmodulestatemodelconcept.OutageModuleRequestTracking.ExceptionRecieved){ 
+//				reasonforcallmodulestatemodelconcept.FinalReasonForCallDecision = "Unknown";
+//				reasonforcallmodulestatemodelconcept.isException = true;
+//				if (reasonforcallmodulestatemodelconcept.OutageModuleRequestTracking.RequestTimedOut) {
+//					reasonforcallmodulestatemodelconcept.ExceptionDetail = "Outage ModuleTimedOut";
+//				}  else {
+//					reasonforcallmodulestatemodelconcept.ExceptionDetail = "Outage Module Threw Exception";
+//				}
+//				
+//			} else { 				
+//				boolean isAccountInOutage = reasonforcallmodulestatemodelconcept.OutageModuleRequestTracking.AccountInOutage;
+//				if (isAccountInOutage) {
+//					reasonforcallmodulestatemodelconcept.FinalReasonForCallDecision = "Outage";
+//				}else {
+//					reasonforcallmodulestatemodelconcept.FinalReasonForCallDecision = "Unknown";
+//				}
+//			}
+//
+//		} else {
+//			reasonforcallmodulestatemodelconcept.FinalReasonForCallDecision = "Unknown";
+//		} 
+//
+
+
+	}
+}

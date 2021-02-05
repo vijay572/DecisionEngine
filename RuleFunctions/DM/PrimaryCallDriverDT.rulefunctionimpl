@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Table:Table xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:Table="http:///com/tibco/cep/decision/table/model/DecisionTable.ecore" name="PrimaryCallDriverDT" folder="/RuleFunctions/DM/" implements="/RuleFunctions/DM/PrimaryCallDriver" since="BE 4.0">
+  <md>
+    <prop name="Priority" type="Integer" value="5"/>
+    <prop name="SingleRowExecution" type="Boolean" value="true"/>
+  </md>
+  <decisionTable>
+    <rule id="1">
+      <md>
+        <prop name="Description" type="String" value=""/>
+        <prop name="Priority" type="Integer" value="1"/>
+      </md>
+      <cond id="1_1" colId="1" expr="false"/>
+      <act id="1_2" colId="2" expr="&quot;Unknown&quot;"/>
+    </rule>
+    <rule id="2">
+      <md>
+        <prop name="Description" type="String" value=""/>
+        <prop name="Priority" type="Integer" value="3"/>
+      </md>
+      <cond id="2_1" colId="1" expr="true"/>
+      <cond id="2_3" colId="3" expr="true"/>
+      <cond id="2_4" colId="4" expr="false"/>
+      <cond id="2_5" colId="5" expr="false"/>
+      <act id="2_2" colId="2" expr="&quot;Outage&quot;"/>
+    </rule>
+    <rule id="3">
+      <md>
+        <prop name="Description" type="String" value=""/>
+        <prop name="Priority" type="Integer" value="3"/>
+      </md>
+      <cond id="3_1" colId="1" expr="true"/>
+      <cond id="3_3" colId="3" expr="false"/>
+      <cond id="3_4" colId="4" expr="true"/>
+      <cond id="3_5" colId="5" expr="false"/>
+      <act id="3_2" colId="2" expr="&quot;Appointment&quot;"/>
+    </rule>
+    <rule id="4">
+      <md>
+        <prop name="Description" type="String" value=""/>
+        <prop name="Priority" type="Integer" value="3"/>
+      </md>
+      <cond id="4_1" colId="1" expr="true"/>
+      <cond id="4_3" colId="3" expr="false"/>
+      <cond id="4_4" colId="4" expr="false"/>
+      <cond id="4_5" colId="5" expr="true"/>
+      <act id="4_2" colId="2" expr="&quot;FirstBill&quot;"/>
+    </rule>
+    <rule id="5">
+      <md>
+        <prop name="Description" type="String" value=""/>
+        <prop name="Priority" type="Integer" value="5"/>
+      </md>
+      <cond id="5_1" colId="1" expr="true"/>
+      <cond id="5_6" colId="6" expr="&quot;Outage&quot;"/>
+      <cond id="5_3" colId="3" expr="true"/>
+      <act id="5_2" colId="2" expr="&quot;Outage&quot;"/>
+    </rule>
+    <rule id="6">
+      <md>
+        <prop name="Description" type="String" value=""/>
+        <prop name="Priority" type="Integer" value="5"/>
+      </md>
+      <cond id="6_1" colId="1" expr="true"/>
+      <cond id="6_4" colId="4" expr="true"/>
+      <cond id="6_6" colId="6" expr="&quot;Appointment&quot;"/>
+      <act id="6_2" colId="2" expr="&quot;Appointment&quot;"/>
+    </rule>
+    <rule id="7">
+      <md>
+        <prop name="Description" type="String" value=""/>
+        <prop name="Priority" type="Integer" value="5"/>
+      </md>
+      <cond id="7_1" colId="1" expr="true"/>
+      <cond id="7_5" colId="5" expr="true"/>
+      <cond id="7_6" colId="6" expr="&quot;Billing&quot;"/>
+      <act id="7_2" colId="2" expr="&quot;FirstBill&quot;"/>
+    </rule>
+    <rule id="8">
+      <md>
+        <prop name="Description" type="String" value=""/>
+        <prop name="Priority" type="Integer" value="7"/>
+      </md>
+      <cond id="8_1" colId="1" expr="true"/>
+      <cond id="8_3" colId="3" expr="true"/>
+      <act id="8_2" colId="2" expr="&quot;Outage&quot;"/>
+    </rule>
+    <rule id="9">
+      <md>
+        <prop name="Description" type="String" value=""/>
+        <prop name="Priority" type="Integer" value="7"/>
+      </md>
+      <cond id="9_1" colId="1" expr="true"/>
+      <cond id="9_3" colId="3" expr="false"/>
+      <cond id="9_4" colId="4" expr="true"/>
+      <act id="9_2" colId="2" expr="&quot;Appointment&quot;"/>
+    </rule>
+    <rule id="10">
+      <md>
+        <prop name="Description" type="String" value=""/>
+        <prop name="Priority" type="Integer" value="7"/>
+      </md>
+      <cond id="10_1" colId="1" expr="true"/>
+      <cond id="10_3" colId="3" expr="false"/>
+      <cond id="10_4" colId="4" expr="false"/>
+      <cond id="10_5" colId="5" expr="true"/>
+      <act id="10_2" colId="2" expr="&quot;FirstBill&quot;"/>
+    </rule>
+    <rule id="11">
+      <md>
+        <prop name="Description" type="String" value=""/>
+        <prop name="Priority" type="Integer" value="10"/>
+      </md>
+      <cond id="11_1" colId="1" expr="true"/>
+      <act id="11_2" colId="2" expr="&quot;Unknown&quot;"/>
+    </rule>
+    <columns>
+      <column id="1" name="account.IsActive" propertyPath="/Concepts/Account/IsActive" propertyType="4" columnType="CONDITION" alias="IsActive" defaultCellText="false"/>
+      <column id="3" name="account.IsInOutage" propertyPath="/Concepts/Account/IsInOutage" propertyType="4" columnType="CONDITION" alias="IsInOutage" defaultCellText="false"/>
+      <column id="4" name="account.HasActiveAppointment" propertyPath="/Concepts/Account/HasActiveAppointment" propertyType="4" columnType="CONDITION" alias="HasActiveAppointment" defaultCellText="false"/>
+      <column id="5" name="account.HasFirstBill" propertyPath="/Concepts/Account/HasFirstBill" propertyType="4" columnType="CONDITION" alias="HasFirstBill" defaultCellText="false"/>
+      <column id="6" name="account.IVRCode" propertyPath="/Concepts/Account/IVRCode" columnType="CONDITION" alias="IVRCode"/>
+      <column id="2" name="account.PrimaryReasonForCall" propertyPath="/Concepts/Account/PrimaryReasonForCall" columnType="ACTION" alias="PrimaryReasonForCall"/>
+    </columns>
+  </decisionTable>
+  <exceptionTable/>
+  <argument direction="BOTH">
+    <property path="/Concepts/Account" alias="account" resourceType="CONCEPT"/>
+  </argument>
+</Table:Table>

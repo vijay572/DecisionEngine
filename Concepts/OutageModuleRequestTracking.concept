@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><element:Concept xmlns:element="http:///com/tibco/cep/designtime/core/model/element" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Concepts/" folder="/Concepts/" name="OutageModuleRequestTracking" description="" GUID="0DBB6038-9554-2355-B02B-43E2B6AA91F8" ownerProjectName="DecisionEngine" superConceptPath="">
+    <extendedProperties/>
+    <properties name="ModuleName" ownerProjectName="DecisionEngine" ownerPath="/Concepts/OutageModuleRequestTracking"/>
+    <properties name="RequestSent" ownerProjectName="DecisionEngine" type="boolean" ownerPath="/Concepts/OutageModuleRequestTracking"/>
+    <properties name="ExceptionRecieved" ownerProjectName="DecisionEngine" type="boolean" ownerPath="/Concepts/OutageModuleRequestTracking"/>
+    <properties name="RequestedTime" ownerProjectName="DecisionEngine" type="DateTime" ownerPath="/Concepts/OutageModuleRequestTracking"/>
+    <properties name="ResponseTime" ownerProjectName="DecisionEngine" type="DateTime" ownerPath="/Concepts/OutageModuleRequestTracking"/>
+    <properties name="ElapsedTimeForRequestInMillies" ownerProjectName="DecisionEngine" type="long" ownerPath="/Concepts/OutageModuleRequestTracking"/>
+    <properties name="ResponseRecieved" ownerProjectName="DecisionEngine" type="boolean" ownerPath="/Concepts/OutageModuleRequestTracking"/>
+    <properties name="RequestTimedOut" ownerProjectName="DecisionEngine" type="boolean" ownerPath="/Concepts/OutageModuleRequestTracking"/>
+    <properties name="ModuleResponseString" ownerProjectName="DecisionEngine" ownerPath="/Concepts/OutageModuleRequestTracking"/>
+    <properties name="AccountInOutage" ownerProjectName="DecisionEngine" type="boolean" ownerPath="/Concepts/OutageModuleRequestTracking"/>
+</element:Concept>

@@ -1,0 +1,29 @@
+/**
+ * @description 
+ * @author CORTOPSAL133M1D
+ */
+rule Rules.ProcessAppointmentModuleResponse {
+	attribute {
+		priority = 5;
+		forwardChain = true;
+	}
+	declare {
+		Concepts.ReasonForCallModuleStateModelConcept StateModelConceptExisting;
+		Concepts.AppointmentModuleRequestTracking appointmentmodulerequesttracking;
+		Events.Module.Appointment.ResponseBase responsebase;		
+	}
+	when {
+		1==2;
+		appointmentmodulerequesttracking@parent == StateModelConceptExisting;	
+		StateModelConceptExisting@extId == "ReasonForCall:"+ responsebase.TxRoot;
+	}
+	then {
+				
+			appointmentmodulerequesttracking.ResponseRecieved = true;
+			appointmentmodulerequesttracking.ResponseTime = DateTime.now();
+			long elapsedTime = DateTime.getTimeInMillis(appointmentmodulerequesttracking.ResponseTime) - DateTime.getTimeInMillis(appointmentmodulerequesttracking.RequestedTime);
+			appointmentmodulerequesttracking.ElapsedTimeForRequestInMillies = elapsedTime;
+			appointmentmodulerequesttracking.AccountHasActiveAppointment = responsebase.AccountHasAppointment;
+			appointmentmodulerequesttracking.ExceptionRecieved = responsebase.IsException;
+	}
+}

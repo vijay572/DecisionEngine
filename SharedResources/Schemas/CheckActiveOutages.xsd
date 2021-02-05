@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns="http://www.charter.com/enterprise/agentos/decisionengine/schemas/checkactiveoutages/v1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.charter.com/enterprise/agentos/decisionengine/schemas/checkactiveoutages/v1">
+
+    <xsd:include schemaLocation="MessageHeader.xsd"/>
+	<xsd:complexType name="checkActiveOutagesRequestType">
+		<xsd:sequence>
+			<xsd:element name="messageHeader" type="messageHeaderType"/>
+			<xsd:element name="request" type="requestBodyType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="checkActiveOutagesResponseType">
+		<xsd:sequence>
+			<xsd:element name="messageHeader" type="messageHeaderType"/>
+			<xsd:element name="response" type="responseBodyType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="requestBodyType">
+		<xsd:sequence>
+			<xsd:element name="accountId" type="xsd:string"/>
+			<xsd:element name="divisionId" type="xsd:string"/>
+			<xsd:element name="systemDesignator" type="xsd:string"/>
+			<xsd:element name="legacyMso" minOccurs="0" type="xsd:string"/>
+			<xsd:element minOccurs="0" name="additionalElements" type="additionalElementsType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="responseBodyType">
+		<xsd:sequence>
+			<xsd:element name="hasActiveOutages" type="xsd:boolean"/>
+			<xsd:element minOccurs="0" name="additionalElements" type="additionalElementsType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="checkActiveOutagesRequest" type="checkActiveOutagesRequestType">
+	</xsd:element>
+
+	<xsd:element name="checkActiveOutagesResponse" type="checkActiveOutagesResponseType">
+	</xsd:element>
+</xsd:schema>

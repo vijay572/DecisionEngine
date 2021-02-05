@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channel:Channel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:channel="http:///com/tibco/cep/designtime/core/model/service/channel" xmlns:designtime="http:///com/tibco/cep/designtime/core/model/designtime_ontology.ecore" namespace="/Channels/" folder="/Channels/" name="Shared_JMSChannel" description="" GUID="625DB41F-472A-0705-4725-0D88E65A7B67" ownerProjectName="DecisionEngine">
+  <driver configMethod="REFERENCE" reference="/SharedResources/JMS/EMSConnection.sharedjmscon" label="JMS" channel="/">
+    <destinations name="OutageModuleRequest" description="" GUID="5A9ED738-E1E4-5B9E-9E3C-E0B84A0899EB" ownerProjectName="DecisionEngine" eventURI="/Events/Module/Outage/RequestJMS" serializerDeserializerClass="com.tibco.cep.driver.jms.serializer.TextMessageSerializer" driverConfig="//@driver">
+      <properties>
+        <properties xsi:type="designtime:SimpleProperty" name="IsJSONPayload" value="false"/>
+        <properties xsi:type="designtime:SimpleProperty" name="IncludeEventType" value="ALWAYS"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Queue" value="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Name" value="%%SharedResources/Destinations/OutageRequestQueue%%"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Selector" value=""/>
+        <properties xsi:type="designtime:SimpleProperty" name="DeliveryMode" value="2"/>
+        <properties xsi:type="designtime:SimpleProperty" name="AckMode" value="23"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Priority" value="4"/>
+        <properties xsi:type="designtime:SimpleProperty" name="TTL" value="0"/>
+        <properties xsi:type="designtime:SimpleProperty" name="DurableSuscriberName" value="%%Deployment%%:%%EngineName%%:%%SessionName%%:%%ChannelURI%%:%%DestinationName%%"/>
+        <properties xsi:type="designtime:SimpleProperty" name="SharedSubscriptionName" value=""/>
+      </properties>
+    </destinations>
+    <destinations name="OutageModuleResponse" description="" GUID="BE2A5BD7-6052-6C38-6117-4571382DD26C" ownerProjectName="DecisionEngine" eventURI="/Events/Module/Outage/ResponseJMS" serializerDeserializerClass="com.tibco.cep.driver.jms.serializer.TextMessageSerializer" driverConfig="//@driver">
+      <properties>
+        <properties xsi:type="designtime:SimpleProperty" name="IsJSONPayload" value="false"/>
+        <properties xsi:type="designtime:SimpleProperty" name="IncludeEventType" value="ALWAYS"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Queue" value="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Name" value="%%SharedResources/Destinations/OutageResponseQueue%%.%%EngineName%%"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Selector" value=""/>
+        <properties xsi:type="designtime:SimpleProperty" name="DeliveryMode" value="2"/>
+        <properties xsi:type="designtime:SimpleProperty" name="AckMode" value="23"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Priority" value="4"/>
+        <properties xsi:type="designtime:SimpleProperty" name="TTL" value="0"/>
+        <properties xsi:type="designtime:SimpleProperty" name="DurableSuscriberName" value="%%Deployment%%:%%EngineName%%:%%SessionName%%:%%ChannelURI%%:%%DestinationName%%"/>
+        <properties xsi:type="designtime:SimpleProperty" name="SharedSubscriptionName" value=""/>
+      </properties>
+    </destinations>
+    <destinations name="AppointmentModuleRequest" description="" GUID="5A9ED738-E1E4-5B9E-9E3C-E0B84A0899EB" ownerProjectName="DecisionEngine" eventURI="/Events/Module/Appointment/RequestJMS" serializerDeserializerClass="com.tibco.cep.driver.jms.serializer.TextMessageSerializer" driverConfig="//@driver">
+      <properties>
+        <properties xsi:type="designtime:SimpleProperty" name="IsJSONPayload" value="false"/>
+        <properties xsi:type="designtime:SimpleProperty" name="IncludeEventType" value="ALWAYS"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Queue" value="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Name" value="%%SharedResources/Destinations/AppointmentRequestQueue%%"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Selector" value=""/>
+        <properties xsi:type="designtime:SimpleProperty" name="DeliveryMode" value="2"/>
+        <properties xsi:type="designtime:SimpleProperty" name="AckMode" value="23"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Priority" value="4"/>
+        <properties xsi:type="designtime:SimpleProperty" name="TTL" value="0"/>
+        <properties xsi:type="designtime:SimpleProperty" name="DurableSuscriberName" value="%%Deployment%%:%%EngineName%%:%%SessionName%%:%%ChannelURI%%:%%DestinationName%%"/>
+        <properties xsi:type="designtime:SimpleProperty" name="SharedSubscriptionName" value=""/>
+      </properties>
+    </destinations>
+    <destinations name="AppointmentModuleResponse" description="" GUID="BE2A5BD7-6052-6C38-6117-4571382DD26C" ownerProjectName="DecisionEngine" eventURI="/Events/Module/Appointment/ResponseJMS" serializerDeserializerClass="com.tibco.cep.driver.jms.serializer.TextMessageSerializer" driverConfig="//@driver">
+      <properties>
+        <properties xsi:type="designtime:SimpleProperty" name="IsJSONPayload" value="false"/>
+        <properties xsi:type="designtime:SimpleProperty" name="IncludeEventType" value="ALWAYS"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Queue" value="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Name" value="%%SharedResources/Destinations/AppointmentResponseQueue%%.%%EngineName%%"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Selector" value=""/>
+        <properties xsi:type="designtime:SimpleProperty" name="DeliveryMode" value="2"/>
+        <properties xsi:type="designtime:SimpleProperty" name="AckMode" value="23"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Priority" value="4"/>
+        <properties xsi:type="designtime:SimpleProperty" name="TTL" value="0"/>
+        <properties xsi:type="designtime:SimpleProperty" name="DurableSuscriberName" value="%%Deployment%%:%%EngineName%%:%%SessionName%%:%%ChannelURI%%:%%DestinationName%%"/>
+        <properties xsi:type="designtime:SimpleProperty" name="SharedSubscriptionName" value=""/>
+      </properties>
+    </destinations>
+    <destinations name="FirstBillModuleRequest" description="" GUID="5A9ED738-E1E4-5B9E-9E3C-E0B84A0899EB" ownerProjectName="DecisionEngine" eventURI="/Events/Module/FirstBill/RequestJMS" serializerDeserializerClass="com.tibco.cep.driver.jms.serializer.TextMessageSerializer" driverConfig="//@driver">
+      <properties>
+        <properties xsi:type="designtime:SimpleProperty" name="IsJSONPayload" value="false"/>
+        <properties xsi:type="designtime:SimpleProperty" name="IncludeEventType" value="ALWAYS"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Queue" value="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Name" value="%%SharedResources/Destinations/FirstBillRequestQueue%%"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Selector" value=""/>
+        <properties xsi:type="designtime:SimpleProperty" name="DeliveryMode" value="2"/>
+        <properties xsi:type="designtime:SimpleProperty" name="AckMode" value="23"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Priority" value="4"/>
+        <properties xsi:type="designtime:SimpleProperty" name="TTL" value="0"/>
+        <properties xsi:type="designtime:SimpleProperty" name="DurableSuscriberName" value="%%Deployment%%:%%EngineName%%:%%SessionName%%:%%ChannelURI%%:%%DestinationName%%"/>
+        <properties xsi:type="designtime:SimpleProperty" name="SharedSubscriptionName" value=""/>
+      </properties>
+    </destinations>
+    <destinations name="FirstBillModuleResponse" description="" GUID="BE2A5BD7-6052-6C38-6117-4571382DD26C" ownerProjectName="DecisionEngine" eventURI="/Events/Module/FirstBill/ResponseJMS" serializerDeserializerClass="com.tibco.cep.driver.jms.serializer.TextMessageSerializer" driverConfig="//@driver">
+      <properties>
+        <properties xsi:type="designtime:SimpleProperty" name="IsJSONPayload" value="false"/>
+        <properties xsi:type="designtime:SimpleProperty" name="IncludeEventType" value="ALWAYS"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Queue" value="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Name" value="%%SharedResources/Destinations/FirstBillResponseQueue%%.%%EngineName%%"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Selector" value=""/>
+        <properties xsi:type="designtime:SimpleProperty" name="DeliveryMode" value="2"/>
+        <properties xsi:type="designtime:SimpleProperty" name="AckMode" value="23"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Priority" value="4"/>
+        <properties xsi:type="designtime:SimpleProperty" name="TTL" value="0"/>
+        <properties xsi:type="designtime:SimpleProperty" name="DurableSuscriberName" value="%%Deployment%%:%%EngineName%%:%%SessionName%%:%%ChannelURI%%:%%DestinationName%%"/>
+        <properties xsi:type="designtime:SimpleProperty" name="SharedSubscriptionName" value=""/>
+      </properties>
+    </destinations>
+    <destinations name="AccountStatusModuleRequest" description="" GUID="1DA992E7-0C3D-5C4B-F732-F52680637B9F" ownerProjectName="DecisionEngine" eventURI="/Events/Module/AccountStatus/RequestJMS" serializerDeserializerClass="com.tibco.cep.driver.jms.serializer.BytesMessageSerializer" driverConfig="//@driver">
+      <properties>
+        <properties xsi:type="designtime:SimpleProperty" name="IsJSONPayload" value="false"/>
+        <properties xsi:type="designtime:SimpleProperty" name="IncludeEventType" value="ALWAYS"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Queue" value="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Name" value="%%SharedResources/Destinations/AccountStatusRequestQueue%%"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Selector" value=""/>
+        <properties xsi:type="designtime:SimpleProperty" name="DeliveryMode" value="2"/>
+        <properties xsi:type="designtime:SimpleProperty" name="AckMode" value="23"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Priority" value="4"/>
+        <properties xsi:type="designtime:SimpleProperty" name="TTL" value="0"/>
+        <properties xsi:type="designtime:SimpleProperty" name="DurableSuscriberName" value="%%Deployment%%:%%EngineName%%:%%SessionName%%:%%ChannelURI%%:%%DestinationName%%"/>
+        <properties xsi:type="designtime:SimpleProperty" name="SharedSubscriptionName" value=""/>
+      </properties>
+    </destinations>
+    <destinations name="AccountStatusModuleResponse" description="" GUID="0A4BAB0A-F9B0-F52F-35E0-BAC101BCD105" ownerProjectName="DecisionEngine" eventURI="/Events/Module/AccountStatus/ResponseJMS" serializerDeserializerClass="com.tibco.cep.driver.jms.serializer.TextMessageSerializer" driverConfig="//@driver">
+      <properties>
+        <properties xsi:type="designtime:SimpleProperty" name="IsJSONPayload" value="false"/>
+        <properties xsi:type="designtime:SimpleProperty" name="IncludeEventType" value="ALWAYS"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Queue" value="true"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Name" value="%%SharedResources/Destinations/AccountStatusResponseQueue%%.%%EngineName%%"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Selector" value=""/>
+        <properties xsi:type="designtime:SimpleProperty" name="DeliveryMode" value="2"/>
+        <properties xsi:type="designtime:SimpleProperty" name="AckMode" value="23"/>
+        <properties xsi:type="designtime:SimpleProperty" name="Priority" value="4"/>
+        <properties xsi:type="designtime:SimpleProperty" name="TTL" value="0"/>
+        <properties xsi:type="designtime:SimpleProperty" name="DurableSuscriberName" value="%%Deployment%%:%%EngineName%%:%%SessionName%%:%%ChannelURI%%:%%DestinationName%%"/>
+        <properties xsi:type="designtime:SimpleProperty" name="SharedSubscriptionName" value=""/>
+      </properties>
+    </destinations>
+    <driverType xsi:type="channel:DriverTypeInfo" driverTypeName="JMS"/>
+  </driver>
+</channel:Channel>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Events/" folder="/Events/" name="BaseResponseEvent" description="" GUID="6742F247-A35F-3E84-6479-26DEAA112E49" ownerProjectName="DecisionEngine" superEventPath="/Events/BaseEvent" ttlUnits="Seconds">
+    <properties name="IsException" ownerProjectName="DecisionEngine" type="boolean" ownerPath="/Events/BaseResponseEvent"/>
+    <properties name="ExceptionDetail" ownerProjectName="DecisionEngine" ownerPath="/Events/BaseResponseEvent"/>
+    <expiryAction name="BaseResponseEvent_expiryAction" ownerProjectName="DecisionEngine" actionText="" conditionText="">
+        <symbols>
+            <symbolList idName="baseresponseevent" type="/Events/BaseResponseEvent"/>
+        </symbols>
+    </expiryAction>
+</event:SimpleEvent>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Events/" folder="/Events/" name="ReasonForCallRequest" description="" GUID="437C5B4F-7526-8CCA-AEB5-0B088C2DAA30" ownerProjectName="DecisionEngine" superEventPath="/Events/BaseEvent" payloadString="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#10;&#10;&lt;payload ref=&quot;pfx:reasonForCallRequest&quot;/&gt;" ttl="-1" ttlUnits="Seconds">
+    <properties name="CallDriverCode" ownerProjectName="DecisionEngine" ownerPath="/Events/ReasonForCallRequest"/>
+    <properties name="JMSMessageID" ownerProjectName="DecisionEngine" ownerPath="/Events/ReasonForCallRequest"/>
+    <namespaceEntries prefix="xsd" namespace="http://www.w3.org/2001/XMLSchema"/>
+    <namespaceEntries prefix="pfx" namespace="http://www.charter.com/enterprise/agentos/decisionengine/schemas/reasonforcall/v1"/>
+    <registryImportEntries location="SharedResources/Schemas/ReasonForCall.xsd" namespace="http://www.charter.com/enterprise/agentos/decisionengine/schemas/reasonforcall/v1"/>
+    <expiryAction name="ReasonForCallRequest_expiryAction" ownerProjectName="DecisionEngine" actionText="" conditionText="">
+        <symbols>
+            <symbolList idName="reasonforcallrequest" type="/Events/ReasonForCallRequest"/>
+        </symbols>
+    </expiryAction>
+</event:SimpleEvent>

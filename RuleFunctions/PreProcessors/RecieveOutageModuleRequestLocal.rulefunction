@@ -1,0 +1,51 @@
+/**
+ * @description 
+ */
+void rulefunction RuleFunctions.PreProcessors.RecieveOutageModuleRequestLocal {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+		Events.Module.Outage.RequestLocal OutageModuleRequest;
+	}
+	body {
+			Object logger = Log.getLogger(Engine.ruleFunctionName());
+			RuleFunctions.Helper.ParseOutageModuleRequest(null,OutageModuleRequest);
+			
+			Common.Concepts.LogData logData = RuleFunctions.Helper.CreateLogContextFromBaseEvent(OutageModuleRequest,logger);
+			logData.Channel = Event.getDestinationURI(OutageModuleRequest);
+		try {
+			Common.RuleFunctions.LogHandler.log(/*logData Common.Concepts.LogData */logData,
+												/*result String */null,
+												/*message String */"Recieved Outage Module Request",
+												/*payload String */OutageModuleRequest@payload,
+												/*logLevel String */"info",
+												/*logger Object */logger,
+												/*RuleFunctionName String */Engine.ruleFunctionName());
+			Events.Module.Outage.ResponseBase ResponseBase = RuleFunctions.Shared.OutageModule.ProcessOutageModuleRequest(OutageModuleRequest,logData);
+			Events.Module.Outage.ResponseLocal ResponseLocal = Event.createEvent("xslt://{{/Events/Module/Outage/ResponseLocal}}<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"2.0\"><xsl:param name=\"ResponseBase\"/><xsl:param name=\"OutageModuleRequest\"/><xsl:template name=\"Function\" match=\"/\"><createEvent><event><xsl:if test=\"$ResponseBase/@extId\"><xsl:attribute name=\"extId\"><xsl:value-of select=\"$ResponseBase/@extId\"/></xsl:attribute></xsl:if><xsl:if test=\"$ResponseBase/@Id\"><xsl:attribute name=\"Id\"><xsl:value-of select=\"$ResponseBase/@Id\"/></xsl:attribute></xsl:if><xsl:if test=\"$OutageModuleRequest/TxRoot\"><TxRoot><xsl:value-of select=\"$OutageModuleRequest/TxRoot\"/></TxRoot></xsl:if><xsl:if test=\"$OutageModuleRequest/TxParent\"><TxParent><xsl:value-of select=\"$OutageModuleRequest/TxParent\"/></TxParent></xsl:if><xsl:if test=\"$OutageModuleRequest/TxSelf\"><TxSelf><xsl:value-of select=\"$OutageModuleRequest/TxSelf\"/></TxSelf></xsl:if><xsl:if test=\"$OutageModuleRequest/CorrleationID\"><CorrleationID><xsl:value-of select=\"$OutageModuleRequest/CorrleationID\"/></CorrleationID></xsl:if><xsl:if test=\"$ResponseBase/Category\"><Category><xsl:value-of select=\"$ResponseBase/Category\"/></Category></xsl:if><xsl:if test=\"$ResponseBase/TxCategoryFingerprint\"><TxCategoryFingerprint><xsl:value-of select=\"$ResponseBase/TxCategoryFingerprint\"/></TxCategoryFingerprint></xsl:if><xsl:if test=\"$ResponseBase/EventName\"><EventName><xsl:value-of select=\"$ResponseBase/EventName\"/></EventName></xsl:if><xsl:if test=\"$ResponseBase/Component\"><Component><xsl:value-of select=\"$ResponseBase/Component\"/></Component></xsl:if><xsl:if test=\"$ResponseBase/ApplicationID\"><ApplicationID><xsl:value-of select=\"$ResponseBase/ApplicationID\"/></ApplicationID></xsl:if><xsl:if test=\"$ResponseBase/AccountId\"><AccountId><xsl:value-of select=\"$ResponseBase/AccountId\"/></AccountId></xsl:if><xsl:if test=\"$ResponseBase/DivisionId\"><DivisionId><xsl:value-of select=\"$ResponseBase/DivisionId\"/></DivisionId></xsl:if><xsl:if test=\"$ResponseBase/SystemDesignator\"><SystemDesignator><xsl:value-of select=\"$ResponseBase/SystemDesignator\"/></SystemDesignator></xsl:if><xsl:if test=\"$ResponseBase/LegacyMso\"><LegacyMso><xsl:value-of select=\"$ResponseBase/LegacyMso\"/></LegacyMso></xsl:if><xsl:if test=\"$ResponseBase/RequestorUserID\"><RequestorUserID><xsl:value-of select=\"$ResponseBase/RequestorUserID\"/></RequestorUserID></xsl:if><xsl:if test=\"$ResponseBase/EventID\"><EventID><xsl:value-of select=\"$ResponseBase/EventID\"/></EventID></xsl:if><xsl:if test=\"$ResponseBase/Channel\"><Channel><xsl:value-of select=\"$ResponseBase/Channel\"/></Channel></xsl:if><xsl:if test=\"$ResponseBase/MessageID\"><MessageID><xsl:value-of select=\"$ResponseBase/MessageID\"/></MessageID></xsl:if><xsl:if test=\"$ResponseBase/IsException\"><IsException><xsl:value-of select=\"$ResponseBase/IsException\"/></IsException></xsl:if><xsl:if test=\"$ResponseBase/ExceptionDetail\"><ExceptionDetail><xsl:value-of select=\"$ResponseBase/ExceptionDetail\"/></ExceptionDetail></xsl:if><xsl:if test=\"$ResponseBase/AccountInOutage\"><AccountInOutage><xsl:value-of select=\"$ResponseBase/AccountInOutage\"/></AccountInOutage></xsl:if></event></createEvent></xsl:template></xsl:stylesheet>");
+			Event.sendEvent(ResponseLocal);
+			Common.RuleFunctions.LogHandler.log(/*logData Common.Concepts.LogData */logData,
+												/*result String */"SUCCESS",
+												/*message String */"Responded to Outage Module Request",
+												/*payload String */ResponseLocal@payload,
+												/*logLevel String */"info",
+												/*logger Object */logger,
+												/*RuleFunctionName String */Engine.ruleFunctionName());
+		} catch (Exception e) {
+			Events.Module.Outage.ResponseLocal OutageModuleResponse = Event.createEvent("xslt://{{/Events/Module/Outage/ResponseLocal}}<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"2.0\"><xsl:param name=\"OutageModuleRequest\"/><xsl:param name=\"e\"/><xsl:template name=\"Function\" match=\"/\"><createEvent><event><xsl:if test=\"$OutageModuleRequest/@extId\"><xsl:attribute name=\"extId\"><xsl:value-of select=\"$OutageModuleRequest/@extId\"/></xsl:attribute></xsl:if><xsl:if test=\"$OutageModuleRequest/@Id\"><xsl:attribute name=\"Id\"><xsl:value-of select=\"$OutageModuleRequest/@Id\"/></xsl:attribute></xsl:if><xsl:if test=\"$OutageModuleRequest/TxRoot\"><TxRoot><xsl:value-of select=\"$OutageModuleRequest/TxRoot\"/></TxRoot></xsl:if><xsl:if test=\"$OutageModuleRequest/TxParent\"><TxParent><xsl:value-of select=\"$OutageModuleRequest/TxParent\"/></TxParent></xsl:if><xsl:if test=\"$OutageModuleRequest/TxSelf\"><TxSelf><xsl:value-of select=\"$OutageModuleRequest/TxSelf\"/></TxSelf></xsl:if><xsl:if test=\"$OutageModuleRequest/CorrleationID\"><CorrleationID><xsl:value-of select=\"$OutageModuleRequest/CorrleationID\"/></CorrleationID></xsl:if><xsl:if test=\"$OutageModuleRequest/Category\"><Category><xsl:value-of select=\"$OutageModuleRequest/Category\"/></Category></xsl:if><xsl:if test=\"$OutageModuleRequest/TxCategoryFingerprint\"><TxCategoryFingerprint><xsl:value-of select=\"$OutageModuleRequest/TxCategoryFingerprint\"/></TxCategoryFingerprint></xsl:if><xsl:if test=\"$OutageModuleRequest/EventName\"><EventName><xsl:value-of select=\"$OutageModuleRequest/EventName\"/></EventName></xsl:if><xsl:if test=\"$OutageModuleRequest/Component\"><Component><xsl:value-of select=\"$OutageModuleRequest/Component\"/></Component></xsl:if><xsl:if test=\"$OutageModuleRequest/ApplicationID\"><ApplicationID><xsl:value-of select=\"$OutageModuleRequest/ApplicationID\"/></ApplicationID></xsl:if><xsl:if test=\"$OutageModuleRequest/AccountId\"><AccountId><xsl:value-of select=\"$OutageModuleRequest/AccountId\"/></AccountId></xsl:if><xsl:if test=\"$OutageModuleRequest/DivisionId\"><DivisionId><xsl:value-of select=\"$OutageModuleRequest/DivisionId\"/></DivisionId></xsl:if><xsl:if test=\"$OutageModuleRequest/SystemDesignator\"><SystemDesignator><xsl:value-of select=\"$OutageModuleRequest/SystemDesignator\"/></SystemDesignator></xsl:if><xsl:if test=\"$OutageModuleRequest/LegacyMso\"><LegacyMso><xsl:value-of select=\"$OutageModuleRequest/LegacyMso\"/></LegacyMso></xsl:if><xsl:if test=\"$OutageModuleRequest/RequestorUserID\"><RequestorUserID><xsl:value-of select=\"$OutageModuleRequest/RequestorUserID\"/></RequestorUserID></xsl:if><xsl:if test=\"$OutageModuleRequest/EventID\"><EventID><xsl:value-of select=\"$OutageModuleRequest/EventID\"/></EventID></xsl:if><xsl:if test=\"$OutageModuleRequest/Channel\"><Channel><xsl:value-of select=\"$OutageModuleRequest/Channel\"/></Channel></xsl:if><xsl:if test=\"$OutageModuleRequest/MessageID\"><MessageID><xsl:value-of select=\"$OutageModuleRequest/MessageID\"/></MessageID></xsl:if><IsException><xsl:value-of select=\"true()\"/></IsException><ExceptionDetail><xsl:value-of select=\"concat(&quot;System Error:&quot;,$e/@stackTrace)\"/></ExceptionDetail><xsl:for-each select=\"$OutageModuleRequest/payload\"><payload/></xsl:for-each></event></createEvent></xsl:template></xsl:stylesheet>");
+			Event.sendEvent(OutageModuleResponse);
+			Common.RuleFunctions.LogHandler.logException(
+											/*logData Common.Concepts.LogData */logData,
+											/*result String */"ERROR",
+											/*message String */"Responded to Outage Module Request with Exception" ,
+											/*payload String */OutageModuleRequest@payload,
+											/*logLevel String */"error",
+											/*logger Object */logger,
+											/*e BEException */e);	
+		}
+		
+		
+	}
+}

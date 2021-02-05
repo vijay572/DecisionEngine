@@ -1,0 +1,28 @@
+/**
+ * @author: Sreetheja Kethireddy 
+ * @description: Generates log string
+ */
+ 
+String rulefunction Common.RuleFunctions.LogHandler.getLogString {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		String txSelf;
+		String message;
+		String result;
+		String payload;
+		Object logger;
+	}
+	body {
+		
+		Log.log(logger, "trace", " Start of getLogString for ExtID : %s", txSelf);
+		String logString = "TxSelf=" +txSelf+ " Result=" + result+ " Text="+ message ;
+		
+		if (System.getGlobalVariableAsBoolean("EnableLoggingPayload",false)) {
+			logString=logString + ", Payload=" + payload;
+		}
+		
+		return logString;
+	}
+}
